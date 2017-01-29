@@ -2,7 +2,7 @@
   "name": "stevens_trader",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/falturba/StevensTrader/issues"
   },
-  "homepage": "https://github.com/falturba/StevensTrader#readme"
+  "homepage": "https://github.com/falturba/StevensTrader#readme",
+  "dependencies": {
+    "express": "^4.14.1"
+  }
 }
