@@ -1,0 +1,62 @@
+@import 'Config.scss';
+
+a { color: #333; text-decoration: none;}
+h1,h2,h3,h4{
+    // color:$base-color;
+    text-transform: uppercase;
+}
+hr{
+    border: 1px $line-color solid;
+}
+input{
+    @extend %font-light;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    font-size: 1.5rem;
+    border: 1px solid $line-color;
+    outline: none;
+    padding: 16px 20px;
+    height: 60px;
+    width: 100%;
+    @include addTransition(border-color);
+}
+button{cursor: pointer;}
+button:focus {outline:0;}
+.button{
+    @include addTransition(background-color);
+    background-color:$dark-base-color;
+    padding:10px;
+    display:inline-block;
+    color:$white-color;
+    cursor: pointer;
+}
+.button:hover{
+    background-color:$base-color;
+}
+
+body{    
+    @extend %font-bold;
+    font-style: normal;
+    font-weight: 700;
+    background: #fff;
+    color: #333;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+
+/* main structure */
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+
+
+

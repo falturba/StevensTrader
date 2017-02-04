@@ -1,0 +1,46 @@
+@import 'Config.scss';
+.signup-container{
+    width:350px;
+    display: block;
+    border-radius: 4px;
+    border: 1px $line-color solid;
+    background-color: #fff;
+    margin: 50px auto 100px auto;
+    padding: 20px;
+    input{
+        &.wrong{
+            border-color:$base-color;
+        }
+    }
+    #submit-button{
+        margin-top:40px;
+        @extend %font-bold;
+    }
+    .alert-text{
+        color:$base-color;
+        
+    }
+    .warning{
+        color:$base-color;
+        font-style: normal;
+        font-weight: 300;
+        @extend %font-light;
+        @include addCustomTransition(height, opacity);
+        // @include addTransition(opacity);
+        margin-left: 22px;
+        height:0px;
+        opacity: 0;
+        &.wrong{
+            height:20px;
+            opacity: 1;
+        }
+    }
+    
+}
+
+
+@media (min-width: $container-small-min-width){
+    .signup-container{
+        width:600px;
+    }
+}
