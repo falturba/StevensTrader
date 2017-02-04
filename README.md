@@ -4,7 +4,9 @@ To connect using the mongo shell:
 mongo ds139959.mlab.com:39959/stevenstradersystem -u <dbuser> -p <dbpassword>
 To connect using a driver via the standard MongoDB URI (what's this?):
 
+```http
 mongodb://<dbuser>:<dbpassword>@ds139959.mlab.com:39959/stevenstradersystem
+```
 
 DB User details
 
