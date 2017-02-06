@@ -1,24 +1,26 @@
-/**
- * Created by exit on 10/5/16.
- */
+// mongoose 4.3.x
 var mongoose = require('mongoose');
-var options = {
-    db: { native_parser: true },
-    server: { poolSize: 5 },
-    replset: { rs_name: 'myReplicaSetName' },
-    user: 'dbuser',
-    pass: 'strader@123'
-}
-mongoose.connect("ds139959.mlab.com:39959/stevenstradersystem", options);
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-    console.log("Establish database connection successfully.");
+ 
+/* 
+ * Mongoose by default sets the auto_reconnect option to true.
+ * We recommend setting socket options at both the server and replica set level.
+ * We recommend a 30 second connection timeout because it allows for 
+ * plenty of time in most operating environments.
+ */
+var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
+                replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } },
+                user: 'dbuser',
+                pass: 'strader@123'
+                 };       
+ 
+var mongodbUri = 'mongodb://ds139959.mlab.com:39959/stevenstradersystem';
+mongoose.Promise = global.Promise;
+mongoose.connect(mongodbUri, options);
+var conn = mongoose.connection;             
+ 
+conn.on('error', console.error.bind(console, 'connection error:'));  
+ 
+conn.once('open', function() {
+  // Wait for the database connection to establish, then start the app.
+  console.log("Establish database connection successfully.");                         
 });
-
-/******************************************
- **************** set port ********************
- ******************************************/
-/*var listener = app.listen(3000, function(){
-    console.log('Listening on port ' + listener.address().port); //Listening on port 3000
-});*/

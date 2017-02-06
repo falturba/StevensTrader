@@ -1,14 +1,24 @@
 var express = require('express')
 var services = express.Router();
+var bcrypt = require('bcrypt');
 var Account = require('../models/account.js');
-// middleware that is specific to this router
+var bodyParser = require("body-parser");
+services.use(bodyParser.json());
 
-
-// define the home page route
-services.get('/signup/',function(req,res){
+services.post('/signup',function(req,res){
+	var hashedPassword = bcrypt.hashSync(req.body.password,10);
+	var newAccount = new Account({
+		name: req.body.name,
+		email: req.body.email,
+		hashedPassword: hashedPassword
+	});
+	newAccount.save(function(err){
+	});
+});
+services.get('/accounts',function(req,res){
 	Account.find(function(err,acc){
 		res.send(acc);
-	});
+	})
 });
 
 module.exports = services

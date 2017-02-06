@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/falturba/StevensTrader#readme",
   "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.16.0",
     "express": "^4.14.1",
     "mongoose": "^4.8.1"
   },
