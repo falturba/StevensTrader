@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/falturba/StevensTrader#readme",
   "dependencies": {
-    "express": "^4.14.1"
+    "express": "^4.14.1",
+    "mongoose": "^4.8.1"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",
