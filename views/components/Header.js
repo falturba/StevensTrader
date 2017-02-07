@@ -49,9 +49,9 @@ export default class Header extends CollapseAnimateComponent{
 
                             <nav ref={(child)=>{this.nav = child;}} style={ this.animateStyle }  >
                                 <ul className="navbar">
-                                    <li> <a href="../skills">Skills</a> </li>
-                                    <li> <a href="../projects">PRO</a> </li>
-                                    <li> <a href="../about">ABOUT STEVENS</a> </li>                    
+                                    <li> <a href="../skills">Sell</a> </li>
+                                    <li> <a href="../projects">New</a> </li>
+                                    <li> <a href="../about">ABOUT</a> </li>                    
                                 </ul>
                                 <ul className="navbar navbar-right">
                                     <li> <a href="/signup">Sign up</a> </li>
