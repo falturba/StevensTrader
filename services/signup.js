@@ -5,7 +5,7 @@ var Account = require('../models/account.js');
 var bodyParser = require("body-parser");
 services.use(bodyParser.json());
 
-services.post('/api/signup',function(req,res){
+services.post('/signup',function(req,res){
 	var hashedPassword = bcrypt.hashSync(req.body.password,10);
 	var newAccount = new Account({
 		name: req.body.name,
