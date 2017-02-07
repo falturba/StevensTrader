@@ -14,7 +14,7 @@ function listening(){
 //include all the services
 fs.readdirSync('./services').forEach(function(fileName){
 	if(fileName.indexOf('.js')>0)
-	app.use(require('./services/'+fileName));
+	app.use('/services',require('./services/'+fileName));
 })
 
 //include all the routes
