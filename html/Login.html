@@ -1,0 +1,39 @@
+<html>
+    
+    <head>   
+		<title>Welcome to Stevens Trader System - Admin Login </title>
+        
+        <style type="text/css">
+			body {text-align:center;
+				  color: #000;}
+			.MndMrk {color: red;}
+		</style>
+	</head>
+
+    <body>
+		<form id="LinFom" action="LinFom.php" method="post">
+			<div id="LinDiv">
+			
+				<h2>Stevens Trader System - Admin Login</h2>
+				<table width="600" border="0" align="center" cellspacing="10">
+				  <tr>
+					<td width="200" align="right"><label for="LinUID">User Name :<span class="MndMrk">*</span></label></td>
+					<td><input type="text" name="LinUID" id="LinUID" size="50"/></td>
+				  </tr>
+				  <tr>
+					<td width="200" align="right"><label for="LinPwd">Password :<span class="MndMrk">*</span></label></td>
+					<td><input type="password" name="LinPwd" id="LinPwd" size="50"/></td>
+				  </tr>
+				</table>
+				<br>
+				<button id="LinBtn"> Login </button>
+			   
+			</div>
+		</form>
+		<div id="Ack"></div>
+		
+		<script type="text/javascript" src="JqueryScript-v2.1.3.js"></script>
+		<script type="text/javascript" src="LinFom.js"></script>
+	</body>
+	
+</html>
