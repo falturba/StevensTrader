@@ -18,7 +18,8 @@ fs.readdirSync('./services').forEach(function(fileName){
 })
 
 //include all the routes
-fs.readdirSync('./routes').forEach(function(fileName){
-	if(fileName.indexOf('.js')>0)
-	app.use(require('./routes/'+fileName));
-})
+// fs.readdirSync('./routes').forEach(function(fileName){
+// 	if(fileName.indexOf('.js')>0)
+// 	app.use(require('./routes/'+fileName));
+// })
+app.use(express.static('public'));
