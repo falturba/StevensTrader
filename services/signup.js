@@ -1,35 +1,112 @@
 var express = require('express')
 var services = express.Router();
-var bcrypt = require('bcrypt');
 var Account = require('../models/account.js');
 var bodyParser = require("body-parser");
+var email_verfier = require("../libs/email_verifier.js");
+
+
 services.use(bodyParser.json());
 
+
 services.post('/signup',function(req,res){
-	var hashedPassword = bcrypt.hashSync(req.body.password,10);
+	var email = req.body.email;
+	if (req.body.type === 'register') {
 	var newAccount = new Account({
 		name: req.body.name,
-		email: req.body.email,
-		hashedPassword: hashedPassword
+		email: email,
+		password: req.body.password,
 	});
-	newAccount.save(function(err){
-		if(err){
-			res.json({
-				"status": "failed"
-			})
-		}else {
-			res.json({
-				"status": "success"
-			})
-		}
-	});
+	    email_verfier.createTempUser(newAccount, function(err, existingPersistentUser, newTempUser) {
+      if (err) {
+        return res.status(404).send('ERROR: creating temp user FAILED');
+
+      }
+
+      // user already exists in persistent collection
+      if (existingPersistentUser) {
+        return res.json({
+          msg: 'You have already signed up and confirmed your account. Did you forget your password?'
+        });
+      }
+
+      // new account created
+      if (newTempUser) {
+        var URL = newTempUser[email_verfier.options.URLFieldName];
+
+        email_verfier.sendVerificationEmail(email, URL, function(err, info) {
+          if (err) {
+          	console.log(err);
+            return res.status(404).send('ERROR: sending verification email FAILED');
+          }
+          res.json({
+            msg: 'An email has been sent to you. Please check it to verify your account.',
+            info: info
+          });
+        });
+
+      // user already exists in temporary collection!
+      } else {
+        res.json({
+          msg: 'You have already signed up. Please check your email to verify your account.'
+        });
+      }
+    });
+
+  // resend verification button was clicked
+  } else {
+    email_verfier.resendVerificationEmail(email, function(err, accountFound) {
+      if (err) {
+        return res.status(404).send('ERROR: resending verification email FAILED');
+      }
+      if (accountFound) {
+        res.json({
+          msg: 'An email has been sent to you, yet again. Please check it to verify your account.'
+        });
+      } else {
+        res.json({
+          msg: 'Your verification code has expired. Please sign up again.'
+        });
+      }
+    });
+  }
 });
 
-services.get('/accounts',function(req,res){
-	Account.find(function(err,acc){
+// user accesses the link that is sent
+services.get('/verification/:URL', function(req, res) {
+  var url = req.params.URL;
+  console.log(url);
+  email_verfier.confirmTempUser(url, function(err, user) {
+    if (user) {
+    	console.log(user.email);
+      email_verfier.sendConfirmationEmail(user.email, function(err, info) {
+        if (err) {
+        	console.log(err);
+          return res.status(404).send('ERROR: sending confirmation email FAILED');
+        }
+        res.json({
+          msg: 'CONFIRMED!',
+          info: info
+        });
+      });
+    } else {
+      return res.status(404).send('ERROR: confirming temp user FAILED');
+    }
+  });
+});
+
+
+services.get('/accounts/:email',function(req,res){
+	var email = req.params.email;
+	Account.find({"email":email},function(err,acc){
 		res.send(acc);
 	})
 });
+services.get('/temp_accounts',function(req,res){
+	Temp_Account.find(function(err,acc){
+		res.send(acc);
+	})
+});
+
 
 module.exports = services
 
