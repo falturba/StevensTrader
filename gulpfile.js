@@ -92,7 +92,7 @@ var backendConfig = config({
   },
   externals: nodeModules,
   plugins: [
-    new webpack.IgnorePlugin(/\.(css|less|scss)$/),
+    new webpack.IgnorePlugin(/\.(css|less)$/),
     new webpack.BannerPlugin('require("source-map-support").install();',
                              { raw: true, entryOnly: false })
   ]
