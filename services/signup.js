@@ -10,6 +10,7 @@ services.use(bodyParser.json());
 
 services.post('/signup',function(req,res){
 	var email = req.body.email;
+	console.log(email);
 	if (req.body.type === 'register') {
 	var newAccount = new Account({
 		name: req.body.name,
@@ -74,10 +75,8 @@ services.post('/signup',function(req,res){
 // user accesses the link that is sent
 services.get('/verification/:URL', function(req, res) {
   var url = req.params.URL;
-  console.log(url);
   email_verfier.confirmTempUser(url, function(err, user) {
     if (user) {
-    	console.log(user.email);
       email_verfier.sendConfirmationEmail(user.email, function(err, info) {
         if (err) {
         	console.log(err);
@@ -95,17 +94,7 @@ services.get('/verification/:URL', function(req, res) {
 });
 
 
-services.get('/accounts/:email',function(req,res){
-	var email = req.params.email;
-	Account.find({"email":email},function(err,acc){
-		res.send(acc);
-	})
-});
-services.get('/temp_accounts',function(req,res){
-	Temp_Account.find(function(err,acc){
-		res.send(acc);
-	})
-});
+
 
 
 module.exports = services
