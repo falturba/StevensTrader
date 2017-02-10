@@ -1,3 +1,5 @@
+var fallback = require('express-history-api-fallback');
+var path = require('path');
 var express = require("express");
 var fs = require("fs");
 require("./libs/mongoose-init");
@@ -22,4 +24,13 @@ fs.readdirSync('./services').forEach(function(fileName){
 // 	if(fileName.indexOf('.js')>0)
 // 	app.use(require('./routes/'+fileName));
 // })
-app.use(express.static('public'));
+
+
+//set fullback url to public/index.html
+var dirname = path.resolve(); // for fixing empty path problem when using gulp
+app.use(express.static(path.join(dirname, 'public')))
+app.use(fallback('public/index.html', { root: dirname }))
+app.get('*', function (req, res) {
+	console.log("in....:"+ dirname );
+	res.sendFile("index.html", {"root": dirname});
+})
