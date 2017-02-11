@@ -4,7 +4,6 @@ var path = require('path');
 var fs = require('fs');
 var DeepMerge = require('deep-merge');
 var nodemon = require('nodemon');
-var WebpackDevServer = require('webpack-dev-server');
 
 var deepmerge = DeepMerge(function(target, source, key) {
   if(target instanceof Array) {
@@ -18,14 +17,13 @@ var deepmerge = DeepMerge(function(target, source, key) {
 var defaultConfig = {
   module: {
     loaders: [
-      {test: /\.js$/, exclude: /node_modules/, loaders: ['monkey-hot', 'babel'] },
+      {test: /\.js$/, exclude: /node_modules/, loaders: ['babel'] },
     ]
   }
 };
 
 if(process.env.NODE_ENV !== 'production') {
-  //defaultConfig.devtool = '#eval-source-map';
-  defaultConfig.devtool = 'source-map';
+  defaultConfig.devtool = '#eval-source-map';
   defaultConfig.debug = true;
 }
 
@@ -42,8 +40,6 @@ var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 var frontendConfig = config({
   entry: [
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
     './views/index.js'
   ],
   module: {
@@ -64,30 +60,27 @@ var frontendConfig = config({
   },
   output: {
     path: __dirname + '/public',
-    publicPath: 'http://localhost:3000/public', //********** ????? */
-    filename: 'index_bundle.js'
+    filename: "index_bundle.js"
   },
   devServer: {
     historyApiFallback: true
   },
-  plugins: [
-    HTMLWebpackPluginConfig,
-    new webpack.HotModuleReplacementPlugin({ quiet: true })
-  ]
+  plugins: [HTMLWebpackPluginConfig]
 });
 
 // backend
 
-var nodeModules = fs.readdirSync('node_modules')
+var nodeModules = {};
+fs.readdirSync('node_modules')
   .filter(function(x) {
     return ['.bin'].indexOf(x) === -1;
+  })
+  .forEach(function(mod) {
+    nodeModules[mod] = 'commonjs ' + mod;
   });
 
 var backendConfig = config({
-  entry: [
-    'webpack/hot/signal.js',
-    './server.js',
-  ],
+  entry: './server.js',
   target: 'node',
   output: {
     path: path.join(__dirname, 'build'),
@@ -97,21 +90,11 @@ var backendConfig = config({
     __dirname: true,
     __filename: true
   },
-  externals: [
-    function(context, request, callback) {
-      var pathStart = request.split('/')[0];
-      if (nodeModules.indexOf(pathStart) >= 0 && request != 'webpack/hot/signal.js') {
-        return callback(null, "commonjs " + request);
-      };
-      callback();
-    }
-  ],
-  recordsPath: path.join(__dirname, 'build/_records'),
+  externals: nodeModules,
   plugins: [
-    new webpack.IgnorePlugin(/\.(css|less|scss)$/),
+    new webpack.IgnorePlugin(/\.(css|less)$/),
     new webpack.BannerPlugin('require("source-map-support").install();',
-                             { raw: true, entryOnly: false }),
-    new webpack.HotModuleReplacementPlugin({ quiet: true })
+                             { raw: true, entryOnly: false })
   ]
 });
 
@@ -137,34 +120,16 @@ gulp.task('frontend-build', function(done) {
 });
 
 gulp.task('frontend-watch', function() {
-  //webpack(frontendConfig).watch(100, onBuild());
-
-  new WebpackDevServer(webpack(frontendConfig), {
-    publicPath: frontendConfig.output.publicPath,
-    hot: true
-  }).listen(3000, 'localhost', function (err, result) {
-    if(err) {
-      console.log(err);
-    }
-    else {
-      console.log('webpack dev server listening at localhost:3000');
-    }
-  });
-
+  webpack(frontendConfig).watch(100, onBuild());
 });
 
 gulp.task('backend-build', function(done) {
   webpack(backendConfig).run(onBuild(done));
 });
 
-gulp.task('backend-watch', function(done) {
-  var firedDone = false;
+gulp.task('backend-watch', function() {
   webpack(backendConfig).watch(100, function(err, stats) {
-    if(!firedDone) {
-      firedDone = true;
-      done();
-    }
-
+    onBuild()(err, stats);
     nodemon.restart();
   });
 });
@@ -182,6 +147,6 @@ gulp.task('run', ['backend-watch', 'frontend-watch'], function() {
     watch: ['foo/'],
     ext: 'noop'
   }).on('restart', function() {
-    console.log('Patched!');
+    console.log('Restarted!');
   });
 });
