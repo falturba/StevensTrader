@@ -1,3 +1,6 @@
+var path = require('path');
+var webpack = require('webpack');
+
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template: __dirname + '/views/index.html',
@@ -8,7 +11,8 @@ var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 
 module.exports = {
   entry: [
-    './views/index.js'
+    './views/index.js',
+    "webpack-hot-middleware/client?path=http://localhost:4000/__webpack_hmr&timeout=2000&overlay=false'"
   ],
   module: {
     loaders: [
@@ -27,11 +31,16 @@ module.exports = {
     ]
   },
   output: {
-    path: __dirname + '/public',
+    path: path.join(__dirname, 'public/build'),
+    publicPath:"http://localhost:4000/build/",
     filename: "index_bundle.js"
   },
   devServer: {
     historyApiFallback: true
   },
-  plugins: [HTMLWebpackPluginConfig]
+  plugins: [
+    HTMLWebpackPluginConfig,
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
+  ]
 }
