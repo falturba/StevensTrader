@@ -16,6 +16,7 @@ export default class Signup extends React.Component{
             isPasswordCorrect:true, 
             isPasswordRetypeCorrect:true
         };
+        console.log("ins");
     }
     handleSubmit = (event)=>{
         console.dir(event);
@@ -29,16 +30,16 @@ export default class Signup extends React.Component{
             //submit
             var baseurl = window.location.protocol + "//" + window.location.host + "/";
             console.log(baseurl);
-            var newName = 'John Smith',
             xhr = new XMLHttpRequest();
 
             xhr.open('POST', baseurl+'services/signup');
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.onload = function() {
-                if (xhr.status === 200 && xhr.responseText !== newName) {
-                    console.log('Something went wrong.  Name is now ' + xhr.responseText);
-                }else if (xhr.status !== 200) {
-                    console.log('Request failed.  Returned status of ' + xhr.status);
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                }else{
+                    console.log('Something went wrong.  Response: ' + xhr.responseText);
+                    console.log('Status : ' + xhr.status);
                 }
             };
             xhr.send( 
