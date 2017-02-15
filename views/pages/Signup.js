@@ -16,7 +16,6 @@ export default class Signup extends React.Component{
             isPasswordCorrect:true, 
             isPasswordRetypeCorrect:true
         };
-        console.log("ins");
     }
     handleSubmit = (event)=>{
         console.dir(event);

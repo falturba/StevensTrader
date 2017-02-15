@@ -8,11 +8,12 @@ var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: 'body'
 });
 
+var LiveReloadPlugin = require('webpack-livereload-plugin');
+var options = {appendScriptTag:true};
 
 module.exports = {
   entry: [
     './views/index.js',
-    "webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr&timeout=2000&overlay=false'"
   ],
   module: {
     loaders: [
@@ -31,8 +32,7 @@ module.exports = {
     ]
   },
   output: {
-    path: path.join(__dirname, 'public/build'),
-    publicPath:"http://localhost:3000/build/",
+    path: path.join(__dirname, 'public/'),
     filename: "index_bundle.js"
   },
   devServer: {
@@ -40,7 +40,6 @@ module.exports = {
   },
   plugins: [
     HTMLWebpackPluginConfig,
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new LiveReloadPlugin(options)
   ]
 }
