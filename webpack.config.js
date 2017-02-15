@@ -12,7 +12,7 @@ var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 module.exports = {
   entry: [
     './views/index.js',
-    "webpack-hot-middleware/client?path=http://localhost:4000/__webpack_hmr&timeout=2000&overlay=false'"
+    "webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr&timeout=2000&overlay=false'"
   ],
   module: {
     loaders: [
@@ -32,7 +32,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'public/build'),
-    publicPath:"http://localhost:4000/build/",
+    publicPath:"http://localhost:3000/build/",
     filename: "index_bundle.js"
   },
   devServer: {

@@ -10,7 +10,7 @@ services.use(bodyParser.json());
 
 services.post('/signup',function(req,res){
 	var email = req.body.email;
-	console.log(email);
+	console.log(req.body);
 	if (req.body.type === 'register') {
 	var newAccount = new Account({
 		name: req.body.name,

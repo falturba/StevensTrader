@@ -27,23 +27,28 @@ export default class Signup extends React.Component{
             this.state.isPasswordRetypeCorrect
         ){
             //submit
+            var baseurl = window.location.protocol + "//" + window.location.host + "/";
+            console.log(baseurl);
             var newName = 'John Smith',
             xhr = new XMLHttpRequest();
 
-            xhr.open('POST', 'http://localhost:3000/services/signup');
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.open('POST', baseurl+'services/signup');
+            xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.onload = function() {
                 if (xhr.status === 200 && xhr.responseText !== newName) {
-                    alert('Something went wrong.  Name is now ' + xhr.responseText);
+                    console.log('Something went wrong.  Name is now ' + xhr.responseText);
                 }else if (xhr.status !== 200) {
-                    alert('Request failed.  Returned status of ' + xhr.status);
+                    console.log('Request failed.  Returned status of ' + xhr.status);
                 }
             };
-            xhr.send(encodeURI( 
-                NAME+"="+this.state.name+"&"+
-                EMAIL+"="+this.state.email+"&"+
-                PASSWORD+"="+this.state.password+"&"
-            ));
+            xhr.send( 
+                JSON.stringify({
+                    type:"register",
+                    name:this.state.name,
+                    email:this.state.email,
+                    password:this.state.password
+                })
+            );
         }
     }
 

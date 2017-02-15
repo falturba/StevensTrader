@@ -29,7 +29,7 @@ app.use(require("webpack-hot-middleware")(compiler, {
 /******************************/
 
 
-var port = 4000;
+var port = 3000;
 app.listen(port, listening);
 function listening(){
 	console.log('listening in port '+port);
@@ -53,11 +53,11 @@ fs.readdirSync(route+'/services').forEach(function(fileName){
 //set fullback url to public/index.html
 var dirname = path.resolve(); // for fixing empty path problem when using gulp
 app.use(express.static(path.join(__dirname, '../public')));
-// app.use(fallback('public/index.html', { root: dirname }))
-// app.get('*', function (req, res) {
-// 	console.log("in....:"+ dirname );
-// 	res.sendFile("index.html", {"root": dirname});
-// })
+app.use(fallback('/public/build/index.html', { root: dirname }))
+app.get('*', function (req, res) {
+	console.log("in....:"+ dirname );
+	res.sendFile(route+"/public/build/index.html", {"root": dirname});
+})
 
 
 
