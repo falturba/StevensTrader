@@ -19,16 +19,20 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/, exclude: /node_modules/, loader: "babel-loader",
+        include: path.join(__dirname,'views'),
         query: {
           presets: ['react', 'es2015', 'stage-2'],
           plugins: ['transform-class-properties','transform-decorators-legacy']
         }
       },{
-          test: /\.scss$/,
-          loaders: ["style-loader", "css-loader", "sass-loader"]
+        test: /\.scss$/,
+        include: path.join(__dirname,'views'),
+        loaders: ["style-loader", "css-loader", "sass-loader"]
       },{ 
-          test: /\.(png|jpg)$/, 
-          loader: 'url-loader?limit=8192' }
+        test: /\.(png|jpg)$/, 
+        include: path.join(__dirname,'views'),
+        loader: 'url-loader?limit=8192' 
+      }
     ]
   },
   output: {

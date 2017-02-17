@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import SignupScss from '../scss/Signup.scss';
+import store from '../redux/store';
+import {signupAction} from '../redux/actions/accountActions';
 
 const NAME = "name";
 const EMAIL = "email";
@@ -16,16 +18,28 @@ export default class Signup extends React.Component{
             isPasswordCorrect:true, 
             isPasswordRetypeCorrect:true
         };
+        store.subscribe(this.onSubmitComplete);
+        
     }
     handleSubmit = (event)=>{
         console.dir(event);
         event.preventDefault();
+        
+        store.dispatch( signupAction(
+                    this.state.name,
+                    this.state.email,
+                    this.state.password
+            ) );
+            console.log("send...");
+            return;
+
         if(
             this.state.isNameCorrect &&
             this.state.isEmailCorrect &&
             this.state.isPasswordCorrect &&
             this.state.isPasswordRetypeCorrect
         ){
+            
             //submit
             var baseurl = window.location.protocol + "//" + window.location.host + "/";
             console.log(baseurl);
@@ -50,6 +64,12 @@ export default class Signup extends React.Component{
                 })
             );
         }
+    }
+
+    onSubmitComplete=()=>{
+        let storeState = store.getState();
+        console.log("subscribe...");
+        console.dir(storeState);
     }
 
     onChange = (event)=>{
