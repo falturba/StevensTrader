@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import SignupScss from '../scss/Header.scss';
+import SignupScss from '../../scss/Header.scss';
 
-import CollapseAnimateComponent from '../libs/CollapseAnimateComponent';
+import CollapseAnimateComponent from '../../libs/CollapseAnimateComponent';
 
 export default class Header extends CollapseAnimateComponent{
     constructor (props) {

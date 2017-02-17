@@ -2,8 +2,8 @@ import {SEND_SIGNUP} from '../actions/accountActions';
 import {SIGNUP_STORE} from '../store';
 
 let defaultState = {isSignup:false};
-export default function projectReducer(state=defaultState,action){
-    console.log("_______projectReducer:_______");
+export default function AccountReducer(state=defaultState,action){
+    console.log("_______accountReducer_______");
     console.dir(state);
     console.log("_____________________________");
     switch (action.type){

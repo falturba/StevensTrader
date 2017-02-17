@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import SignupScss from '../scss/Signup.scss';
+import SignupScss from '../../scss/Signup.scss';
 
 const EMAIL = "email";
 const PASSWORD = "password";

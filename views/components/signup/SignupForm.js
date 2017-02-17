@@ -1,14 +1,18 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import SignupScss from '../scss/Signup.scss';
-import store from '../redux/store';
-import {signupAction} from '../redux/actions/accountActions';
+import SignupScss from '../../scss/Signup.scss';
+// import store from '../redux/store';
+import {signupAction} from '../../redux/actions/AccountActions';
+import {connect} from 'react-redux';
 
 const NAME = "name";
 const EMAIL = "email";
 const PASSWORD = "password";
 const PASSWORD_RETYPE = "passwordRetype";
-export default class Signup extends React.Component{
+
+
+
+export default class SignupForm extends React.Component{
 
     constructor(props){
         super(props);
@@ -18,20 +22,41 @@ export default class Signup extends React.Component{
             isPasswordCorrect:true, 
             isPasswordRetypeCorrect:true
         };
-        store.subscribe(this.onSubmitComplete);
         
     }
     handleSubmit = (event)=>{
         console.dir(event);
         event.preventDefault();
         
-        store.dispatch( signupAction(
-                    this.state.name,
-                    this.state.email,
-                    this.state.password
-            ) );
-            console.log("send...");
-            return;
+
+        this.props.addFlashMessage({
+            type: 'success',
+            text: 'You signed up successfully. Welcome!'
+        });
+        this.context.router.push('/');
+        return;
+
+        this.props.signupAction({
+            name: this.state.name,
+            email:this.state.email,
+            password:this.state.password
+        }).then(
+            ({data})=>{
+                console.log("Success");
+                console.dir(data);
+
+                
+                
+            },
+            ({data})=>{
+                console.log("Error");
+                console.dir(data);
+            }
+        );
+
+        
+       
+        return;
 
         if(
             this.state.isNameCorrect &&
@@ -40,36 +65,14 @@ export default class Signup extends React.Component{
             this.state.isPasswordRetypeCorrect
         ){
             
-            //submit
-            var baseurl = window.location.protocol + "//" + window.location.host + "/";
-            console.log(baseurl);
-            xhr = new XMLHttpRequest();
-
-            xhr.open('POST', baseurl+'services/signup');
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    console.log(xhr.responseText);
-                }else{
-                    console.log('Something went wrong.  Response: ' + xhr.responseText);
-                    console.log('Status : ' + xhr.status);
-                }
-            };
-            xhr.send( 
-                JSON.stringify({
-                    type:"register",
-                    name:this.state.name,
-                    email:this.state.email,
-                    password:this.state.password
-                })
-            );
+            
         }
     }
 
     onSubmitComplete=()=>{
-        let storeState = store.getState();
-        console.log("subscribe...");
-        console.dir(storeState);
+        // let storeState = store.getState();
+        // console.log("subscribe...");
+        // console.dir(storeState);
     }
 
     onChange = (event)=>{
@@ -144,4 +147,8 @@ export default class Signup extends React.Component{
             </div>
         );
     }
+}
+
+SignupForm.contextTypes={
+    router: React.PropTypes.object.isRequired
 }
