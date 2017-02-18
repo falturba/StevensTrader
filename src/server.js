@@ -27,11 +27,11 @@ fs.readdirSync(serverRoot+'/services').forEach(function(fileName){
 
 
 
-//include all the routes
-// fs.readdirSync(serverRoot+'/routes').forEach(function(fileName){
-// 	if(fileName.indexOf('.js')>0)
-// 	app.use(require('./routes/'+fileName));
-// })
+
+fs.readdirSync(serverRoot+'/routes').forEach(function(fileName){
+	if(fileName.indexOf('.js')>0)
+	app.use(require('./routes/'+fileName));
+})
 
 
 //set fullback url to public/index.html
