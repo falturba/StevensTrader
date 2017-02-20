@@ -1,6 +1,7 @@
 var fallback = require('express-history-api-fallback');
 var path = require('path');
 var express = require("express");
+var stormpath = require('express-stormpath');
 var fs = require("fs");
 require("./libs/mongoose-init");
 
@@ -9,10 +10,24 @@ serverRoot = path.resolve(process.cwd(), "src");
 console.log("server root path is : "+serverRoot);
 console.log('server is starting...');
 var app = express();
+app.use(stormpath.init(app, {
+  apiKey: {
+    id: '65MMGRAAKMW0WUHI69C60YDLX',
+    secret: 'rcwRK4+rJFWWe/b5/VpAJE+2hUtJFkq0yEtv9J+XBQI'
+  },
+  application: {
+    href: `https://api.stormpath.com/v1/applications/7VNFXM5t4213RvLurtTVdO`
+  },web: {
+    login: {
+      enabled: false,
+    }
+}}));
 
 
 
-
+app.on('stormpath.ready', function () {
+  console.log('Stormpath Ready!');
+});
 var port = 3000;
 app.listen(port, listening);
 function listening(){
