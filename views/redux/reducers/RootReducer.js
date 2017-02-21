@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 
-import AccountReducer from './AccountReducer';
-import AddFlashReducer from './FlashMessageReducer';
+import accountReducer from './accountReducer';
+import addFlashReducer from './flashMessageReducer';
 
 export default combineReducers({
-  flashMessages:AddFlashReducer
+  flashMessages:addFlashReducer
 });

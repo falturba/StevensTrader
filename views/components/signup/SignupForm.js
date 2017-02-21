@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import SignupScss from '../../scss/Signup.scss';
 // import store from '../redux/store';
-import {signupAction} from '../../redux/actions/AccountActions';
+import {signupAction} from '../../redux/actions/accountActions';
 import {connect} from 'react-redux';
 
 const NAME = "name";

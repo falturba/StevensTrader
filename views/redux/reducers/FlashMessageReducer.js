@@ -1,4 +1,4 @@
-import {ADD_FLASH_MESSAGE} from '../actions/FlashMessageAction';
+import {ADD_FLASH_MESSAGE} from '../actions/flashMessageAction';
 
 
 export default (state = [], action = {}) => {

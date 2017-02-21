@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 
-import {signupAction} from '../../redux/actions/AccountActions';
-import {addFlashMessage} from '../../redux/actions/FlashMessageAction';
+import {signupAction} from '../../redux/actions/accountActions';
+import {addFlashMessage} from '../../redux/actions/flashMessageAction';
 import {connect} from 'react-redux';
 
 import SignupForm from './SignupForm';
