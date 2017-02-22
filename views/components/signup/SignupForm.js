@@ -29,12 +29,12 @@ export default class SignupForm extends React.Component{
         event.preventDefault();
         
 
-        this.props.addFlashMessage({
-            type: 'success',
-            text: 'You signed up successfully. Welcome!'
-        });
-        this.context.router.push('/');
-        return;
+        // this.props.addFlashMessage({
+        //     type: 'success',
+        //     text: 'You signed up successfully. Welcome!'
+        // });
+        // this.context.router.push('/');
+        // return;
 
         this.props.signupAction({
             name: this.state.name,

@@ -1,3 +1,4 @@
+var bcrypt = require('bcrypt');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -9,6 +10,7 @@ var accountSchema = new Schema({
 });
 
 accountSchema.methods.validPassword = function(password) {
+  console.log(password, this.password);
   return bcrypt.compareSync(password, this.password);
 };
 

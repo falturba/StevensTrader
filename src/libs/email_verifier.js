@@ -1,5 +1,5 @@
-mongoose = require('mongoose');
-nev = require('email-verification')(mongoose);
+var mongoose = require('mongoose');
+var nev = require('email-verification')(mongoose);
 var bcrypt = require('bcrypt');
 var account = require('../models/account');
 var tempAccount = require('../models/temp_account');
@@ -7,7 +7,7 @@ var tempAccount = require('../models/temp_account');
 
 
 // async version of hashing function
-myHasher = function(password, tempUserData, insertTempUser, callback) {
+var myHasher = function(password, tempUserData, insertTempUser, callback) {
   bcrypt.genSalt(8, function(err, salt) {
     bcrypt.hash(password, salt, function(err, hash) {
       return insertTempUser(hash, tempUserData, callback);

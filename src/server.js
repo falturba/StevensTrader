@@ -5,7 +5,7 @@ var fs = require("fs");
 require("./libs/mongoose-init");
 
 
-serverRoot = path.resolve(process.cwd(), "src");
+var serverRoot = path.resolve(process.cwd(), "src");
 console.log("server root path is : "+serverRoot);
 console.log('server is starting...');
 var app = express();
@@ -22,8 +22,10 @@ function listening(){
 //include all the services
 fs.readdirSync(serverRoot+'/services').forEach(function(fileName){
 	if(fileName.indexOf('.js')>0)
-	app.use('/services',require('./services/'+fileName));
+		app.use('/services',require('./services/'+fileName));
 })
+
+
 
 
 
