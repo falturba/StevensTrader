@@ -25,10 +25,7 @@
     "email-verification": "^0.4.5",
     "express": "^4.14.1",
     "express-history-api-fallback": "^2.1.0",
-    "express-session": "^1.15.1",
-    "express-stormpath": "^3.2.0",
-    "mongoose": "^4.8.1",
-    "react-stormpath": "^2.0.0"
+    "mongoose": "^4.8.1"
   },
   "devDependencies": {
     "axios": "^0.15.3",
