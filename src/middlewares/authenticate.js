@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import mongodb from 'mongodb';
 import config from '../config/jwtConfig';
 import Account from '../models/account';
 
@@ -16,18 +17,20 @@ export default (req, res, next) => {
         res.status(401).json({ error: 'Failed to authenticate' });
       } else {
         let account = new Account({...decoded});
-
-        // User.query({
-        //   where: { id: decoded.id },
-        //   select: [ 'email', 'id', 'username' ]
-        // }).fetch().then(user => {
-        //   if (!user) {
-        //     res.status(404).json({ error: 'No such user' });
-        //   } else {
-        //     req.currentUser = user;
-        //     next();
-        //   }
-
+        Account.findOne({
+            _id:decoded.id,
+            name:decoded.name,
+            email:decoded.email,
+        }, function(error, data){
+            if(error){
+                res.status(401).json({ errors: { form: 'There is database connection problem, please try again.' } });
+            }else if(data){
+                next();
+            }else{
+                //not found user in server
+                res.status(401).json({ error: 'Failed to authenticate' });
+            }
+        });
         }
       }
     );

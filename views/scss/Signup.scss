@@ -7,7 +7,7 @@
     background-color: #fff;
     margin: 50px auto 100px auto;
     padding: 20px;
-    input{
+    input,textarea{
         &.wrong{
             border-color:$base-color;
         }

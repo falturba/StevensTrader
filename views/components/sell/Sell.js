@@ -1,58 +1,54 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import SignupScss from '../../scss/Signup.scss';
-import {loginAction} from '../../redux/actions/accountActions';
+import {postProductAction} from '../../redux/actions/postAction';
 import store from '../../redux/store';
 
-const EMAIL = "email";
-const PASSWORD = "password";
+const TITLE = "title";
+const DESCRIPTION = "description";
 export default class Sell extends React.Component{
 
     constructor(props){
         super(props);
         this.state = {
-            isEmailCorrect:true, 
-            isPasswordCorrect:true, 
+            isTitleCorrect:true, 
+            isDescriptionCorrect:true, 
         };
     }
     handleSubmit = (event)=>{
         console.dir(event);
         event.preventDefault();
-        if(
-            this.state.isEmailCorrect &&
-            this.state.isPasswordCorrect
-        ){
+        // if(
+        //     this.state.isTitleCorrect &&
+        //     this.state.isPasswordCorrect
+        // ){
             //submit
-            store.dispatch( loginAction({
-                email:this.state.email,
-                password:this.state.password
+            store.dispatch( postProductAction({
+                title:this.state.title,
+                description: this.state.description
             }) );
-        }
+        // }
     }
 
     onChange = (event)=>{
         var state = {};
         var value = event.target.value.trim();
        
-        if(event.target.name===EMAIL){
-            if(this.validateEmail(value)){
-                state.isEmailCorrect = true;
-            }else{
-                state.isEmailCorrect = false;
-            }
-        }else if(event.target.name===PASSWORD){
+        if(event.target.name===TITLE){
             if(value===""){
-                state.isPasswordCorrect = false;
+                state.isTitleCorrect = false;
             }else{
-                state.isPasswordCorrect = true;
+                state.isTitleCorrect = true;
+            }
+        }else if(event.target.name===DESCRIPTION){
+            if(value===""){
+                state.isDescriptionCorrect = false;
+            }else{
+                state.isDescriptionCorrect = true;
             }
         }
         state[event.target.name] = value;
         this.setState(state);
-    }
-
-    validateEmail(email){
-        return /^\"?[\w-_\.]*\"?@stevens\.edu$/.test(email);        
     }
 
     checkStateClass(isCorrect){
@@ -66,18 +62,18 @@ export default class Sell extends React.Component{
         return(
             <div className="signup-container">
                 <form onSubmit={this.handleSubmit}>
-                    <h1 >Log In</h1>
+                    <h1 >Sell</h1>
                     <hr/>
 
-                    <h3>Email</h3>
-                    <input type="text"      name={EMAIL} onChange={this.onChange} className={`${this.checkStateClass(this.state.isEmailCorrect)}`}/>
-                    <div className={`warning ${this.checkStateClass(this.state.isEmailCorrect)}`}>Email should be Stevens's email.</div>
+                    <h3>Title</h3>
+                    <input type="text"      name={TITLE} onChange={this.onChange} className={`${this.checkStateClass(this.state.isTitleCorrect)}`}/>
+                    <div className={`warning ${this.checkStateClass(this.state.isTitleCorrect)}`}>Title can not be empty.</div>
 
-                    <h3>Password</h3>
-                    <input type="password"  name={PASSWORD} onChange={this.onChange} className={`${this.checkStateClass(this.state.isPasswordCorrect)}`}/>
-                    <div className={`warning ${this.checkStateClass(this.state.isPasswordCorrect)}`}>Password can not be empty.</div>
+                    <h3>Description</h3>
+                    <textarea  name={DESCRIPTION} onChange={this.onChange} className={`${this.checkStateClass(this.state.isDescriptionCorrect)}`}/>
+                    <div className={`warning ${this.checkStateClass(this.state.isDescriptionCorrect)}`}>Description can not be empty.</div>
 
-                    <input type="submit" value="SUBMIT" id="submit-button" className="button"/>
+                    <input type="submit" value="POST" id="submit-button" className="button"/>
                 </form>
             </div>
         );
