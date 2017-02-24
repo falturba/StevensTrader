@@ -44,7 +44,7 @@ export default class SignupForm extends React.Component{
             ({data})=>{
                 console.log("Success");
                 console.dir(data);
-
+                this.context.router.push('/login');
                 
                 
             },

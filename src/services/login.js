@@ -9,8 +9,8 @@ let router = express.Router();
 router.use(bodyParser.json());
 
 
-router.post('/signin',function(req,res){
-    console.log("services/signin", req.body);
+router.post('/login',function(req,res){
+    console.log("services/login", req.body);
     const { email, password } = req.body;
     Account.findOne({
         email:email
@@ -21,12 +21,14 @@ router.post('/signin',function(req,res){
         }else if(data){
             var account = new Account(data);
             var isCorrectPassword = account.validPassword(password);
+            //check hash password
             if(isCorrectPassword){
                 const token = jwt.sign({
+                    id: account._id.toString(),
                     name: account.name,
                     email: account.email
                 }, config.jwtSecret);
-                console.dir(token);
+                console.dir(account._id.toString());
                 res.json({ token });
             }else{
                 res.status(401).json({ errors: { form: 'Password incorrect.' } });

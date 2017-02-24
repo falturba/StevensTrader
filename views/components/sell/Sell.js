@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import SignupScss from '../../scss/Signup.scss';
-import {signinAction} from '../../redux/actions/accountActions';
+import {loginAction} from '../../redux/actions/accountActions';
 import store from '../../redux/store';
 
 const EMAIL = "email";
 const PASSWORD = "password";
-export default class Signin extends React.Component{
+export default class Sell extends React.Component{
 
     constructor(props){
         super(props);
@@ -23,7 +23,7 @@ export default class Signin extends React.Component{
             this.state.isPasswordCorrect
         ){
             //submit
-            store.dispatch( signinAction({
+            store.dispatch( loginAction({
                 email:this.state.email,
                 password:this.state.password
             }) );

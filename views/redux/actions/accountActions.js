@@ -1,26 +1,45 @@
 import axios from 'axios';
-export const SEND_SIGNUP = "sendsignup";
+import setAuthorizationToken from "../../utils/setAuthorizationToken";
+import jwtDecode from 'jwt-decode'
+import { browserHistory } from 'react-router'
 
-export const SIGNUP_PASS = "signuppass";
-export const SIGNUP_FAIL = "signupfail";
+export const LOGIN_PASS = "loginpass";
+export const LOGIN_FAIL = "loginfail";
+export const SET_CURRENT_USER = "setcurrentuser";
 
 export function signupAction(userData){
     //return dispatch for "thunk" promise
     return dispatch => {
-        axios.post('/services/signup',{...userData,type:'register'});
+        return axios.post('/services/signup',{...userData,type:'register'});
     }
 }
 
-export function signinAction(userData){
+export function loginAction(userData){
     //return dispatch for "thunk" promise
-    console.log("signin");
     return dispatch => {
-        return axios.post('/services/signin',{...userData})
+        return axios.post('/services/login',{...userData})
         .then((response) => {
-            dispatch({type: SIGNUP_PASS, payload: response.data})
+            if(response && response.data && response.data.token){
+                const token = response.data.token;
+                localStorage.setItem('jwtToken',token);
+                setAuthorizationToken(token);
+                dispatch({type: SET_CURRENT_USER, payload: jwtDecode(token)});
+                browserHistory.push('/');
+            }else{
+                dispatch({type: LOGIN_FAIL, payload: response.data})
+            }
         })
         .catch((response) => {
-            dispatch({type: SIGNUP_FAIL, payload: response.data})
+            dispatch({type: LOGIN_FAIL, payload: response.data})
         });
+    }
+}
+
+export function logoutAction(){
+    return dispatch =>{
+        localStorage.removeItem('jwtToken');
+        setAuthorizationToken(false);
+        dispatch({type: SET_CURRENT_USER, payload: {}});
+        browserHistory.push('/login');
     }
 }
