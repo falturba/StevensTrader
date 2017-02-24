@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/falturba/StevensTrader#readme",
   "dependencies": {
+    "babel-cli": "^6.23.0",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.16.0",
     "email-verification": "^0.4.5",

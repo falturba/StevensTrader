@@ -19,6 +19,9 @@ class SecondViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func popController(_ sender: Any) {
+        self.dismiss(animated: false, completion: nil);
+    }
     func checkTextField(type:String) -> Bool
     {
         let regex:NSRegularExpression!

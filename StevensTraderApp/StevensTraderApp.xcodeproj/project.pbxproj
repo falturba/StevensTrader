@@ -7,73 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CC61884C1E52B45000C1E835 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CC61883D1E52B36400C1E835 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1E994D589148955DF9A3764A /* Pods_StevensTraderAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B3F419BDB055447052CA4A /* Pods_StevensTraderAppTests.framework */; };
+		902EE4A6E080AD11EDB68FDA /* Pods_StevensTraderApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 124A6F5305DC26BB46BB53C4 /* Pods_StevensTraderApp.framework */; };
 		CC641CCA1E4E73E600CD6998 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC641CC91E4E73E600CD6998 /* AppDelegate.swift */; };
 		CC641CCC1E4E73E600CD6998 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC641CCB1E4E73E600CD6998 /* ViewController.swift */; };
 		CC641CCF1E4E73E600CD6998 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC641CCD1E4E73E600CD6998 /* Main.storyboard */; };
 		CC641CD11E4E73E600CD6998 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC641CD01E4E73E600CD6998 /* Assets.xcassets */; };
 		CC641CD41E4E73E600CD6998 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC641CD21E4E73E600CD6998 /* LaunchScreen.storyboard */; };
 		CC641CDF1E4E73E600CD6998 /* StevensTraderAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC641CDE1E4E73E600CD6998 /* StevensTraderAppTests.swift */; };
-		CC641CEC1E4EDC9500CD6998 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC641CEB1E4EDC9500CD6998 /* SecondViewController.swift */; };
+		CC641CEC1E4EDC9500CD6998 /* signupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC641CEB1E4EDC9500CD6998 /* signupViewController.swift */; };
+		CCE339F61E5E659600E3FFB7 /* sellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE339F51E5E659600E3FFB7 /* sellViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		CC61883C1E52B36400C1E835 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC6188311E52B36400C1E835 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F8111E3319A95C8B0040E7D1;
-			remoteInfo = "Alamofire iOS";
-		};
-		CC61883E1E52B36400C1E835 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC6188311E52B36400C1E835 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F8111E3E19A95C8B0040E7D1;
-			remoteInfo = "Alamofire iOS Tests";
-		};
-		CC6188401E52B36400C1E835 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC6188311E52B36400C1E835 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4DD67C0B1A5C55C900ED2280;
-			remoteInfo = "Alamofire macOS";
-		};
-		CC6188421E52B36400C1E835 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC6188311E52B36400C1E835 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F829C6B21A7A94F100A2CD59;
-			remoteInfo = "Alamofire macOS Tests";
-		};
-		CC6188441E52B36400C1E835 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC6188311E52B36400C1E835 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4CF626EF1BA7CB3E0011A099;
-			remoteInfo = "Alamofire tvOS";
-		};
-		CC6188461E52B36400C1E835 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC6188311E52B36400C1E835 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4CF626F81BA7CB3E0011A099;
-			remoteInfo = "Alamofire tvOS Tests";
-		};
-		CC6188481E52B36400C1E835 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC6188311E52B36400C1E835 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E4202FE01B667AA100C997FB;
-			remoteInfo = "Alamofire watchOS";
-		};
-		CC61884D1E52B45000C1E835 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC6188311E52B36400C1E835 /* Alamofire.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
-			remoteInfo = "Alamofire iOS";
-		};
 		CC641CDB1E4E73E600CD6998 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CC641CBE1E4E73E500CD6998 /* Project object */;
@@ -90,7 +36,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CC61884C1E52B45000C1E835 /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,7 +43,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CC6188311E52B36400C1E835 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "../../Downloads/Alamofire-master/Alamofire.xcodeproj"; sourceTree = "<group>"; };
+		124A6F5305DC26BB46BB53C4 /* Pods_StevensTraderApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StevensTraderApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		18B3F419BDB055447052CA4A /* Pods_StevensTraderAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StevensTraderAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		25773111695B81AE08DFE004 /* Pods-StevensTraderApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StevensTraderApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StevensTraderApp/Pods-StevensTraderApp.debug.xcconfig"; sourceTree = "<group>"; };
+		7186AE9CD43866997F1F976B /* Pods-StevensTraderAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StevensTraderAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StevensTraderAppTests/Pods-StevensTraderAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		86F0507811D0B82D334EB63A /* Pods-StevensTraderApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StevensTraderApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-StevensTraderApp/Pods-StevensTraderApp.release.xcconfig"; sourceTree = "<group>"; };
 		CC641CC61E4E73E600CD6998 /* StevensTraderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StevensTraderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC641CC91E4E73E600CD6998 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC641CCB1E4E73E600CD6998 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -109,7 +58,9 @@
 		CC641CDA1E4E73E600CD6998 /* StevensTraderAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StevensTraderAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC641CDE1E4E73E600CD6998 /* StevensTraderAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StevensTraderAppTests.swift; sourceTree = "<group>"; };
 		CC641CE01E4E73E600CD6998 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CC641CEB1E4EDC9500CD6998 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		CC641CEB1E4EDC9500CD6998 /* signupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signupViewController.swift; sourceTree = "<group>"; };
+		CCE339F51E5E659600E3FFB7 /* sellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sellViewController.swift; sourceTree = "<group>"; };
+		DC6A327DF3016C199F408383 /* Pods-StevensTraderAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StevensTraderAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StevensTraderAppTests/Pods-StevensTraderAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				902EE4A6E080AD11EDB68FDA /* Pods_StevensTraderApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,24 +76,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E994D589148955DF9A3764A /* Pods_StevensTraderAppTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CC6188321E52B36400C1E835 /* Products */ = {
+		3AC3FD229C3AFD3128F96D01 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				CC61883D1E52B36400C1E835 /* Alamofire.framework */,
-				CC61883F1E52B36400C1E835 /* Alamofire iOS Tests.xctest */,
-				CC6188411E52B36400C1E835 /* Alamofire.framework */,
-				CC6188431E52B36400C1E835 /* Alamofire macOS Tests.xctest */,
-				CC6188451E52B36400C1E835 /* Alamofire.framework */,
-				CC6188471E52B36400C1E835 /* Alamofire tvOS Tests.xctest */,
-				CC6188491E52B36400C1E835 /* Alamofire.framework */,
+				25773111695B81AE08DFE004 /* Pods-StevensTraderApp.debug.xcconfig */,
+				86F0507811D0B82D334EB63A /* Pods-StevensTraderApp.release.xcconfig */,
+				DC6A327DF3016C199F408383 /* Pods-StevensTraderAppTests.debug.xcconfig */,
+				7186AE9CD43866997F1F976B /* Pods-StevensTraderAppTests.release.xcconfig */,
 			);
-			name = Products;
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6286EF962F64A9E262F05670 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				124A6F5305DC26BB46BB53C4 /* Pods_StevensTraderApp.framework */,
+				18B3F419BDB055447052CA4A /* Pods_StevensTraderAppTests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		CC641CBD1E4E73E500CD6998 = {
@@ -150,7 +109,8 @@
 				CC641CC81E4E73E600CD6998 /* StevensTraderApp */,
 				CC641CDD1E4E73E600CD6998 /* StevensTraderAppTests */,
 				CC641CC71E4E73E600CD6998 /* Products */,
-				CC6188311E52B36400C1E835 /* Alamofire.xcodeproj */,
+				3AC3FD229C3AFD3128F96D01 /* Pods */,
+				6286EF962F64A9E262F05670 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -169,10 +129,11 @@
 				CC641CC91E4E73E600CD6998 /* AppDelegate.swift */,
 				CC641CCB1E4E73E600CD6998 /* ViewController.swift */,
 				CC641CCD1E4E73E600CD6998 /* Main.storyboard */,
-				CC641CEB1E4EDC9500CD6998 /* SecondViewController.swift */,
+				CC641CEB1E4EDC9500CD6998 /* signupViewController.swift */,
 				CC641CD01E4E73E600CD6998 /* Assets.xcassets */,
 				CC641CD21E4E73E600CD6998 /* LaunchScreen.storyboard */,
 				CC641CD51E4E73E600CD6998 /* Info.plist */,
+				CCE339F51E5E659600E3FFB7 /* sellViewController.swift */,
 			);
 			path = StevensTraderApp;
 			sourceTree = "<group>";
@@ -193,15 +154,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC641CE31E4E73E600CD6998 /* Build configuration list for PBXNativeTarget "StevensTraderApp" */;
 			buildPhases = (
+				9B9221D37D165B7C613CBF9A /* [CP] Check Pods Manifest.lock */,
 				CC641CC21E4E73E600CD6998 /* Sources */,
 				CC641CC31E4E73E600CD6998 /* Frameworks */,
 				CC641CC41E4E73E600CD6998 /* Resources */,
 				CC61884F1E52B45000C1E835 /* Embed Frameworks */,
+				3EF5BD61D323BC72DA7C11E1 /* [CP] Embed Pods Frameworks */,
+				FBF7694DF09C985741302973 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				CC61884E1E52B45000C1E835 /* PBXTargetDependency */,
 			);
 			name = StevensTraderApp;
 			productName = StevensTraderApp;
@@ -212,9 +175,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC641CE61E4E73E600CD6998 /* Build configuration list for PBXNativeTarget "StevensTraderAppTests" */;
 			buildPhases = (
+				BAA8C1349B4FE8F5C01AC95E /* [CP] Check Pods Manifest.lock */,
 				CC641CD61E4E73E600CD6998 /* Sources */,
 				CC641CD71E4E73E600CD6998 /* Frameworks */,
 				CC641CD81E4E73E600CD6998 /* Resources */,
+				C528B0F8564219AB8B71A158 /* [CP] Embed Pods Frameworks */,
+				E6717D6A37760BAA0C3B9B9E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -260,12 +226,6 @@
 			mainGroup = CC641CBD1E4E73E500CD6998;
 			productRefGroup = CC641CC71E4E73E600CD6998 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = CC6188321E52B36400C1E835 /* Products */;
-					ProjectRef = CC6188311E52B36400C1E835 /* Alamofire.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				CC641CC51E4E73E600CD6998 /* StevensTraderApp */,
@@ -273,58 +233,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		CC61883D1E52B36400C1E835 /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = CC61883C1E52B36400C1E835 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CC61883F1E52B36400C1E835 /* Alamofire iOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Alamofire iOS Tests.xctest";
-			remoteRef = CC61883E1E52B36400C1E835 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CC6188411E52B36400C1E835 /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = CC6188401E52B36400C1E835 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CC6188431E52B36400C1E835 /* Alamofire macOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Alamofire macOS Tests.xctest";
-			remoteRef = CC6188421E52B36400C1E835 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CC6188451E52B36400C1E835 /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = CC6188441E52B36400C1E835 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CC6188471E52B36400C1E835 /* Alamofire tvOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Alamofire tvOS Tests.xctest";
-			remoteRef = CC6188461E52B36400C1E835 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CC6188491E52B36400C1E835 /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = CC6188481E52B36400C1E835 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		CC641CC41E4E73E600CD6998 /* Resources */ = {
@@ -346,13 +254,107 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3EF5BD61D323BC72DA7C11E1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StevensTraderApp/Pods-StevensTraderApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9B9221D37D165B7C613CBF9A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BAA8C1349B4FE8F5C01AC95E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C528B0F8564219AB8B71A158 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StevensTraderAppTests/Pods-StevensTraderAppTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E6717D6A37760BAA0C3B9B9E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StevensTraderAppTests/Pods-StevensTraderAppTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FBF7694DF09C985741302973 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StevensTraderApp/Pods-StevensTraderApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CC641CC21E4E73E600CD6998 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC641CEC1E4EDC9500CD6998 /* SecondViewController.swift in Sources */,
+				CC641CEC1E4EDC9500CD6998 /* signupViewController.swift in Sources */,
 				CC641CCC1E4E73E600CD6998 /* ViewController.swift in Sources */,
+				CCE339F61E5E659600E3FFB7 /* sellViewController.swift in Sources */,
 				CC641CCA1E4E73E600CD6998 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,11 +370,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		CC61884E1E52B45000C1E835 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Alamofire iOS";
-			targetProxy = CC61884D1E52B45000C1E835 /* PBXContainerItemProxy */;
-		};
 		CC641CDC1E4E73E600CD6998 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CC641CC51E4E73E600CD6998 /* StevensTraderApp */;
@@ -495,6 +492,7 @@
 		};
 		CC641CE41E4E73E600CD6998 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 25773111695B81AE08DFE004 /* Pods-StevensTraderApp.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -509,6 +507,7 @@
 		};
 		CC641CE51E4E73E600CD6998 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86F0507811D0B82D334EB63A /* Pods-StevensTraderApp.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -523,6 +522,7 @@
 		};
 		CC641CE71E4E73E600CD6998 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC6A327DF3016C199F408383 /* Pods-StevensTraderAppTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -538,6 +538,7 @@
 		};
 		CC641CE81E4E73E600CD6998 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7186AE9CD43866997F1F976B /* Pods-StevensTraderAppTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
