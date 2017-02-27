@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import SignupScss from '../../scss/Signup.scss';
+import SellScss from '../../scss/Sell.scss';
+import DownloadImage from '../../images/download.png'
 import {postProductAction} from '../../redux/actions/postAction';
 import store from '../../redux/store';
 
@@ -12,9 +14,45 @@ export default class Sell extends React.Component{
         super(props);
         this.state = {
             isTitleCorrect:true, 
-            isDescriptionCorrect:true, 
+            isDescriptionCorrect:true,
+            hoverStyle:""
         };
     }
+    dragHover = (event)=>{
+        if(this.state.hoverStyle!="hover"){
+            this.setState({hoverStyle:"hover"});
+        }
+        event.preventDefault();
+        event.stopPropagation();
+        return false;
+    }
+    dragLeave = (event)=>{
+        if(this.state.hoverStyle!=""){
+            this.setState({hoverStyle:""});
+        }
+        event.preventDefault();
+        event.stopPropagation();
+        return false;
+    }
+    dropFile = (event)=>{
+        var files = event.target.files || event.dataTransfer.files;
+        console.log("file");
+        console.dir(files);
+		// process all File objects
+		for (var i = 0, f; f = files[i]; i++) {
+			//ParseFile(f);
+		}
+
+
+        this.setState({hoverStyle:""});
+        event.stopPropagation();
+        event.preventDefault();
+        return;
+    }
+    componentDidMount(){
+        this.dragDropArea.addEventListener("dragover", this.dragHover, false);
+    }
+
     handleSubmit = (event)=>{
         console.dir(event);
         event.preventDefault();
@@ -73,6 +111,17 @@ export default class Sell extends React.Component{
                     <textarea  name={DESCRIPTION} onChange={this.onChange} className={`${this.checkStateClass(this.state.isDescriptionCorrect)}`}/>
                     <div className={`warning ${this.checkStateClass(this.state.isDescriptionCorrect)}`}>Description can not be empty.</div>
 
+                    <h3>Upload</h3>
+                    <div className={`drag-drop-area ${this.state.hoverStyle}`} ref={child=>this.dragDropArea=child} 
+                        draggable="true"
+                        onDragOver={this.dragHover} 
+                        onDragLeave={this.dragLeave}
+                        onDrop={this.dropFile}>
+                        <div className="drag-drop-area-line">
+                            <h1>Drag and drop file in this box</h1>
+                            <img src={DownloadImage}/>
+                        </div>
+                    </div>
                     <input type="submit" value="POST" id="submit-button" className="button"/>
                 </form>
             </div>

@@ -23,6 +23,7 @@
     "babel-cli": "^6.23.0",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.16.0",
+    "bson": "^1.0.4",
     "email-verification": "^0.4.5",
     "express": "^4.14.1",
     "express-history-api-fallback": "^2.1.0",
@@ -56,6 +57,7 @@
     "redux-thunk": "^2.2.0",
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
     "webpack": "^2.2.1",
     "webpack-hot-middleware": "^2.16.1",
     "webpack-livereload-plugin": "^0.10.0"

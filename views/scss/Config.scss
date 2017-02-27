@@ -10,8 +10,10 @@ $container-large-width : 1170px;
 
 $base-color : #9D1535;
 $dark-base-color : #761A26;
+$light-base-color : #A94D59;
 $line-color : #ddd;
 $white-color: #fff;
+$light-gray-color: #CCC;
 
 $menu-animate-time : .3s;
 @mixin addTransition($variableName) {
