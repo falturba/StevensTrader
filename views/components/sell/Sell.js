@@ -9,13 +9,14 @@ import store from '../../redux/store';
 const TITLE = "title";
 const DESCRIPTION = "description";
 export default class Sell extends React.Component{
-
+    //read file https://www.html5rocks.com/en/tutorials/file/dndfiles/
     constructor(props){
         super(props);
         this.state = {
             isTitleCorrect:true, 
             isDescriptionCorrect:true,
-            hoverStyle:""
+            hoverStyle:"",
+            uploadImagePaths:[]
         };
     }
     dragHover = (event)=>{
@@ -40,7 +41,27 @@ export default class Sell extends React.Component{
         console.dir(files);
 		// process all File objects
 		for (var i = 0, f; f = files[i]; i++) {
-			//ParseFile(f);
+			// Only process image files.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            var _this = this;
+            // Closure to capture the file information.
+            reader.onload = (function(theFile) {
+                return function(e) {
+                    // Render thumbnail.
+                    //img class="thumb" src="', e.target.result
+                    console.dir( e.target.result );
+                    console.dir( escape(theFile.name));
+                    _this.setState({uploadImagePaths: [..._this.state.uploadImagePaths,e.target.result] });
+                };
+            })(f);
+
+            // Read in the image file as a data URL.
+            reader.readAsDataURL(f);
 		}
 
 
@@ -97,6 +118,7 @@ export default class Sell extends React.Component{
     }
     
     render(){
+
         return(
             <div className="signup-container">
                 <form onSubmit={this.handleSubmit}>
@@ -112,9 +134,19 @@ export default class Sell extends React.Component{
                     <div className={`warning ${this.checkStateClass(this.state.isDescriptionCorrect)}`}>Description can not be empty.</div>
 
                     <h3>Upload</h3>
-                    <div className={`drag-drop-area ${this.state.hoverStyle}`} ref={child=>this.dragDropArea=child} 
+                                    
+
+                    <div className="upload-image-container">
+                        {this.state.uploadImagePaths.map( (image,i)=>(
+                            <div className="image-container">
+                                <a href="#" ref={child=>{  }} className="close-button"/>
+                                <img key={`image-${i}`} src={image}/>
+                            </div>
+                        ))}
+                    </div> 
+                    <div className={`drag-drop-area ${this.state.hoverStyle}`} ref={child=>this.dragDropArea=child}
                         draggable="true"
-                        onDragOver={this.dragHover} 
+                        onDragOver={this.dragHover}
                         onDragLeave={this.dragLeave}
                         onDrop={this.dropFile}>
                         <div className="drag-drop-area-line">

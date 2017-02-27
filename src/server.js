@@ -36,7 +36,7 @@ fs.readdirSync(serverRoot+'/routes').forEach(function(fileName){
 })
 
 
-//set fullback url to public/index.html
+//set fallback url to public/index.html
 var dirname = path.resolve(); // for fixing empty path problem when using gulp
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(fallback('/public/index.html', { root: dirname }))
