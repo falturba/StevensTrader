@@ -1,6 +1,6 @@
 var express = require('express')
 var listService = express.Router()
-var Items = require("../models/items.js")
+var Items = require("../models/item.js")
 var bodyParser = require("body-parser");
 listService.use(bodyParser.json({limit:'50mb'}));
 listService.use(bodyParser.urlencoded({limit: '50mb', extended: true}));

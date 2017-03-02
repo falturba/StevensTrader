@@ -2,6 +2,7 @@ var fallback = require('express-history-api-fallback');
 var path = require('path');
 var express = require("express");
 var fs = require("fs");
+var bodyParser = require('body-parser');
 require("./libs/mongoose-init");
 
 
@@ -11,7 +12,9 @@ console.log('server is starting...');
 var app = express();
 
 
-
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: false
+}));
 
 var port = 3000;
 app.listen(port, listening);
@@ -45,5 +48,5 @@ app.get('*', function (req, res) {
 	res.sendFile(route+"/public/index.html", {"root": dirname});
 })
 
-
+app.use(express.static(path.join(__dirname, 'public')));
 

@@ -16,7 +16,7 @@ router.post('/login',function(req,res){
         email:email
     }, function(error, data){
         if(error){
-            res.status(401).json({ errors: { form: 'There is database connection problem, please try again.' } });
+            res.status(500).json({ errors: { form: 'There is database connection problem, please try again.' } });
             return;
         }else if(data){
             var account = new Account(data);
