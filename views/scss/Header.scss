@@ -186,14 +186,3 @@ nav:after,nav:before, .navbar-header:before,.navbar-header:after, .container:bef
     }
     
 }
-
-@media (min-width: $container-medium-min-width){
-  .container {
-      width: 970px;
-  }
-}
-@media (min-width: $container-large-min-width){
-  .container {
-      width: 1170px;
-  }
-}

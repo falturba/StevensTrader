@@ -3,7 +3,7 @@ import ReactDom from 'react-dom'
 import SignupScss from '../../scss/Signup.scss'
 import SellScss from '../../scss/Sell.scss'
 import DownloadImage from '../../images/download.png'
-import {postProductAction} from '../../redux/actions/postAction'
+import {postProductAction} from '../../redux/actions/productsAction'
 import store from '../../redux/store'
 import {condintionEnum} from '../../../src/models/enum'
 

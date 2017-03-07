@@ -108,6 +108,22 @@ body{
     }
 }
 
+@media (min-width: $container-small-min-width ){
+    .container {
+        width: 750px;
+    }
+}
+@media (min-width: $container-medium-min-width){
+  .container {
+      width: 970px;
+  }
+}
+@media (min-width: $container-large-min-width){
+  .container {
+      width: 1170px;
+  }
+}
 
-
-
+.container-full{
+    width:100%;
+}
