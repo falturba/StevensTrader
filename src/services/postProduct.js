@@ -14,7 +14,7 @@ import fs from 'fs'
 //  1.1 if video create thumbnail
 //  1.2 if not image or video throw error
 // 2. Check all image resize completed before save to DB.
-//  2.1 Because it doesn't check for save resize image, so cannot delete image_small(thumbnail) when insert DB fail
+//  2.1 Because it doesn't check for saving resize image, so cannot delete image_small(thumbnail) when insert DB fail
 /*************************************/
 
 let router = express.Router()
@@ -75,7 +75,7 @@ router.post('/postproduct', /*authenticate,*/ (req, res) => {
                 res.status(412).json(err)//db value is not valid
             }else{
                 console.log("Complete save item.")
-                res.status(200).json({status:"post complete."})
+                res.status(200).json({status:"post complete.",postId:result._doc._id.toString()})
             }
         });
     });

@@ -43,4 +43,7 @@ using port 8080
 ```url
 http://localhost:8080
 ```
-
+## Run Test [Mocha]
+```shell
+$npm t
+```
