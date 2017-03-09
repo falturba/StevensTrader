@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import SignupScss from '../../scss/Signup.scss';
+// import SignupScss from '../../scss/Signup.scss';
 import {loginAction} from '../../redux/actions/accountActions';
 import store from '../../redux/store';
 

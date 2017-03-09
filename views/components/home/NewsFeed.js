@@ -27,10 +27,10 @@ class NewsFeed extends React.Component{
                     <div className="item-container"></div>
                     <div className="item-container"></div>
                 </div>
-            </div>);
+            </div>)
     }
 }
 const mapStateToProps=(state)=>{
-    return { messages:state.flashMessages};
+    return { messages:state.flashMessages}
 }
-export default connect(mapStateToProps)(NewsFeed);
+export default connect(mapStateToProps)(NewsFeed)

@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 
 import SignupForm from './SignupForm';
 
-class Signup extends React.Component{
+export class Signup extends React.Component{
     constructor(props){
         super(props);
         const { signupAction, addFlashMessage } = this.props;

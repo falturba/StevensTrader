@@ -3,7 +3,7 @@ var services = express.Router();
 var Account = require('../models/account.js');
 var bodyParser = require("body-parser");
 var email_verfier = require("../libs/email_verifier.js");
-var stormpath = require('express-stormpath');
+// var stormpath = require('express-stormpath');
 
 services.use(bodyParser.json());
 
@@ -93,10 +93,10 @@ services.get('/verification/:URL', function(req, res) {
   });
 });
 
-services.get("/product",stormpath.apiAuthenticationRequired,function(req,res){
+/*services.get("/product",stormpath.apiAuthenticationRequired,function(req,res){
   res.json({"bike":"30"});
   //res.send("test");
-});
+});*/
 
 
 
