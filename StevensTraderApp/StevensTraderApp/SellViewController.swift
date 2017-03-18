@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 import MobileCoreServices
-class sellViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class SellViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
     @IBOutlet weak var price: UITextField!
     @IBOutlet weak var itemTitle: UITextField!
@@ -73,22 +73,22 @@ class sellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     func uploadImage() -> Void
     {
         
-        let data = UIImageJPEGRepresentation(imageView.image!, 0.5)
-        
-        Alamofire.upload(.POST, "http://"+serverIP+":3000/services/uploadimage", data: data)
-            .progress { bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
-                print(totalBytesWritten)
-                
-                // This closure is NOT called on the main queue for performance
-                // reasons. To update your ui, dispatch to the main queue.
-                dispatch_async(dispatch_get_main_queue()) {
-                    print("Total bytes written on main queue: \(totalBytesWritten)")
-                }
-            }
-            .validate()
-            .responseJSON { response in
-                debugPrint(response)
-        }
+//        let data = UIImageJPEGRepresentation(imageView.image!, 0.5)
+//        
+//        Alamofire.upload(.POST, "http://"+serverIP+":3000/services/uploadimage", data: data)
+//            .progress { bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
+//                print(totalBytesWritten)
+//                
+//                // This closure is NOT called on the main queue for performance
+//                // reasons. To update your ui, dispatch to the main queue.
+//                dispatch_async(dispatch_get_main_queue()) {
+//                    print("Total bytes written on main queue: \(totalBytesWritten)")
+//                }
+//            }
+//            .validate()
+//            .responseJSON { response in
+//                debugPrint(response)
+//        }
 
     }
     @IBAction func back(_ sender: Any) {

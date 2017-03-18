@@ -9,15 +9,15 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--sellViewController-->
+        <!--SellViewController-->
         <scene sceneID="5Xj-AX-i2g">
             <objects>
-                <viewController title="sellViewController" id="1w3-Ql-9CP" customClass="sellViewController" customModule="StevensTraderApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="SellViewController" id="1w3-Ql-9CP" userLabel="SellViewController" customClass="SellViewController" customModule="StevensTraderApp" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Egt-c7-gla"/>
                         <viewControllerLayoutGuide type="bottom" id="I6h-Bu-eJw"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="0o8-k8-kcN" customClass="SellViewController">
+                    <view key="view" contentMode="scaleToFill" id="0o8-k8-kcN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -114,12 +114,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TPn-mj-jDu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-989.60000000000002" y="-782.15892053973016"/>
+            <point key="canvasLocation" x="2358" y="-325"/>
         </scene>
-        <!--menueViewController-->
+        <!--MenueViewController-->
         <scene sceneID="y4s-fe-xkP">
             <objects>
-                <viewController title="menueViewController" id="kR4-g1-e67" sceneMemberID="viewController">
+                <viewController title="MenueViewController" id="kR4-g1-e67" userLabel="MenueViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WIz-T6-uVQ"/>
                         <viewControllerLayoutGuide type="bottom" id="Uyh-ch-a1H"/>
@@ -139,7 +139,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Sell"/>
                                 <connections>
-                                    <segue destination="1w3-Ql-9CP" kind="show" id="x2d-T4-tIW"/>
+                                    <segue destination="1w3-Ql-9CP" kind="presentation" id="JHe-Dm-q7H"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58b-lf-WwB">
@@ -166,12 +166,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j8Z-mk-HwQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="160.80000000000001" y="-606.74662668665667"/>
+            <point key="canvasLocation" x="1137" y="-325"/>
         </scene>
-        <!--loginViewController-->
+        <!--LoginViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="loginViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="StevensTraderApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="LoginViewController" id="BYZ-38-t0r" userLabel="LoginViewController" customClass="LoginViewController" customModule="StevensTraderApp" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -232,7 +232,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Sign in"/>
                                 <connections>
-                                    <segue destination="kR4-g1-e67" kind="show" id="vUE-VK-HJK"/>
+                                    <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RvR-jQ-xiU"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EO9-kh-zD6">
@@ -241,21 +241,27 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Sign up"/>
                                 <connections>
-                                    <segue destination="uOp-0R-ScU" kind="show" id="4UI-YA-MRK"/>
+                                    <segue destination="uOp-0R-ScU" kind="presentation" identifier="signupSegue" id="BaB-nC-xtA"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.62276923656463623" green="0.067089423537254333" blue="0.19922518730163574" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="email" destination="bBS-Hj-1TT" id="wdp-Dd-xpt"/>
+                        <outlet property="password" destination="Lj8-3X-HZG" id="uO4-aS-hAK"/>
+                        <outlet property="view" destination="8bC-Xf-vdC" id="yUs-D6-dkG"/>
+                        <segue destination="kR4-g1-e67" kind="presentation" identifier="menueSegue" id="nyV-mb-dZn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="135" y="151"/>
         </scene>
-        <!--signupViewController-->
+        <!--SignupViewController-->
         <scene sceneID="a98-jr-V3K">
             <objects>
-                <viewController title="signupViewController" id="uOp-0R-ScU" customClass="SecondViewController" customModule="StevensTraderApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="SignupViewController" id="uOp-0R-ScU" userLabel="SignupViewController" customClass="SignupViewController" customModule="StevensTraderApp" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tCC-nr-5zf"/>
                         <viewControllerLayoutGuide type="bottom" id="igg-5t-cOt"/>
@@ -368,7 +374,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h4u-Y1-3gM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1254" y="151"/>
+            <point key="canvasLocation" x="1137" y="667"/>
         </scene>
     </scenes>
     <resources>

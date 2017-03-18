@@ -8,7 +8,7 @@
 import Alamofire
 import UIKit
 
-class SecondViewController: UIViewController {
+class SignupViewController: UIViewController {
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
@@ -20,7 +20,7 @@ class SecondViewController: UIViewController {
     }
     
     @IBAction func popController(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil);
+        self.dismiss(animated: true, completion: nil);
     }
     func checkTextField(type:String) -> Bool
     {

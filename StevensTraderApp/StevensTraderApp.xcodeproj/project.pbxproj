@@ -10,13 +10,16 @@
 		1E994D589148955DF9A3764A /* Pods_StevensTraderAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B3F419BDB055447052CA4A /* Pods_StevensTraderAppTests.framework */; };
 		902EE4A6E080AD11EDB68FDA /* Pods_StevensTraderApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 124A6F5305DC26BB46BB53C4 /* Pods_StevensTraderApp.framework */; };
 		CC641CCA1E4E73E600CD6998 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC641CC91E4E73E600CD6998 /* AppDelegate.swift */; };
-		CC641CCC1E4E73E600CD6998 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC641CCB1E4E73E600CD6998 /* ViewController.swift */; };
+		CC641CCC1E4E73E600CD6998 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC641CCB1E4E73E600CD6998 /* LoginViewController.swift */; };
 		CC641CCF1E4E73E600CD6998 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC641CCD1E4E73E600CD6998 /* Main.storyboard */; };
 		CC641CD11E4E73E600CD6998 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC641CD01E4E73E600CD6998 /* Assets.xcassets */; };
 		CC641CD41E4E73E600CD6998 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC641CD21E4E73E600CD6998 /* LaunchScreen.storyboard */; };
 		CC641CDF1E4E73E600CD6998 /* StevensTraderAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC641CDE1E4E73E600CD6998 /* StevensTraderAppTests.swift */; };
-		CC641CEC1E4EDC9500CD6998 /* signupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC641CEB1E4EDC9500CD6998 /* signupViewController.swift */; };
-		CCE339F61E5E659600E3FFB7 /* sellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE339F51E5E659600E3FFB7 /* sellViewController.swift */; };
+		CC641CEC1E4EDC9500CD6998 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC641CEB1E4EDC9500CD6998 /* SignupViewController.swift */; };
+		CCB87FC31E7DB4E700EF6514 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB87FC21E7DB4E700EF6514 /* KeychainService.swift */; };
+		CCB87FC51E7DB8BB00EF6514 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB87FC41E7DB8BB00EF6514 /* EntryViewController.swift */; };
+		CCB87FC71E7DD78500EF6514 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB87FC61E7DD78500EF6514 /* Config.swift */; };
+		CCE339F61E5E659600E3FFB7 /* SellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE339F51E5E659600E3FFB7 /* SellViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +53,7 @@
 		86F0507811D0B82D334EB63A /* Pods-StevensTraderApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StevensTraderApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-StevensTraderApp/Pods-StevensTraderApp.release.xcconfig"; sourceTree = "<group>"; };
 		CC641CC61E4E73E600CD6998 /* StevensTraderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StevensTraderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC641CC91E4E73E600CD6998 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CC641CCB1E4E73E600CD6998 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CC641CCB1E4E73E600CD6998 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CC641CCE1E4E73E600CD6998 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CC641CD01E4E73E600CD6998 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC641CD31E4E73E600CD6998 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,8 +61,11 @@
 		CC641CDA1E4E73E600CD6998 /* StevensTraderAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StevensTraderAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC641CDE1E4E73E600CD6998 /* StevensTraderAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StevensTraderAppTests.swift; sourceTree = "<group>"; };
 		CC641CE01E4E73E600CD6998 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CC641CEB1E4EDC9500CD6998 /* signupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signupViewController.swift; sourceTree = "<group>"; };
-		CCE339F51E5E659600E3FFB7 /* sellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sellViewController.swift; sourceTree = "<group>"; };
+		CC641CEB1E4EDC9500CD6998 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		CCB87FC21E7DB4E700EF6514 /* KeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		CCB87FC41E7DB8BB00EF6514 /* EntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
+		CCB87FC61E7DD78500EF6514 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		CCE339F51E5E659600E3FFB7 /* SellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellViewController.swift; sourceTree = "<group>"; };
 		DC6A327DF3016C199F408383 /* Pods-StevensTraderAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StevensTraderAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StevensTraderAppTests/Pods-StevensTraderAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,14 +132,13 @@
 		CC641CC81E4E73E600CD6998 /* StevensTraderApp */ = {
 			isa = PBXGroup;
 			children = (
+				CCB87FC11E7DB4A300EF6514 /* Utilities */,
+				CCB87FC01E7DB48F00EF6514 /* Controllers */,
 				CC641CC91E4E73E600CD6998 /* AppDelegate.swift */,
-				CC641CCB1E4E73E600CD6998 /* ViewController.swift */,
 				CC641CCD1E4E73E600CD6998 /* Main.storyboard */,
-				CC641CEB1E4EDC9500CD6998 /* signupViewController.swift */,
 				CC641CD01E4E73E600CD6998 /* Assets.xcassets */,
 				CC641CD21E4E73E600CD6998 /* LaunchScreen.storyboard */,
 				CC641CD51E4E73E600CD6998 /* Info.plist */,
-				CCE339F51E5E659600E3FFB7 /* sellViewController.swift */,
 			);
 			path = StevensTraderApp;
 			sourceTree = "<group>";
@@ -145,6 +150,26 @@
 				CC641CE01E4E73E600CD6998 /* Info.plist */,
 			);
 			path = StevensTraderAppTests;
+			sourceTree = "<group>";
+		};
+		CCB87FC01E7DB48F00EF6514 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CC641CEB1E4EDC9500CD6998 /* SignupViewController.swift */,
+				CC641CCB1E4E73E600CD6998 /* LoginViewController.swift */,
+				CCE339F51E5E659600E3FFB7 /* SellViewController.swift */,
+				CCB87FC41E7DB8BB00EF6514 /* EntryViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		CCB87FC11E7DB4A300EF6514 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				CCB87FC21E7DB4E700EF6514 /* KeychainService.swift */,
+				CCB87FC61E7DD78500EF6514 /* Config.swift */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,9 +377,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC641CEC1E4EDC9500CD6998 /* signupViewController.swift in Sources */,
-				CC641CCC1E4E73E600CD6998 /* ViewController.swift in Sources */,
-				CCE339F61E5E659600E3FFB7 /* sellViewController.swift in Sources */,
+				CC641CEC1E4EDC9500CD6998 /* SignupViewController.swift in Sources */,
+				CCB87FC51E7DB8BB00EF6514 /* EntryViewController.swift in Sources */,
+				CC641CCC1E4E73E600CD6998 /* LoginViewController.swift in Sources */,
+				CCB87FC71E7DD78500EF6514 /* Config.swift in Sources */,
+				CCE339F61E5E659600E3FFB7 /* SellViewController.swift in Sources */,
+				CCB87FC31E7DB4E700EF6514 /* KeychainService.swift in Sources */,
 				CC641CCA1E4E73E600CD6998 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
