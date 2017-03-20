@@ -14,27 +14,35 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var price: UITextField!
     @IBOutlet weak var itemTitle: UITextField!
     @IBOutlet weak var imageView: UIImageView!
-    var serverIP : String = "155.246.46.124"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(UIInputViewController.dismissKeyboard))
-        
-        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
-        tap.cancelsTouchesInView = false
-        
-        view.addGestureRecognizer(tap)
-        // Do any additional setup after loading the view.
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(UIInputViewController.dismissKeyboard))
+//        
+//        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+//        tap.cancelsTouchesInView = false
+//        
+//        view.addGestureRecognizer(tap)
+//        // Do any additional setup after loading the view.
+//    }
+//    func dismissKeyboard() {
+//        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+//        view.endEditing(true)
     }
-    func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
-    }
-    @IBAction func sellItem(_ sender: Any) {
-        let url = URL(string: "http://"+serverIP+":3000/services/listitem")!
+    @IBAction func submit(_ sender: UIButton) {
+        var serverip = ""
+        do{
+              serverip = try Config.getServerIP()
+        }catch {
+            print("Wrong Server ip in the configuration")
+            return
+        }
+        
+        let url = URL(string: "http://"+serverip+"/services/listitem")!
         var request = URLRequest( url:url)
         request.httpMethod = "POST"
-        let parameters: [String: Any] = [
+        let parameters: [String: String] = [
             "title" : itemTitle.text!,
             "condition" : "New",
             "price" : price.text!,
@@ -91,15 +99,14 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
 //        }
 
     }
-    @IBAction func back(_ sender: Any) {
-        self.dismiss(animated: false, completion:nil)
+    @IBAction func back(_ sender: UIBarButtonItem) {
+         self.dismiss(animated: false, completion:nil)
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
+
     
-    @IBAction func addPic(_ sender: Any) {
+    @IBAction func addImage(_ sender: UIButton) {
+    
         if UIImagePickerController.isSourceTypeAvailable(
             UIImagePickerControllerSourceType.camera) {
             

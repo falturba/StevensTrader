@@ -17,8 +17,8 @@
 		CC641CDF1E4E73E600CD6998 /* StevensTraderAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC641CDE1E4E73E600CD6998 /* StevensTraderAppTests.swift */; };
 		CC641CEC1E4EDC9500CD6998 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC641CEB1E4EDC9500CD6998 /* SignupViewController.swift */; };
 		CCB87FC31E7DB4E700EF6514 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB87FC21E7DB4E700EF6514 /* KeychainService.swift */; };
-		CCB87FC51E7DB8BB00EF6514 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB87FC41E7DB8BB00EF6514 /* EntryViewController.swift */; };
 		CCB87FC71E7DD78500EF6514 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB87FC61E7DD78500EF6514 /* Config.swift */; };
+		CCB87FC91E7E078E00EF6514 /* MenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB87FC81E7E078E00EF6514 /* MenueViewController.swift */; };
 		CCE339F61E5E659600E3FFB7 /* SellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE339F51E5E659600E3FFB7 /* SellViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,8 +63,8 @@
 		CC641CE01E4E73E600CD6998 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC641CEB1E4EDC9500CD6998 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		CCB87FC21E7DB4E700EF6514 /* KeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
-		CCB87FC41E7DB8BB00EF6514 /* EntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		CCB87FC61E7DD78500EF6514 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		CCB87FC81E7E078E00EF6514 /* MenueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenueViewController.swift; sourceTree = "<group>"; };
 		CCE339F51E5E659600E3FFB7 /* SellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellViewController.swift; sourceTree = "<group>"; };
 		DC6A327DF3016C199F408383 /* Pods-StevensTraderAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StevensTraderAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StevensTraderAppTests/Pods-StevensTraderAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,7 +158,7 @@
 				CC641CEB1E4EDC9500CD6998 /* SignupViewController.swift */,
 				CC641CCB1E4E73E600CD6998 /* LoginViewController.swift */,
 				CCE339F51E5E659600E3FFB7 /* SellViewController.swift */,
-				CCB87FC41E7DB8BB00EF6514 /* EntryViewController.swift */,
+				CCB87FC81E7E078E00EF6514 /* MenueViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -378,10 +378,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC641CEC1E4EDC9500CD6998 /* SignupViewController.swift in Sources */,
-				CCB87FC51E7DB8BB00EF6514 /* EntryViewController.swift in Sources */,
 				CC641CCC1E4E73E600CD6998 /* LoginViewController.swift in Sources */,
 				CCB87FC71E7DD78500EF6514 /* Config.swift in Sources */,
 				CCE339F61E5E659600E3FFB7 /* SellViewController.swift in Sources */,
+				CCB87FC91E7E078E00EF6514 /* MenueViewController.swift in Sources */,
 				CCB87FC31E7DB4E700EF6514 /* KeychainService.swift in Sources */,
 				CC641CCA1E4E73E600CD6998 /* AppDelegate.swift in Sources */,
 			);

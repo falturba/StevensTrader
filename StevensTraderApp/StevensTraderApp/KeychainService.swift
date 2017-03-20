@@ -21,7 +21,16 @@ struct KeychainAccess {
                 ] as CFDictionary
             SecItemDelete(keychainQuery)
             print(SecItemAdd(keychainQuery, nil))
+            
         }
+    }
+    func resetPasscode(identifier:String)
+    {
+        let keychainQuery = [
+            kSecClassValue: kSecClassGenericPasswordValue,
+            kSecAttrServiceValue: identifier,
+            ] as CFDictionary
+        SecItemDelete(keychainQuery)
     }
     
     func getPasscode(identifier: String) -> String? {

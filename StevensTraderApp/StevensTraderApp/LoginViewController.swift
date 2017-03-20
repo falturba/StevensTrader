@@ -15,6 +15,21 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+           
+        
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+        loadLoggedInUser()
+    }
+    func loadLoggedInUser() {
+        let myKeychain = KeychainAccess()
+        let key = myKeychain.getPasscode(identifier: "StevensTraderToken")
+        if(key != nil) {
+            self.performSegue(withIdentifier: "menueSegue", sender: self)
+        }
     }
     
     @IBAction func login(_ sender: UIButton) {

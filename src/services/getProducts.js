@@ -17,7 +17,6 @@ router.get('/getproducts',(req,res)=>{
     				res.status(200).json({products:data});
     			});
     		}
-
     // res.writeHead(200, {'Content-Type': 'application/json'})
     // res.json({status:'ok'})
 			});
