@@ -3,7 +3,8 @@ import ReactDom from 'react-dom'
 import {connect} from 'react-redux'
 import NewsFeedScss from '../../scss/NewFeed.scss'
 import store from '../../redux/store'
-import {getProductNewFeedAction} from '../../redux/actions/productsAction'
+import {getProductNewFeedAction} from '../../redux/actions/productsActions'
+import Item from './Item'
 
 class NewsFeed extends React.Component{
     constructor(props){
@@ -16,21 +17,17 @@ class NewsFeed extends React.Component{
         return(
             <div className="container">
                 <div className="list-item-container">
-                    <div className="item-container">
-                        <div className="image-container">
-                            <img src="/images/6f6f8c09512c5b64b58e04f8a2aa4590_small"/>
-                        </div>
-                        <h3>test</h3>
-                    </div>
-                    <div className="item-container"></div>
-                    <div className="item-container"></div>
-                    <div className="item-container"></div>
-                    <div className="item-container"></div>
+                    { this.props.products&&this.props.products.map(
+                        (itemData,i)=>{
+                            return <Item key={i} itemData={itemData}/>
+                        }
+                    )}
                 </div>
             </div>)
     }
 }
 const mapStateToProps=(state)=>{
-    return { messages:state.flashMessages}
+    console.log('map state new feed')
+    return { products:state.productsReducer.products}
 }
 export default connect(mapStateToProps)(NewsFeed)

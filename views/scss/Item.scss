@@ -1,0 +1,22 @@
+@import 'Config.scss';
+.container-item{
+    display: table;
+    width:100%;
+
+    .image-column{
+        display: table-cell;
+        background-color:#fee;
+        .image-catalog{
+            width:400px;
+            height:1000px;
+        }
+    }
+    .detail-column{
+        display: table-cell;
+        width: 100%;
+        background-color:#ffe;
+        .detail{
+            height:1000px;
+        }
+    }
+}

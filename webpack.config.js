@@ -37,8 +37,9 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'public/'),
-    filename: "index_bundle.js"
+    filename: "/index_bundle.js"
   },
+  devtool: 'inline-source-map',
   devServer: {
     historyApiFallback: true
   },

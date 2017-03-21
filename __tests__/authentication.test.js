@@ -12,17 +12,17 @@ describe('Login (Snapshot)', () => {
 })
 
 describe('---- Item Testing -------', () => {
-        it('Login warning',()=>{
-            console.log('----------------------------')
-            const login = shallow(<Login />)
-            login.setState({isEmailCorrect:true, 
-                    isPasswordCorrect:true, })
+    it('Login warning',()=>{
+        console.log('----------------------------')
+        const login = shallow(<Login />)
+        login.setState({isEmailCorrect:true, 
+                isPasswordCorrect:true, })
 
-            console.log(login.find('.warning'))
-            expect(login.find('.warning')).toEqual('Hello world')
+        console.log(login.find('.warning'))
+        expect(login.find('.warning')).toEqual('Hello world')
 
 
-            // isEmailCorrect:true, 
-            //         isPasswordCorrect:true, 
-        })
+        // isEmailCorrect:true, 
+        //         isPasswordCorrect:true, 
     })
+})
