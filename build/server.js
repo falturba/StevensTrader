@@ -39,7 +39,7 @@ app.use(_bodyParser2.default.urlencoded({ // to support URL-encoded bodies
 	extended: false
 }));
 
-var port = 3000;
+var port = process.env.PORT || 3000;
 app.listen(port, listening);
 function listening() {
 	console.log('listening in port ' + port);
