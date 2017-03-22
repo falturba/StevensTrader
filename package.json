@@ -26,6 +26,7 @@
   "homepage": "https://github.com/falturba/StevensTrader#readme",
   "dependencies": {
     "babel-cli": "^6.23.0",
+    "babel-preset-es2015": "^6.24.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.16.1",
     "bson": "^1.0.4",
