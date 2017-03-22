@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import mongodb from 'mongodb';
+//import mongodb from 'mongodb';
 import config from '../config/jwtConfig';
 import Account from '../models/account';
 

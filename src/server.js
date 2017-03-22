@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, '../public')))
 app.use(fallback('/public/index.html', { root: dirname }))
 app.get('*', function (req, res) {
 	console.log("in....:"+ dirname )
-	res.sendFile(route+"/public/index.html", {"root": dirname})
+	res.sendFile(route+"../public/index.html", {"root": dirname})
 })
 
 app.use(express.static(path.join(__dirname, 'public')))

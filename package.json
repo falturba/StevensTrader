@@ -26,12 +26,14 @@
   "homepage": "https://github.com/falturba/StevensTrader#readme",
   "dependencies": {
     "babel-cli": "^6.23.0",
-    "bcrypt": "^1.0.2",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.16.1",
     "bson": "^1.0.4",
     "email-verification": "^0.4.5",
+    "enzyme": "^2.7.1",
     "express": "^4.14.1",
     "express-history-api-fallback": "^2.1.0",
+    "file-loader": "^0.10.1",
     "jsonwebtoken": "^7.3.0",
     "jwt-decode": "^2.1.0",
     "mongoose": "^4.8.1",
@@ -75,7 +77,7 @@
     "sharp": "^0.17.2",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^2.2.1",
+    "webpack": "2.2.1",
     "webpack-hot-middleware": "^2.16.1",
     "webpack-livereload-plugin": "^0.10.0"
   }
