@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: false
 }))
 
-const port = 3000
+const port = process.env.PORT || 3000;
 app.listen(port, listening)
 function listening(){
 	console.log('listening in port '+port)
