@@ -11,7 +11,7 @@
     "watch:build": "webpack --watch",
     "watch:server": "nodemon \"./src/server.js\" --watch \"./src\" --exec babel-node",
     "start": "babel-watch \"./src/server.js\"",
-    "build-server": "rm -rf ../production/src ../production/public && cp -R public package.json ../production && babel -d ../production/src ./src -s",
+    "build-server": "webpack -p --config ./webpack.production.config.js && mkdir -p ../production && rm -rf ../production/src ../production/public && cp -R public package.json ../production && babel -d ../production/src ./src -s",
     "production": "node ./src/server.js"
   },
   "repository": {
@@ -79,6 +79,7 @@
     "url-loader": "^0.5.7",
     "webpack": "2.2.1",
     "webpack-hot-middleware": "^2.16.1",
-    "webpack-livereload-plugin": "^0.10.0"
+    "webpack-livereload-plugin": "^0.10.0",
+    "webpack-uglify-js-plugin": "^1.1.9"
   }
 }

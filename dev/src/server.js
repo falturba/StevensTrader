@@ -1,15 +1,9 @@
 import fallback from 'express-history-api-fallback'
 import path from 'path'
 import express from "express"
-import fs from "fs"
 import bodyParser from 'body-parser'
 import mongooseInit from './libs/mongoose-init'
-import getProduct from './services/getProduct'
-import getProducts from './services/getProducts'
-import listItem from './services/listItem'
-import login from './services/login'
-import postProduct from './services/postProduct'
-import signup from './services/signup'
+import {initServices} from './services'
 
 
 const serverRoot = path.resolve(process.cwd(), "src")
@@ -27,26 +21,12 @@ app.listen(port, listening)
 function listening(){
 	console.log('listening in port '+port)
 }
-
-//include all the services
-// fs.readdirSync(serverRoot+'/services').forEach(function(fileName){
-// 	if(fileName.indexOf('.js')>0)
-// 		app.use('/services',require('./services/'+fileName))
-// })
-// fs.readdirSync(serverRoot+'/routes').forEach(function(fileName){
-// 	if(fileName.indexOf('.js')>0)
-// 	app.use(require('./routes/'+fileName))
-// })
-
+initServices(app)
 
 //set fallback url to public/index.html
 const dirname = path.resolve(); // for fixing empty path problem when using gulp
 app.use(express.static(path.join(__dirname, '../public')))
 app.use(fallback('/public/index.html', { root: dirname }))
-// app.get('*', function (req, res) {
-// 	console.log("in....:"+ dirname )
-// 	res.sendFile("../public/index.html", {"root": dirname})
-// })
 
 app.use(express.static(path.join(__dirname, 'public')))
 
