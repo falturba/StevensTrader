@@ -15,11 +15,11 @@ class Item extends React.Component{
     }
 
     render(){
-        if(this.props.product){
+        if(this.props.product && this.props.product.medias){
             return(
                 <div className='container'>
                     <div className='container-item'>
-                        <ImageCatalog />
+                        <ImageCatalog props={this.props.product.medias}/>
                         <div className='detail-column'>bbb</div>
                     </div>
                 </div>

@@ -1,14 +1,51 @@
 @import 'Config.scss';
+%wrapper{
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    text-align: center;
+}
+%border-gray{
+    border: 1px solid $line-color;
+    border-radius: 0px;
+    box-sizing: border-box;
+    background-color:$white-color;
+}
 .container-item{
     display: table;
     width:100%;
 
     .image-column{
         display: table-cell;
-        background-color:#fee;
-        .image-catalog{
+        background-color:#f0a;
+        
+        .image-wrapper{
             width:400px;
-            height:1000px;
+            height:400px;
+            @extend %wrapper;
+            @extend %border-gray;
+        }
+        .thumb-wrapper{
+            float:left;
+            width:90px;
+            height:90px;
+            margin:5px;
+            @extend %wrapper;
+            @extend %border-gray;
+        }
+        img{
+            max-width: 100%;
+            max-height:100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
         }
     }
     .detail-column{
