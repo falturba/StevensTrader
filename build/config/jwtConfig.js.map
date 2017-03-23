@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/config/jwtConfig.js"],"names":["jwtSecret"],"mappings":";;;;;kBAAe;AACXA,eAAW;AADA,C","file":"jwtConfig.js","sourcesContent":["export default {\n    jwtSecret: 'wewannatogotosiliconvaley'\n}"]}

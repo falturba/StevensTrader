@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/config/pathConfig.js"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA","file":"pathConfig.js","sourcesContent":["// import fs from 'fs'\n// export const imageDir = \"./public/images/\";\n// if (!fs.existsSync(imageDir)){\n//     fs.mkdirSync(imageDir)\n// }"]}

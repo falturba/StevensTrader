@@ -36,5 +36,4 @@ jspm_packages
 .DS_Store
 
 #generated folder
-
-public
+production
