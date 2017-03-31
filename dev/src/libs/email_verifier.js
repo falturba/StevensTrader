@@ -20,7 +20,7 @@ nev.configure({
   persistentUserModel: account,
   expirationTime: 600, // 10 minutes
 tempUserCollection: 'temp_accounts',
-  verificationURL: 'http://localhost:3000/services/verification/${URL}',
+  verificationURL: 'https://stevenstrader.herokuapp.com//services/verification/${URL}',
   transportOptions: {
     service: 'Gmail',
     auth: {
