@@ -11,7 +11,7 @@
     "watch:build": "webpack --watch",
     "watch:server": "nodemon \"./src/server.js\" --watch \"./src\" --exec babel-node",
     "start": "babel-watch \"./src/server.js\"",
-    "build-server": "webpack -p --config ./webpack.production.config.js && mkdir -p ../production && rm -rf ../production/src ../production/public && cp -R public package.json ../production && babel -d ../production/src ./src -s",
+    "build-server": "webpack -p --config ./webpack.production.config.js && mkdir -p ../production && rm -rf ../production/src ../production/public && cp -R public package.json ../production && babel -d ../production/src ./src -s && touch ../production/Procfile && echo \"web: npm run production\" >> ../production/Procfile",
     "production": "node ./src/server.js"
   },
   "repository": {
