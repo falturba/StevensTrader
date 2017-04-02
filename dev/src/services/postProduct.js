@@ -18,7 +18,7 @@ import fs from 'fs'
 /*************************************/
 
 let router = express.Router()
-router.post('/postproduct', /*authenticate,*/ (req, res) => {
+router.post('/postproduct',authenticate, (req, res) => {
   /**************************
   *** Raw function
   ****************************/

@@ -29,6 +29,8 @@ router.post('/login',function(req,res){
                     email: account.email
                 }, config.jwtSecret);
                 console.dir(account._id.toString());
+                
+                Account.update(account,{token:token}).exec();
                 res.json({ token });
             }else{
                 res.status(401).json({ errors: { form: 'Password incorrect.' } });

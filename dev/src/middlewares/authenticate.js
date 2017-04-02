@@ -24,7 +24,15 @@ export default (req, res, next) => {
             if(error){
                 res.status(401).json({ errors: { form: 'There is database connection problem, please try again.' } });
             }else if(data){
+              var account = new Account(data)
+              if(account.token == token)
+              {
                 next();
+              }
+              else{
+                res.status(401).json({error:'Invalid Token'});
+              }
+              
             }else{
                 //not found user in server
                 res.status(401).json({ error: 'Failed to authenticate' });
