@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
         
         // Do any additional setup after loading the view, typically from a nib.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(UIInputViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
+        tap.cancelsTouchesInView = true
         view.addGestureRecognizer(tap)
         name.isHidden = true
         if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: nil) {
@@ -82,10 +82,10 @@ class LoginViewController: UIViewController {
         
     }
     func loadLoggedInUser() {
-        let myKeychain = KeychainAccess()
-        let key = myKeychain.getPasscode(identifier: "StevensTraderToken")
+        
+        let key = KeychainAccess.getPasscode()
         if(key != nil) {
-            self.performSegue(withIdentifier: "menueSegue", sender: self)
+            // self.performSegue(withIdentifier: "menueSegue", sender: self)
         }
     }
     
@@ -105,211 +105,225 @@ class LoginViewController: UIViewController {
     }
     
     
-     func login() {
+    func login() {
         
         let emailText = email.text!+"@stevens.edu"
         let passwrodText = password.text!
-            let serverip =  Config.getServerIP()
-            let url = URL(string:serverip+"/services/login")
-            var request =  URLRequest( url:url!)
-            request.httpMethod = "POST"
-            let parameters:[String:String]=["email":emailText,"password":passwrodText]
-            request.httpBody = try! JSONSerialization.data(withJSONObject: parameters)
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            Alamofire.request(request).responseJSON(completionHandler: {
-                response in switch response.result {
-                case .failure(let error):
-                    print(error)
-                    let alert = UIAlertController(title: "Error", message: "Error in connecting to ther server. Please try again later", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                    if let data = response.data, let responseString = String(data: data, encoding: .utf8) {
-                        print(responseString)
-                    }
-                case .success(_):
-                    guard let json = response.value as? [String:String],let jwt = json["token"] else {
-                        let alert = UIAlertController(title: "Error", message: "Error in Error in the server response", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                        print (response.value ?? "no response")
-                       return
-                    }
-                    let myKeychainAccess = KeychainAccess()
-                    myKeychainAccess.setPasscode(identifier: "StevensTraderToken",passcode: jwt)
-                    print(jwt)
-                    self.performSegue(withIdentifier: "menueSegue", sender: nil)
+        let serverip =  Config.getServerIP()
+        let url = URL(string:serverip+"/services/login")
+        var request =  URLRequest( url:url!)
+        request.httpMethod = "POST"
+        let parameters:[String:String]=["email":emailText,"password":passwrodText]
+        request.httpBody = try! JSONSerialization.data(withJSONObject: parameters)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        Alamofire.request(request).responseJSON(completionHandler: {
+            response in switch response.result {
+            case .failure(let error):
+                print(error)
+                let alert = UIAlertController(title: "Error..", message: "Error in connecting to ther server. Please try again later", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                if let data = response.data, let responseString = String(data: data, encoding: .utf8)
+                {
+                    print(responseString)
                 }
-            })
-            
-        
-        
-        
-        
-        
+            case .success(_):
+                guard let json = response.value as? [String:String],let jwt = json["token"] else
+                {
+                    var errorMessage = "Something wrong with the server. Please try again later"
+                     if response.response?.statusCode == 401
+                    {
+                        errorMessage = "Wrong username or password"
+                        
+                     }else if response.response?.statusCode == 500
+                     {
+                        print("error in the database connection")
+                    }
+                let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+                }
+                
+                
+                KeychainAccess.setPasscode(passcode: jwt)
+                print(jwt)
+                self.performSegue(withIdentifier: "menueSegue", sender: nil)
+            }
+        })
     }
     
-    
-    func signup() {
-        if(checkTextField(type:"email"))
-        {
-            if(checkTextField(type:"name"))
+        
+        
+        
+        
+        
+        
+        
+        
+        func signup() {
+            if(checkTextField(type:"email"))
             {
-                if(checkTextField(type:"password")){
-                    let emailText = email.text!+"@stevens.edu"
-                    let nameText = name.text!
-                    let passwordText = password.text!
-                    let serverip =  Config.getServerIP()
-                    let url = URL(string:serverip+"/services/signup")
-                    var request = URLRequest( url:url!)
-                    request.httpMethod = "POST"
-                    let parameters: [String: String] = [
-                        "type" : "register" as String,
-                        "name" : nameText as String,
-                        "email" : emailText as String,
-                        "password":passwordText as String
-                    ]
-                    request.httpBody = try! JSONSerialization.data(withJSONObject: parameters)
-                    
-                    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                    
-                    Alamofire.request(request).responseJSON(completionHandler:{ response in
-                        switch response.result {
-                        case .failure(let error):
-                            print(error)
-                            let alert = UIAlertController(title: "Error", message: "Error in connecting to ther server. Please try again later", preferredStyle: UIAlertControllerStyle.alert)
-                            alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-                            self.present(alert, animated: true, completion: nil)
-                            if let data = response.data, let responseString = String(data: data, encoding: .utf8) {
-                                print(responseString)
-                            }
-                        case .success(_):
-                            let result = response.result
-                            var msg = ""
-                            if let dict = result.value as? JSONStandard{
-                                msg = dict["msg"] as! String
+                if(checkTextField(type:"name"))
+                {
+                    if(checkTextField(type:"password")){
+                        let emailText = email.text!+"@stevens.edu"
+                        let nameText = name.text!
+                        let passwordText = password.text!
+                        let serverip =  Config.getServerIP()
+                        let url = URL(string:serverip+"/services/signup")
+                        var request = URLRequest( url:url!)
+                        request.httpMethod = "POST"
+                        let parameters: [String: String] = [
+                            "type" : "register" as String,
+                            "name" : nameText as String,
+                            "email" : emailText as String,
+                            "password":passwordText as String
+                        ]
+                        request.httpBody = try! JSONSerialization.data(withJSONObject: parameters)
+                        
+                        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                        
+                        Alamofire.request(request).responseJSON(completionHandler:{ response in
+                            switch response.result {
+                            case .failure(let error):
+                                print(error)
+                                let alert = UIAlertController(title: "Error", message: "Error in connecting to ther server. Please try again later", preferredStyle: UIAlertControllerStyle.alert)
+                                alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+                                self.present(alert, animated: true, completion: nil)
+                                if let data = response.data, let responseString = String(data: data, encoding: .utf8) {
+                                    print(responseString)
+                                }
+                            case .success(_):
+                                let result = response.result
+                                var msg = ""
+                                if let dict = result.value as? JSONStandard{
+                                    msg = dict["msg"] as! String
+                                }
+                                
+                                let alert = UIAlertController(title: "message", message:msg, preferredStyle: UIAlertControllerStyle.alert)
+                                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                                self.present(alert, animated: true, completion: nil)
                             }
                             
-                            let alert = UIAlertController(title: "message", message:msg, preferredStyle: UIAlertControllerStyle.alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                            self.present(alert, animated: true, completion: nil)
-                        }
-                        
-                    })
+                        })
+                    }
+                    else {
+                        let alert = UIAlertController(title: "Wrong Password", message: "Password has to be minimum 8 characters, at least 1 Alphabet and 1 Number", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                    
                 }
                 else {
-                    let alert = UIAlertController(title: "Wrong Password", message: "Password has to be minimum 8 characters, at least 1 Alphabet and 1 Number", preferredStyle: UIAlertControllerStyle.alert)
+                    let alert = UIAlertController(title: "Wrong Name", message: "Name has to be letters only", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }
                 
             }
             else {
-                let alert = UIAlertController(title: "Wrong Name", message: "Name has to be letters only", preferredStyle: UIAlertControllerStyle.alert)
+                let alert = UIAlertController(title: "Wrong Email", message: "Email has to be letters only", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
-            
         }
-        else {
-            let alert = UIAlertController(title: "Wrong Email", message: "Email has to be letters only", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-
-    
-    func checkTextField(type:String) -> Bool
-    {
-        let regex:NSRegularExpression!
-        let input:String!
-        do
+        
+        
+        func checkTextField(type:String) -> Bool
         {
-            switch(type){
-            case "email":
-                regex = try NSRegularExpression(pattern: "^[a-zA-Z]+[a-zA-Z]*$")
-                input = email.text!
-                break
-            case "name":
-                regex = try NSRegularExpression(pattern: "^[a-zA-Z]+[a-zA-Z]*$")
-                input = name.text!
-                break
-            case "password":
-                regex = try NSRegularExpression(pattern: "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
-                input = password.text!
-                break
-            default:
-                print ("error type")
+            let regex:NSRegularExpression!
+            let input:String!
+            do
+            {
+                switch(type){
+                case "email":
+                    regex = try NSRegularExpression(pattern: "^[a-zA-Z]+[a-zA-Z]*$")
+                    input = email.text!
+                    break
+                case "name":
+                    regex = try NSRegularExpression(pattern: "^[a-zA-Z]+[a-zA-Z]*$")
+                    input = name.text!
+                    break
+                case "password":
+                    regex = try NSRegularExpression(pattern: "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
+                    input = password.text!
+                    break
+                default:
+                    print ("error type")
+                    return false
+                }
+                let matches = regex.matches(in: input, options:[], range:NSRange(location:0,length:input.utf16.count))
+                if (matches.count>0){
+                    return true
+                }
+                else{
+                    return false
+                }
+            }catch{
+                print("wrong regular expression")
                 return false
             }
-            let matches = regex.matches(in: input, options:[], range:NSRange(location:0,length:input.utf16.count))
-            if (matches.count>0){
-                return true
-            }
-            else{
-                return false
-            }
-        }catch{
-            print("wrong regular expression")
-            return false
         }
-    }
-
-    @IBAction func touchLogin(_ sender: Any) {
-        // 1.
-        if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error:nil) {
-            
-            // 2.
-            context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics,
-                                   localizedReason: "Logging in with Touch ID") {
-                                    (success, evaluateError) in
-                                    
-                                    if (success) {
-                                        DispatchQueue.main.async {
-                                            // User authenticated successfully, take appropriate action
-                                            
-                                            self.performSegue(withIdentifier: "menueSegue", sender: self)
-                                        }
-                                    } else {
+        
+        @IBAction func touchLogin(_ sender: Any) {
+            // 1.
+            if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error:nil) {
+                
+                // 2.
+                context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics,
+                                       localizedReason: "Logging in with Touch ID") {
+                                        (success, evaluateError) in
                                         
-                                        if let error: LAError = evaluateError as! LAError? {
-                                            var message: String
-                                            var showAlert : Bool
-                                            
-                                            switch error {
+                                        if (success) {
+                                            DispatchQueue.main.async {
+                                                // User authenticated successfully, take appropriate action
                                                 
-                                            case LAError.authenticationFailed:
-                                                message = "There was a problem verifying your identity."
-                                                showAlert = true
-                                            case LAError.userCancel:
-                                                message = "You pressed cancel."
-                                                showAlert = true
-                                            case LAError.userFallback:
-                                                message = "You pressed password."
-                                                showAlert = true
-                                            default:
-                                                showAlert = true
-                                                message = "Touch ID may not be configured"
+                                                self.performSegue(withIdentifier: "menueSegue", sender: self)
                                             }
+                                        } else {
                                             
-                                            if showAlert {
-                                                let alertView = UIAlertController(title: "Error",
-                                                                                  message: message as String, preferredStyle:.alert)
-                                                let okAction = UIAlertAction(title: "Darn!", style: .default, handler: nil)
-                                                alertView.addAction(okAction)
-                                                self.present(alertView, animated: true, completion: nil)
+                                            if let error: LAError = evaluateError as! LAError? {
+                                                var message: String
+                                                var showAlert : Bool
+                                                
+                                                switch error {
+                                                    
+                                                case LAError.authenticationFailed:
+                                                    message = "There was a problem verifying your identity."
+                                                    showAlert = true
+                                                case LAError.userCancel:
+                                                    message = "You pressed cancel."
+                                                    showAlert = true
+                                                case LAError.userFallback:
+                                                    message = "You pressed password."
+                                                    showAlert = true
+                                                default:
+                                                    showAlert = true
+                                                    message = "Touch ID may not be configured"
+                                                }
+                                                
+                                                if showAlert {
+                                                    let alertView = UIAlertController(title: "Error",
+                                                                                      message: message as String, preferredStyle:.alert)
+                                                    let okAction = UIAlertAction(title: "Darn!", style: .default, handler: nil)
+                                                    alertView.addAction(okAction)
+                                                    self.present(alertView, animated: true, completion: nil)
+                                                }
                                             }
                                         }
-                                    }
-                                    
+                                        
+                }
+            } else {
+                // 5.
+                let alertView = UIAlertController(title: "Error",
+                                                  message: "Touch ID not available" as String, preferredStyle:.alert)
+                let okAction = UIAlertAction(title: "Darn!", style: .default, handler: nil)
+                alertView.addAction(okAction)
+                self.present(alertView, animated: true, completion: nil)
             }
-        } else {
-            // 5.
-            let alertView = UIAlertController(title: "Error",
-                                              message: "Touch ID not available" as String, preferredStyle:.alert)
-            let okAction = UIAlertAction(title: "Darn!", style: .default, handler: nil)
-            alertView.addAction(okAction)
-            self.present(alertView, animated: true, completion: nil)
-        }
 }
+
 }
+
 

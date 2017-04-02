@@ -269,13 +269,18 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             "title" : itemTitle.text!,
             "condition" : "New",
             "price" : price.text!,]
-        let myKeychain = KeychainAccess()
-        let token = myKeychain.getPasscode(identifier: "StevensTraderToken")
-        print(token!)
+        let token = KeychainAccess.getPasscode()
+        if token == nil
+        {
+            self.dismiss(animated: true, completion: nil)
+        }
+        else
+        {
         let headers: HTTPHeaders = ["authorization":"Bearer "+token!]
         let URL = try! URLRequest(url: serverip+"/services/postproduct", method: .post, headers: headers)
        
         uploadImagesAndData(params: parameters,image1: imageView1.image!,image2: imageView2.image!,image3: imageView3.image!,url:URL)
+        }
         
         
 }
@@ -311,6 +316,11 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                                             print("responseObject: \(value)")
                                         case .failure(let responseError):
                                             print("responseError: \(responseError)")
+                                            if(response.response?.statusCode == 401)
+                                            {
+                                                KeychainAccess.resetPasscode()
+                                                self.dismiss(animated: true, completion: nil)
+                                            }
                                         }
                                 }
                             case .failure(let encodingError):

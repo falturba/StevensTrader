@@ -9,10 +9,10 @@ let kSecMatchLimitValue = String(format: kSecMatchLimit as String)
 let kSecReturnDataValue = String(format: kSecReturnData as String)
 let kSecMatchLimitOneValue = String(format: kSecMatchLimitOne as String)
 let kSecAttrAccountValue = String(format: kSecAttrAccount as String)
-
+let identifier:String = "StevensTraderToken"
 struct KeychainAccess {
     
-    func setPasscode(identifier: String, passcode: String) {
+    static func setPasscode(passcode: String) {
         if let dataFromString = passcode.data(using: String.Encoding.utf8) {
             let keychainQuery = [
                 kSecClassValue: kSecClassGenericPasswordValue,
@@ -24,7 +24,7 @@ struct KeychainAccess {
             
         }
     }
-    func resetPasscode(identifier:String)
+    static func resetPasscode()
     {
         let keychainQuery = [
             kSecClassValue: kSecClassGenericPasswordValue,
@@ -33,7 +33,7 @@ struct KeychainAccess {
         SecItemDelete(keychainQuery)
     }
     
-    func getPasscode(identifier: String) -> String? {
+    static func getPasscode() -> String? {
         let keychainQuery = [
             kSecClassValue: kSecClassGenericPasswordValue,
             kSecAttrServiceValue: identifier,

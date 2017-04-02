@@ -11,9 +11,10 @@ import UIKit
 class MenueViewController: UIViewController {
     
    
-    @IBAction func signout(_ sender: Any) {
-        let myKeychain = KeychainAccess()
-        myKeychain.resetPasscode(identifier: "StevensTraderToken")
+    @IBAction func signout(_ sender: Any)
+    {
+        
+        KeychainAccess.resetPasscode()
         self.dismiss(animated: true, completion: nil)
     }
     override func viewDidLoad() {
