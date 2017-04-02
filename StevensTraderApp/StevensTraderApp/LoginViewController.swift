@@ -31,13 +31,39 @@ class LoginViewController: UIViewController {
         if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: nil) {
             touchlogin.isHidden = false
         }
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: self.view.window)
+    }
+    /*--------------------- Keyboard handlers functions -----------------------*/
     func dismissKeyboard()
     {
         view.endEditing(true)
     }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+        
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
+    }
+    /*----------------------------------------------------------------------------*/
+    
     @IBAction func changeSegmant(_ sender: Any) {
         if segmantControl.selectedSegmentIndex == 0
         {
@@ -79,11 +105,6 @@ class LoginViewController: UIViewController {
     }
     
     
-    
-    
-    
-    
-    
      func login() {
         
         let emailText = email.text!+"@stevens.edu"
@@ -115,6 +136,7 @@ class LoginViewController: UIViewController {
                     }
                     let myKeychainAccess = KeychainAccess()
                     myKeychainAccess.setPasscode(identifier: "StevensTraderToken",passcode: jwt)
+                    print(jwt)
                     self.performSegue(withIdentifier: "menueSegue", sender: nil)
                 }
             })

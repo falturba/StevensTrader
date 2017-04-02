@@ -34,7 +34,8 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(UIInputViewController.dismissKeyboard))
         tap.cancelsTouchesInView = true
         view.addGestureRecognizer(tap)
-        // Do any additional setup after loading the view.
+        
+        self.condition.allowsEditingTextAttributes = false
         
         let imageTaps1 = UITapGestureRecognizer(target: self, action: #selector(handleImageTap))
         let imageTaps2 = UITapGestureRecognizer(target: self, action: #selector(handleImageTap))
@@ -52,13 +53,44 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.productDesc.delegate = self
         self.itemTitle.delegate = self
         self.price.delegate = self
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: self.view.window)
     }
     
-    //Dismissing the keyboard when the user tab anywhere
+    /*--------------------- Keyboard handlers functions -----------------------*/
     func dismissKeyboard()
     {
         view.endEditing(true)
     }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if itemTitle.isEditing == true
+        {
+            return
+        }
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+        
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
+    }
+    /*----------------------------------------------------------------------------*/
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -232,39 +264,68 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     //-------------------------------------------------------------------------------//
     
     @IBAction func submit(_ sender: UIButton) {
-        let serverip =  Config.getServerIP()
-        let url = URL(string: "http://"+serverip+"/services/listitem")!
-        var request = URLRequest( url:url)
-        request.httpMethod = "POST"
+        let serverip = Config.getServerIP()
         let parameters: [String: String] = [
             "title" : itemTitle.text!,
             "condition" : "New",
-            "price" : price.text!,
-            ]
-        request.httpBody = try! JSONSerialization.data(withJSONObject: parameters)
+            "price" : price.text!,]
+        let myKeychain = KeychainAccess()
+        let token = myKeychain.getPasscode(identifier: "StevensTraderToken")
+        print(token!)
+        let headers: HTTPHeaders = ["authorization":"Bearer "+token!]
+        let URL = try! URLRequest(url: serverip+"/services/postproduct", method: .post, headers: headers)
+       
+        uploadImagesAndData(params: parameters,image1: imageView1.image!,image2: imageView2.image!,image3: imageView3.image!,url:URL)
         
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        Alamofire.request(request).responseJSON(completionHandler:
-            { response in
-                switch response.result
-                {
-                case .failure(let error):
-                    print(error)
-                    let alert = UIAlertController(title: "message", message:"Error in saving the data, please try again later", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                    break
-                case .success(_):
-                    let alert = UIAlertController(title: "message", message:"Item is sucessfully added", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                    
-                    break
+}
+    
+    
+    func uploadImagesAndData(params:[String : String]?,image1: UIImage,image2: UIImage,image3: UIImage,url :URLRequest ) -> Void {
+        
+        
+        let imageData1 = UIImageJPEGRepresentation(image1, 0.5)!
+        let imageData2 = UIImageJPEGRepresentation(image2, 0.5)!
+        let imageData3 = UIImageJPEGRepresentation(image3, 0.5)!
+        
+        
+        Alamofire.upload(multipartFormData: { multipartFormData in
+            
+            for (key, value) in params! {
+                if let data = value.data(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue)) {
+                    multipartFormData.append(data, withName: key)
                 }
+            }
+      
+            multipartFormData.append(imageData1, withName: "image", fileName: "image.jpg", mimeType: "image/jpeg")
+            multipartFormData.append(imageData2, withName: "image", fileName: "image.jpg", mimeType: "image/jpeg")
+            multipartFormData.append(imageData3, withName: "image", fileName: "image.jpg", mimeType: "image/jpeg")
+        }, with:url , encodingCompletion: { encodingResult in
+                            switch encodingResult {
+                            case .success(let upload, _, _):
+                                upload
+                                    .validate()
+                                    .responseJSON { response in
+                                        switch response.result {
+                                        case .success(let value):
+                                            print("responseObject: \(value)")
+                                        case .failure(let responseError):
+                                            print("responseError: \(responseError)")
+                                        }
+                                }
+                            case .failure(let encodingError):
+                                print("encodingError: \(encodingError)")
+                            }
         })
     }
+    
 }
+
+    
+    
+    
+    
+    
 
 
 //A custom image view with a set value to check if the user set an image or not to avoid sending the default images to the server

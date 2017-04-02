@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1E994D589148955DF9A3764A /* Pods_StevensTraderAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B3F419BDB055447052CA4A /* Pods_StevensTraderAppTests.framework */; };
 		902EE4A6E080AD11EDB68FDA /* Pods_StevensTraderApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 124A6F5305DC26BB46BB53C4 /* Pods_StevensTraderApp.framework */; };
+		CC35125C1E90C0910050B97E /* CustomTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC35125B1E90C0910050B97E /* CustomTabBarViewController.swift */; };
 		CC641CCA1E4E73E600CD6998 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC641CC91E4E73E600CD6998 /* AppDelegate.swift */; };
 		CC641CCC1E4E73E600CD6998 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC641CCB1E4E73E600CD6998 /* LoginViewController.swift */; };
 		CC641CCF1E4E73E600CD6998 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC641CCD1E4E73E600CD6998 /* Main.storyboard */; };
@@ -51,6 +52,7 @@
 		25773111695B81AE08DFE004 /* Pods-StevensTraderApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StevensTraderApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StevensTraderApp/Pods-StevensTraderApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7186AE9CD43866997F1F976B /* Pods-StevensTraderAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StevensTraderAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StevensTraderAppTests/Pods-StevensTraderAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		86F0507811D0B82D334EB63A /* Pods-StevensTraderApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StevensTraderApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-StevensTraderApp/Pods-StevensTraderApp.release.xcconfig"; sourceTree = "<group>"; };
+		CC35125B1E90C0910050B97E /* CustomTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarViewController.swift; sourceTree = "<group>"; };
 		CC641CC61E4E73E600CD6998 /* StevensTraderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StevensTraderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC641CC91E4E73E600CD6998 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC641CCB1E4E73E600CD6998 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CC35125A1E90C02F0050B97E /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				CC35125B1E90C0910050B97E /* CustomTabBarViewController.swift */,
+			);
+			name = Custom;
+			sourceTree = "<group>";
+		};
 		CC641CBD1E4E73E500CD6998 = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +142,7 @@
 		CC641CC81E4E73E600CD6998 /* StevensTraderApp */ = {
 			isa = PBXGroup;
 			children = (
+				CC35125A1E90C02F0050B97E /* Custom */,
 				CCB87FC11E7DB4A300EF6514 /* Utilities */,
 				CCB87FC01E7DB48F00EF6514 /* Controllers */,
 				CC641CC91E4E73E600CD6998 /* AppDelegate.swift */,
@@ -379,6 +390,7 @@
 			files = (
 				CC641CEC1E4EDC9500CD6998 /* SignupViewController.swift in Sources */,
 				CC641CCC1E4E73E600CD6998 /* LoginViewController.swift in Sources */,
+				CC35125C1E90C0910050B97E /* CustomTabBarViewController.swift in Sources */,
 				CCB87FC71E7DD78500EF6514 /* Config.swift in Sources */,
 				CCE339F61E5E659600E3FFB7 /* SellViewController.swift in Sources */,
 				CCB87FC91E7E078E00EF6514 /* MenueViewController.swift in Sources */,
