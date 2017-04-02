@@ -27,6 +27,7 @@ export default (req, res, next) => {
               var account = new Account(data)
               if(account.token == token)
               {
+                req.userId = account._id
                 next();
               }
               else{

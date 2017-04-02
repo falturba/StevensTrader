@@ -21,7 +21,8 @@ var itemSchema = new Schema({
       imageName:{type:String, required: true},
       thumbnailName:{type:String, required: true}
     }
-  ]
+  ],
+  userId: {type:Schema.Types.ObjectId}
 })
 
 var Items = mongoose.model('Item', itemSchema)

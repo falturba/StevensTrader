@@ -34,7 +34,7 @@ router.post('/postproduct',authenticate, (req, res) => {
   //   res.status(201).json({ success: true })
   // })
   
-    const data = {medias:[]};
+    const data = {medias:[],userId:req.userId};
 
     var form = new formidable.IncomingForm()
 

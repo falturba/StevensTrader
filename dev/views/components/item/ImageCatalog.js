@@ -2,10 +2,11 @@ import React from 'react'
 import ReactDom from 'react-dom'
 import ImageItem from './ImageItem'
 
-function getBigImagePath(imagePaths){
-    if(imagePaths && imagePaths[0]){
-        return `/images/${imagePaths[0].imageName}`
-    }
+Function.prototype.bindArgs =
+function (...boundArgs)
+{
+    let context = this
+    return function(...args) { return context.call(this, ...boundArgs, ...args); }
 }
 
 export default class ImageCatalog extends React.Component{
@@ -13,24 +14,33 @@ export default class ImageCatalog extends React.Component{
         super(props)
         console.log("props::")
         console.dir(props)
+        this.imagePaths = props.props
+        this.state = {currentImageIndex: 0}
     }
 
-    clickCallback(){
-
+    clickCallback = (imageIndex)=>{
+        this.setState({currentImageIndex:imageIndex})
     }
-
+    
+    getBigImagePath(){
+        if(this.imagePaths && this.imagePaths[this.state.currentImageIndex]){
+            return `/images/${this.imagePaths[this.state.currentImageIndex].imageName}`
+        }
+        return ''
+    }
     render(){
         return(
             <div className='image-column'>
                 <div className="image-wrapper">
-                    <img src={getBigImagePath(this.props.props)}/>
+                    <img src={this.getBigImagePath()}/>
                 </div>
                 {
                     this.props.props.map((imageObject,i)=>{
                         return <ImageItem props={{
-                                ...imageObject,
-                                clickCallback:this.clickCallback
-                            }} key={i}/>
+                                    ...imageObject,
+                                    imageIndex:i,
+                                    clickCallback:this.clickCallback
+                                }} key={i}/>
                     })
                 }
                     

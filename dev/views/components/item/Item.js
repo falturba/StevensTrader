@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import store from '../../redux/store'
 import {getProductAction} from '../../redux/actions/productsActions'
 import ImageCatalog from './ImageCatalog'
+import ItemDetail from './ItemDetail'
 import ItemScss from '../../scss/Item.scss'
 
 class Item extends React.Component{
@@ -20,7 +21,7 @@ class Item extends React.Component{
                 <div className='container'>
                     <div className='container-item'>
                         <ImageCatalog props={this.props.product.medias}/>
-                        <div className='detail-column'>bbb</div>
+                        <ItemDetail {...this.props.product} />
                     </div>
                 </div>
             )

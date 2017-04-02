@@ -16,10 +16,11 @@
 .container-item{
     display: table;
     width:100%;
+    margin-top:40px;
 
     .image-column{
         display: table-cell;
-        background-color:#f0a;
+        // background-color:#f0a;
         
         .image-wrapper{
             width:400px;
@@ -34,6 +35,7 @@
             margin:5px;
             @extend %wrapper;
             @extend %border-gray;
+            cursor:pointer;
         }
         img{
             max-width: 100%;
@@ -51,9 +53,14 @@
     .detail-column{
         display: table-cell;
         width: 100%;
-        background-color:#ffe;
+        // background-color:#ffe;
+        padding: 0;
+        vertical-align: top;
+        padding:20px;
         .detail{
-            height:1000px;
+            @extend %border-gray;
+            padding:5px;
+            margin:10px;
         }
     }
 }
