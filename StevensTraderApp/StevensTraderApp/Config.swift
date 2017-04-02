@@ -9,10 +9,11 @@
 import UIKit
 
 class Config: NSObject {
-    static func getServerIP() throws -> String {
+    static func getServerIP()  -> String {
         guard let infoPlist = Bundle.main.infoDictionary,
             let serverip = infoPlist["serverip"] as? String else {
-                throw ConfigError.serverip
+                print("missing config server ip")
+                return ""
         }
         return serverip
     }

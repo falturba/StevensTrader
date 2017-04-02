@@ -72,8 +72,9 @@ class SignupViewController: UIViewController {
                     let emailText = email.text!+"@stevens.edu"
                     let nameText = name.text!
                     let passwordText = password.text!
-                    let url = URL(string: "http://localhost:3000/services/signup")!
-                    var request = URLRequest( url:url)
+                    let serverip =  Config.getServerIP()
+                    let url = URL(string:serverip+"/services/signup")
+                    var request = URLRequest( url:url!)
                     request.httpMethod = "POST"
                     let parameters: [String: String] = [
                         "type" : "register" as String,

@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Stevens Trader needs to access your photo library in order to upload images</string>
 	<key>serverip</key>
-	<string>http://localhost:3000</string>
+	<string>http://stevenstrader.herokuapp.com</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -49,6 +51,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
+	<string>Stevens Trader needs to access your camera in order to post images</string>
 </dict>
 </plist>

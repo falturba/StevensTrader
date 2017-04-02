@@ -43,14 +43,17 @@ struct KeychainAccess {
         var dataTypeRef: AnyObject?
         let status: OSStatus = SecItemCopyMatching(keychainQuery, &dataTypeRef)
         var passcode: String?
-        if (status == errSecSuccess) {
+        if (status == errSecSuccess)
+        {
             if let retrievedData = dataTypeRef as? Data,
-                let result = String(data: retrievedData, encoding: String.Encoding.utf8) {
+                let result = String(data: retrievedData, encoding: String.Encoding.utf8)
+            {
                 passcode = result as String
             }
         }
         else {
             print("Nothing was retrieved from the keychain. Status code \(status)")
+            return nil
         }
         return passcode
     }
