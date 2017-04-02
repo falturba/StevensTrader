@@ -15,8 +15,12 @@ const ItemDetail = (props)=>{
             <h3>Post At</h3>
                 <div className="detail">{props.createdAt}</div>
             <h3>Description</h3>
-                <div className="detail">{props.description}</div>
+                <div className="detail"><pre>{props.description}</pre></div>
             <hr/>
+            <h3>Seller Name</h3>
+                <div className="detail"><pre>{props.userData.name}</pre></div>
+            <h3>Email</h3>
+                <div className="detail"><pre>{props.userData.email}</pre></div>
         </div>
     )
 }
