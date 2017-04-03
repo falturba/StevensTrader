@@ -4,6 +4,13 @@ import ReactDom from 'react-dom'
 const ItemDetail = (props)=>{
     console.log("item-detail")
     console.dir(props)
+
+    let username = "-"
+    let email = "-"
+    if(!!props.userData){
+        username = props.userData.name
+        email = props.userData.email
+    }
     return(
         <div className='detail-column'>
             <h1>{props.title}</h1>
@@ -18,9 +25,9 @@ const ItemDetail = (props)=>{
                 <div className="detail"><pre>{props.description}</pre></div>
             <hr/>
             <h3>Seller Name</h3>
-                <div className="detail"><pre>{props.userData.name}</pre></div>
+                <div className="detail"><pre>{username}</pre></div>
             <h3>Email</h3>
-                <div className="detail"><pre>{props.userData.email}</pre></div>
+                <div className="detail"><pre>{email}</pre></div>
         </div>
     )
 }

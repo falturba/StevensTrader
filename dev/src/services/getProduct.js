@@ -31,7 +31,10 @@ router.get('/getproduct/:id',(req,res)=>{
                 as: "userData"
             }
         },{
-            $unwind:"$userData" //destruture [] that wrap from joining table (lookup)
+            $unwind:{ //destruture [] that wrap from joining table (lookup)
+                path: "$userData",
+                preserveNullAndEmptyArrays: true
+            }
         },{
             $project:{
                 _id:1,
@@ -58,7 +61,7 @@ router.get('/getproduct/:id',(req,res)=>{
         if(data[0]){
             returnData=data[0]
         }
-        console.log("products:")
+        console.log("product:")
         console.dir(returnData)
         res.status(200).json({product:returnData})
     })
