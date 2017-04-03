@@ -17,13 +17,15 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var touchlogin: UIButton!
+   
     typealias JSONStandard = Dictionary<String, AnyObject>
     //local Auth
     var context = LAContext()
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(UIInputViewController.dismissKeyboard))
         tap.cancelsTouchesInView = true
         view.addGestureRecognizer(tap)
@@ -69,10 +71,12 @@ class LoginViewController: UIViewController {
         {
             button.setTitle("login", for: [])
             name.isHidden = true
+            touchlogin.isEnabled = true
             
         }else {
             button.setTitle("Signup", for: [])
             name.isHidden = false
+            touchlogin.isEnabled = false
         }
         
     }
@@ -85,7 +89,7 @@ class LoginViewController: UIViewController {
         
         let key = KeychainAccess.getPasscode()
         if(key != nil) {
-            // self.performSegue(withIdentifier: "menueSegue", sender: self)
+            self.performSegue(withIdentifier: "menueSegue", sender: self)
         }
     }
     
@@ -94,6 +98,7 @@ class LoginViewController: UIViewController {
     @IBAction func loginSignupButton(_ sender: Any) {
         if segmantControl.selectedSegmentIndex == 0
         {
+            
             login()
         }
         else

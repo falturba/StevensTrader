@@ -16,23 +16,33 @@ class CustomTabBarViewController: UITabBarController,UITabBarControllerDelegate 
         // Do any additional setup after loading the view.
     }
 
-//     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem)
-//    {
-//        if item.tag == 3
-//        {
-//            
-//        }
-//       
-//    }
-  
+
      func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        print (tabBarController.selectedIndex)
-        
-        if tabBarController.selectedViewController == tabBarController.viewControllers?[2] && tabBarController.selectedIndex != 2
+ 
+        if viewController == tabBarController.customizableViewControllers?[2]
         {
-            return false
-        }else{
-            return true
+          let actionSheet = UIAlertController(title: "Options", message: "select an option", preferredStyle: .actionSheet)
+            actionSheet.addAction(UIAlertAction(title: "Cancel", style: .default, handler:nil))
+            
+            
+            actionSheet.addAction(UIAlertAction(title: "Logout", style: .default, handler: {(action:UIAlertAction) in
+                
+                    KeychainAccess.resetPasscode()
+                    self.dismiss(animated: true, completion: nil)
+                    
+                        
+                }))
+            
+            
+            self.present(actionSheet,animated:true,completion: nil)
+            
+            
+          return false
+        }
+        
+        else
+        {
+          return true
         }
     }
 

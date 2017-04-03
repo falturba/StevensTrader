@@ -70,7 +70,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="S67-Hg-K03">
-                                <rect key="frame" x="98" y="89" width="179" height="134"/>
+                                <rect key="frame" x="95" y="131" width="179" height="134"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dci-mO-Yvk">
@@ -88,6 +88,25 @@
                                     <action selector="touchLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hqo-dF-oo9"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="spatial" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44x-hd-qND">
+                                <rect key="frame" x="62" y="28" width="250" height="71"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                </accessibility>
+                                <attributedString key="attributedText">
+                                    <fragment content="Stevens Trader">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="39" name="AvenirNextCondensed-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <color key="highlightedColor" red="0.62352941176470589" green="0.066666666666666666" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="shadowColor" red="0.67750626800000002" green="0.23812481760000001" blue="0.29550772910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <size key="shadowOffset" width="200" height="32"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.67916572093963623" green="0.23809636798169878" blue="0.29473842514885795" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -125,7 +144,7 @@
             </objects>
             <point key="canvasLocation" x="1170" y="127"/>
         </scene>
-        <!--Item-->
+        <!--settings-->
         <scene sceneID="RuG-SJ-gHE">
             <objects>
                 <viewController id="fGl-DK-66Z" sceneMemberID="viewController">
@@ -138,13 +157,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="3" title="Item" id="0hh-eg-fXS"/>
+                    <tabBarItem key="tabBarItem" tag="3" title="settings" image="settings" selectedImage="settings" id="0hh-eg-fXS"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9N4-Pf-3w5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1169" y="946"/>
         </scene>
-        <!--Table View Controller-->
+        <!--buy-->
         <scene sceneID="JqP-Fq-HE0">
             <objects>
                 <tableViewController id="Nn3-oj-J79" sceneMemberID="viewController">
@@ -167,13 +186,13 @@
                             <outlet property="delegate" destination="Nn3-oj-J79" id="z6J-t9-Mdu"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" tag="2" systemItem="bookmarks" id="dYh-0e-HcZ"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="buy" image="buy" selectedImage="buy" id="dYh-0e-HcZ"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U9z-26-qEn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2182" y="608"/>
         </scene>
-        <!--Sell View Controller-->
+        <!--sell-->
         <scene sceneID="ze0-mX-gkk">
             <objects>
                 <viewController id="ykQ-gg-a9r" customClass="SellViewController" customModule="StevensTraderApp" sceneMemberID="viewController">
@@ -251,7 +270,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.67750626802444458" green="0.23812481760978699" blue="0.29550772905349731" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="1" systemItem="topRated" id="ekf-8S-GuF"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="sell" image="sell" selectedImage="sell" id="ekf-8S-GuF"/>
                     <navigationItem key="navigationItem" id="BDD-sJ-rGu">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="R2T-vx-qAe">
                             <connections>
@@ -276,8 +295,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="buy" width="25" height="25"/>
         <image name="camera" width="225" height="200"/>
         <image name="login_touch" width="138" height="137"/>
         <image name="logo" width="155" height="130"/>
+        <image name="sell" width="25" height="25"/>
+        <image name="settings" width="25" height="25"/>
     </resources>
 </document>

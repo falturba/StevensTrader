@@ -207,7 +207,7 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                     imagePicker.sourceType =  .photoLibrary
                     imagePicker.mediaTypes = [kUTTypeImage as String]
                     imagePicker.allowsEditing = false
-                    self.present(imagePicker, animated: false, completion: nil)
+                    self.present(imagePicker, animated: true, completion: nil)
                     
                 }
                 
@@ -267,7 +267,7 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         let serverip = Config.getServerIP()
         let parameters: [String: String] = [
             "title" : itemTitle.text!,
-            "condition" : "New",
+            "condition" : condition.text!,
             "price" : price.text!,]
         let token = KeychainAccess.getPasscode()
         if token == nil
