@@ -50,12 +50,15 @@ router.post('/postproduct',authenticate, (req, res) => {
         file.path =  imageDir+id //tell Formidable the path and name for saving image
         file.thumbnailSaveName = id+"_small" //inject value attach to 'file' envent
         file.saveName = id // inject value attach to 'file' envent
+
     })
     .on('file', function (name, file){
         //receive file argument
         sharp(file.path).resize(320, 240).toFile(imageDir+file.thumbnailSaveName, (err, info) => console.log(err,info) )
+
         data.medias.push({
             type:file.type,
+            img:{data: fs.readFileSync(file.path),contentType :file.type},
             imageName:file.saveName,
             thumbnailName:file.thumbnailSaveName
         })
@@ -74,6 +77,7 @@ router.post('/postproduct',authenticate, (req, res) => {
                 })
                 res.status(412).json(err)//db value is not valid
             }else{
+
                 console.log("Complete save item.")
                 res.status(200).json({status:"post complete.",postId:result._doc._id.toString()})
             }

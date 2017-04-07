@@ -18,6 +18,7 @@ var itemSchema = new Schema({
   medias:[
     {
       id:mongoose.Schema.Types.ObjectId,
+      img:{ data: Buffer, contentType: String },
       imageName:{type:String, required: true},
       thumbnailName:{type:String, required: true}
     }
