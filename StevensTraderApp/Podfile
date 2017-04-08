@@ -7,6 +7,7 @@ target 'StevensTraderApp' do
 
   # Pods for StevensTraderApp
 	pod 'Alamofire', '~> 4.3'
+    pod 'SwiftyJSON'
   target 'StevensTraderAppTests' do
     inherit! :search_paths
     # Pods for testing

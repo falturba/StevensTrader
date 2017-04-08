@@ -289,9 +289,9 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     func uploadImagesAndData(params:[String : String]?,image1: UIImage,image2: UIImage,image3: UIImage,url :URLRequest ) -> Void {
         
         
-        let imageData1 = UIImageJPEGRepresentation(image1, 0.5)!
-        let imageData2 = UIImageJPEGRepresentation(image2, 0.5)!
-        let imageData3 = UIImageJPEGRepresentation(image3, 0.5)!
+        let imageData1 = UIImageJPEGRepresentation(image1, 0.05)!
+        let imageData2 = UIImageJPEGRepresentation(image2, 0.05)!
+        let imageData3 = UIImageJPEGRepresentation(image3, 0.05)!
         
         
         Alamofire.upload(multipartFormData: { multipartFormData in
@@ -301,10 +301,17 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                     multipartFormData.append(data, withName: key)
                 }
             }
-      
-            multipartFormData.append(imageData1, withName: "image", fileName: "image.jpg", mimeType: "image/jpeg")
-            multipartFormData.append(imageData2, withName: "image", fileName: "image.jpg", mimeType: "image/jpeg")
-            multipartFormData.append(imageData3, withName: "image", fileName: "image.jpg", mimeType: "image/jpeg")
+            if(self.imageView1.set){
+                multipartFormData.append(imageData1, withName: "image", fileName: "image1.jpg", mimeType: "image/jpeg")
+            }
+            if(self.imageView2.set){
+                multipartFormData.append(imageData2, withName: "image", fileName: "image2.jpg", mimeType: "image/jpeg")
+            }
+            if(self.imageView3.set){
+                multipartFormData.append(imageData3, withName: "image", fileName: "image3.jpg", mimeType: "image/jpeg")
+            }
+            
+            
         }, with:url , encodingCompletion: { encodingResult in
                             switch encodingResult {
                             case .success(let upload, _, _):

@@ -37,10 +37,11 @@ router.post('/postproduct',authenticate, (req, res) => {
     const data = {medias:[],userId:req.userId};
 
     var form = new formidable.IncomingForm()
-
+var thumbnailSet = false;
     form.parse(req, function(err, fields, files) {
         // console.dir(fields)
         // console.dir(files)
+        
     })
     .on('fileBegin', function (name, file){
         // before start buffer
@@ -55,10 +56,17 @@ router.post('/postproduct',authenticate, (req, res) => {
     .on('file', function (name, file){
         //receive file argument
         sharp(file.path).resize(320, 240).toFile(imageDir+file.thumbnailSaveName, (err, info) => console.log(err,info) )
-
+        
+        //setting the first image only as a thumbnail in the DB
+        //This should be smaller (for the IOS)
+        if(!thumbnailSet)
+        {
+          data["thumbnail"] = {data:fs.readFileSync(file.path),contentType :file.type};
+          thumbnailSet = true; //to skip the other images
+        }
         data.medias.push({
             type:file.type,
-            img:{data: fs.readFileSync(file.path),contentType :file.type},
+            img:{data: fs.readFileSync(file.path),contentType :file.type}, //saving the image in the DB
             imageName:file.saveName,
             thumbnailName:file.thumbnailSaveName
         })

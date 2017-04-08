@@ -15,6 +15,7 @@ var itemSchema = new Schema({
   description: {type: String},
   condition: {type: String, required: true, enum:condintionEnum},
   price:{type: Number, required: true,min:priceMin,max:priceMax},
+  thumbnail: {data: Buffer, contentType: String },
   medias:[
     {
       id:mongoose.Schema.Types.ObjectId,
