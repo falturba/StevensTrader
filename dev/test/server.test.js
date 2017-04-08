@@ -68,6 +68,8 @@ describe('---- Item Testing -------', () => {
             .field('price','6')
             .attach('imageField', fs.readFileSync('test/test_image/img2.jpg'), 'img2.jpg')
             .end((err, res) => {
+                console.log('*******')
+                console.log(res.body) //error no token provide
                 expect(res.body.status).to.be.eql('post complete.')
                 done()
 
