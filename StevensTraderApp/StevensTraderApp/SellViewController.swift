@@ -25,12 +25,18 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet var condition: UITextField!
     @IBOutlet var conditionDropDown: UIPickerView!
     @IBOutlet weak var productDesc: UITextView!
-    
+    var activityIndicator = UIActivityIndicatorView()
   
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activityIndicator.center = self.view.center
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
+        
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(UIInputViewController.dismissKeyboard))
         tap.cancelsTouchesInView = true
         view.addGestureRecognizer(tap)
@@ -123,14 +129,13 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     {
         button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .red
-        button.setTitle("delete", for: .normal)
+        button.setImage(#imageLiteral(resourceName: "delete"), for:.normal)
         button.addTarget(self, action: #selector(deleteImage), for:.touchUpInside)
         button.tag = imageView.tag
-        let yc =  button.centerYAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 12)
-        let xc = button.centerXAnchor.constraint(equalTo: imageView.centerXAnchor)
-        let width =  button.widthAnchor.constraint(equalTo: imageView.widthAnchor)
-        let height =  button.heightAnchor.constraint(equalToConstant: 20)
+        let yc =  button.centerYAnchor.constraint(equalTo: imageView.topAnchor)
+        let xc = button.centerXAnchor.constraint(equalTo: imageView.rightAnchor)
+        let width =  button.widthAnchor.constraint(equalTo: imageView.widthAnchor,constant:40)
+        let height =  button.heightAnchor.constraint(equalTo: imageView.heightAnchor,constant:40)
         let con = [yc,xc,width,height]
         self.view.addSubview(button)
         NSLayoutConstraint.activate(con)
@@ -143,16 +148,19 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         {
         case 1:
             imageView1.image = #imageLiteral(resourceName: "camera")
+            imageView1.backgroundColor = UIColor.clear
             sender.isHidden = true
             imageView1.set = false
             break
         case 2:
             imageView2.image = #imageLiteral(resourceName: "camera")
+            imageView2.backgroundColor = UIColor.clear
             sender.isHidden = true
             imageView2.set = false
             break
         case 3:
             imageView3.image = #imageLiteral(resourceName: "camera")
+            imageView3.backgroundColor = UIColor.clear
             sender.isHidden = true
             imageView3.set = false
             break
@@ -246,16 +254,19 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             if imagePicked == 1
             {
                 imageView1.setImage(image: image)
+                imageView1.backgroundColor = .black
                 deleteButton1.isHidden = false
             }
             else if imagePicked == 2
             {
                 imageView2.setImage(image: image)
+                imageView2.backgroundColor = .black
                 deleteButton2.isHidden = false
             }
             else if imagePicked == 3
             {
                 imageView3.setImage(image: image)
+                imageView3.backgroundColor = .black
                 deleteButton3.isHidden = false
             }
         }
@@ -264,11 +275,16 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     //-------------------------------------------------------------------------------//
     
     @IBAction func submit(_ sender: UIButton) {
+        
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        activityIndicator.stopAnimating()
+        
         let serverip = Config.getServerIP()
         let parameters: [String: String] = [
             "title" : itemTitle.text!,
             "condition" : condition.text!,
-            "price" : price.text!,]
+            "price" : price.text!,
+            "description":productDesc.text!]
         let token = KeychainAccess.getPasscode()
         if token == nil
         {
@@ -282,16 +298,17 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         uploadImagesAndData(params: parameters,image1: imageView1.image!,image2: imageView2.image!,image3: imageView3.image!,url:URL)
         }
         
-        
+        activityIndicator.stopAnimating()
+        UIApplication.shared.endIgnoringInteractionEvents()
 }
     
     
     func uploadImagesAndData(params:[String : String]?,image1: UIImage,image2: UIImage,image3: UIImage,url :URLRequest ) -> Void {
         
         
-        let imageData1 = UIImageJPEGRepresentation(image1, 0.05)!
-        let imageData2 = UIImageJPEGRepresentation(image2, 0.05)!
-        let imageData3 = UIImageJPEGRepresentation(image3, 0.05)!
+        let imageData1 = UIImageJPEGRepresentation(image1, 0.1)!
+        let imageData2 = UIImageJPEGRepresentation(image2, 0.1)!
+        let imageData3 = UIImageJPEGRepresentation(image3, 0.1)!
         
         
         Alamofire.upload(multipartFormData: { multipartFormData in

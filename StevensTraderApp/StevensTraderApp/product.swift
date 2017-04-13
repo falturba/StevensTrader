@@ -15,6 +15,9 @@ class Product: NSObject {
     var desc:String?
     var thumbnailUrl:String?
     var id:String?
+    var ownerName:String?
+    var ownerEmail:String?
+    var medias = [String]()
 }
 
 //["New","Refurbished","Used","Very Good","Good","Acceptable"]

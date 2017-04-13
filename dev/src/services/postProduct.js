@@ -79,6 +79,7 @@ var thumbnailSet = false;
         var item = new Item(data)
         item.save(function(err,result){
             if(err){
+              console.log(err)
                 data.medias.forEach(media=>{
                     fs.unlink(imageDir+media.imageName, ()=>{})
                     fs.unlink(imageDir+media.thumbnailName, ()=>{})

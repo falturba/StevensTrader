@@ -19,7 +19,7 @@ class CustomTabBarViewController: UITabBarController,UITabBarControllerDelegate 
 
      func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
  
-        if viewController == tabBarController.customizableViewControllers?[2]
+        if viewController == tabBarController.customizableViewControllers?[3]
         {
           let actionSheet = UIAlertController(title: "Options", message: "select an option", preferredStyle: .actionSheet)
             actionSheet.addAction(UIAlertAction(title: "Cancel", style: .default, handler:nil))

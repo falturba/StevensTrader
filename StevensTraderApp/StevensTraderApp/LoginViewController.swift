@@ -17,6 +17,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var touchlogin: UIButton!
+    var activityIndicator = UIActivityIndicatorView()
    
     typealias JSONStandard = Dictionary<String, AnyObject>
     //local Auth
@@ -24,7 +25,10 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(UIInputViewController.dismissKeyboard))
         tap.cancelsTouchesInView = true
@@ -98,12 +102,19 @@ class LoginViewController: UIViewController {
     @IBAction func loginSignupButton(_ sender: Any) {
         if segmantControl.selectedSegmentIndex == 0
         {
-            
+            UIApplication.shared.beginIgnoringInteractionEvents()
+            activityIndicator.startAnimating()
             login()
+            activityIndicator.stopAnimating()
+            UIApplication.shared.endIgnoringInteractionEvents()
         }
         else
         {
+            UIApplication.shared.beginIgnoringInteractionEvents()
+            activityIndicator.startAnimating()
             signup()
+            activityIndicator.stopAnimating()
+            UIApplication.shared.endIgnoringInteractionEvents()
         }
         
         

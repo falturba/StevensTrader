@@ -12,9 +12,10 @@ import SwiftyJSON
 class BuyTableViewController: UITableViewController {
     let cellId = "productCell"
     var products = [Product]()
+    var product:Product!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
      //   tableView.register(ProductCell.self, forCellReuseIdentifier: cellId)
         
         let serverip =  Config.getServerIP()
@@ -38,7 +39,19 @@ class BuyTableViewController: UITableViewController {
                 product.price = jsonProduct["price"].number
                 product.id = jsonProduct["_id"].stringValue
                 product.thumbnailUrl = Config.getServerIP()+"/services/getthumbnail/"+product.id!
-
+                product.ownerName = jsonProduct["userData"]["name"].stringValue
+                product.ownerEmail = jsonProduct["userData"]["email"].stringValue
+                
+                
+                for (_,subjson) in jsonProduct["medias"]
+                {
+                    let url:String = Config.getServerIP()+"/services/getimage/"+subjson["_id"].string!
+                    
+                    product.medias.append(url)
+                }
+                
+                
+                //product.medias = jsonProduct["medias"].array as! [String]
                 products.append(product)
                 
                 
@@ -52,11 +65,29 @@ class BuyTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return products.count
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        self.product = products[indexPath.item]
+        performSegue(withIdentifier: "showItemSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier! == "showItemSegue")
+        {
+            if let itemView = segue.destination as? ItemViewController {
+            
+                itemView.product = product
+            }
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
        let product = products[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ProductCell
+        
         cell.productTitle.text = product.title
         cell.productCondition.text
             = product.condition!.rawValue
@@ -65,25 +96,15 @@ class BuyTableViewController: UITableViewController {
        cell.productImage.image = #imageLiteral(resourceName: "buy")
         cell.productImage.contentMode = .scaleAspectFit
         if let productImageUrl = product.thumbnailUrl {
-            let urlrequest = URLRequest(url: URL(string: productImageUrl)!)
-            URLSession.shared.dataTask(with: urlrequest, completionHandler: { (data,response,error) in
-                
-                //if downloading the thumbnail failed
-                if error != nil {
-                    print(error!)
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    let image = UIImage(data: data!)
-                    cell.productImage.image = image
-                }
-                
-                
-            }).resume()
+            
+            cell.productImage.loadImageWithCache(url: productImageUrl)
         }
         return cell
     }
+    
+    
+   
+    
 
 }
 
