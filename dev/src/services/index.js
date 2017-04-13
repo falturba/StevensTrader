@@ -4,7 +4,6 @@ import login from './login'
 import postProduct from './postProduct'
 import signup from './signup'
 import getProductsForIOS from './getProductsForIOS'
-import getSingleProductForIOS from './getSingleProductForIOS'
 export function initServices(app){
   console.log("init service...")
   app.use('/services',getProduct)
@@ -13,7 +12,6 @@ export function initServices(app){
   app.use('/services',postProduct)
   app.use('/services',signup)
   app.use('/services',getProductsForIOS)
-  app.use('/services',getSingleProductForIOS)
 }
 
 
