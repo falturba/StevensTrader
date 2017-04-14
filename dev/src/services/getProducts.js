@@ -30,7 +30,10 @@ router.get('/getproducts',(req,res)=>{
                 description:1,
                 condition:1,
                 price:1,
-                medias:1,
+                medias:{
+                	imageName:1,
+                	thumbnailName:1
+                },
                 updatedAt:1,
                 createdAt:1,
                 userData:{
