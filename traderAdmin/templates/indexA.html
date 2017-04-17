@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+	<title> Accounts</title>
+	<script type="text/javascript">
+		var myArray = []
+		{% for aa in jsString %}
+    		myArray.push("{{aa}}")
+   		 {% endfor %}
+   		 
+   		 console.dir(myArray);
+	</script>
+</head>
+<body>
+	<!--<p>{{acct}}</p>-->
+
+	<ul>
+    {% for acct in accounts %}
+    <li>{{acct}}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>
