@@ -36,10 +36,5 @@ jspm_packages
 .DS_Store
 
 #generated folder
-<<<<<<< Updated upstream
 production
-=======
-build
-public
-models/account.js
->>>>>>> Stashed changes
+dev/public/images
