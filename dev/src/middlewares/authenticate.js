@@ -28,6 +28,7 @@ export default (req, res, next) => {
               if(account.token == token)
               {
                 req.userId = account._id
+                req.token = token
                 next();
               }
               else{
