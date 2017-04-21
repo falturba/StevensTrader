@@ -21,6 +21,7 @@
 		CC641CD41E4E73E600CD6998 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC641CD21E4E73E600CD6998 /* LaunchScreen.storyboard */; };
 		CC641CDF1E4E73E600CD6998 /* StevensTraderAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC641CDE1E4E73E600CD6998 /* StevensTraderAppTests.swift */; };
 		CC641CEC1E4EDC9500CD6998 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC641CEB1E4EDC9500CD6998 /* SignupViewController.swift */; };
+		CC8D21AB1EA0529C00EFBA4A /* myProductsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8D21AA1EA0529C00EFBA4A /* myProductsTableViewController.swift */; };
 		CCB87FC31E7DB4E700EF6514 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB87FC21E7DB4E700EF6514 /* KeychainService.swift */; };
 		CCB87FC71E7DD78500EF6514 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB87FC61E7DD78500EF6514 /* Config.swift */; };
 		CCB87FC91E7E078E00EF6514 /* MenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB87FC81E7E078E00EF6514 /* MenueViewController.swift */; };
@@ -72,6 +73,7 @@
 		CC641CDE1E4E73E600CD6998 /* StevensTraderAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StevensTraderAppTests.swift; sourceTree = "<group>"; };
 		CC641CE01E4E73E600CD6998 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC641CEB1E4EDC9500CD6998 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		CC8D21AA1EA0529C00EFBA4A /* myProductsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myProductsTableViewController.swift; sourceTree = "<group>"; };
 		CCB87FC21E7DB4E700EF6514 /* KeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		CCB87FC61E7DD78500EF6514 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		CCB87FC81E7E078E00EF6514 /* MenueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenueViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				CCB87FC81E7E078E00EF6514 /* MenueViewController.swift */,
 				CC4EB2D01E9237D8002AF07B /* BuyTableViewController.swift */,
 				CC0FFDEE1E9EEBCE00019635 /* ItemViewController.swift */,
+				CC8D21AA1EA0529C00EFBA4A /* myProductsTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				CC4EB2EB1E98311B002AF07B /* product.swift in Sources */,
 				CC641CEC1E4EDC9500CD6998 /* SignupViewController.swift in Sources */,
 				CC641CCC1E4E73E600CD6998 /* LoginViewController.swift in Sources */,
+				CC8D21AB1EA0529C00EFBA4A /* myProductsTableViewController.swift in Sources */,
 				CC4EB2D11E9237D8002AF07B /* BuyTableViewController.swift in Sources */,
 				CC0FFDED1E9EA0B000019635 /* UIImageExtension.swift in Sources */,
 				CC0FFDEF1E9EEBCE00019635 /* ItemViewController.swift in Sources */,

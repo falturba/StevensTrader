@@ -24,7 +24,7 @@ export default class ImageCatalog extends React.Component{
     
     getBigImagePath(){
         if(this.imagePaths && this.imagePaths[this.state.currentImageIndex]){
-            return `/images/${this.imagePaths[this.state.currentImageIndex].imageName}`
+            return `/services/getimage/${this.imagePaths[this.state.currentImageIndex]._id}`
         }
         return ''
     }

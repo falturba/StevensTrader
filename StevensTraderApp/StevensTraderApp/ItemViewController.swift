@@ -99,7 +99,6 @@ class ItemViewController: UIViewController {
         
             let urlrequest = URLRequest(url: URL(string: url)!)
             URLSession.shared.dataTask(with: urlrequest, completionHandler: { (data,response,error) in
-                
                 //if downloading the thumbnail failed
                 if error != nil {
                     print(error!)

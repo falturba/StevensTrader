@@ -338,6 +338,9 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                                         switch response.result {
                                         case .success(let value):
                                             print("responseObject: \(value)")
+                                            let alert = UIAlertController(title: "Item Added", message: "Your item is successfully added", preferredStyle: UIAlertControllerStyle.alert)
+                                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                                            self.present(alert,animated: true,completion: nil)
                                         case .failure(let responseError):
                                             print("responseError: \(responseError)")
                                             if(response.response?.statusCode == 401)

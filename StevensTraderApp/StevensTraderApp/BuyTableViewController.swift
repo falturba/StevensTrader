@@ -16,8 +16,23 @@ class BuyTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
-     //   tableView.register(ProductCell.self, forCellReuseIdentifier: cellId)
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.backgroundView = refreshControl
+        }
+    
+    
+
+        
+        
+    }
+
+    func reloadData()
+    {
         let serverip =  Config.getServerIP()
         Alamofire.request(serverip+"/services/getproductsforios").responseJSON { (responseData) -> Void in
             if((responseData.result.value) != nil) {
@@ -26,6 +41,15 @@ class BuyTableViewController: UITableViewController {
             }
         }
     }
+
+func refresh(_ refreshControl: UIRefreshControl) {
+    // Do your job, when done:
+    reloadData()
+    refreshControl.endRefreshing()
+}
+
+
+
     func parseJson(_ json:JSON)
     {
         
@@ -50,8 +74,16 @@ class BuyTableViewController: UITableViewController {
                     product.medias.append(url)
                 }
                 
-                
-                //product.medias = jsonProduct["medias"].array as! [String]
+                var exist = false
+                for prod in products
+                {
+                    if(prod.id==product.id)
+                    {
+                        exist = true
+                    }
+                    
+                }
+                if(exist) { continue }
                 products.append(product)
                 
                 
