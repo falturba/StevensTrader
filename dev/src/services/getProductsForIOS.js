@@ -51,15 +51,36 @@ router.get('/getproductsforios',(req,res)=>{
 })
 
 router.get('/getthumbnail/:id/',(req,res)=>{
-  console.log("got thumbnail request")
+
   if(!Mongoose.Types.ObjectId.isValid(req.params.id)){
     res.status(400).json({status:"Wrong ID format"})
   }
+  Item.aggregate([
 
-  Item.findById({_id:req.params.id},{_id:0,thumbnail:1} ,function (err, doc) {
-    if (err) return next(err);
-    res.contentType(doc.thumbnail.contentType);
-    res.send(doc.thumbnail.data);
+    {$match:{
+      _id :Mongoose.Types.ObjectId(req.params.id)
+    }}
+    ,{$project:{_id:1,"medias":{$arrayElemAt: [ "$medias", 0 ]}}} ]
+
+
+    ,function (err, doc) {
+    if (err)
+    {
+      console.log(err);
+      res.status(500).json({status:"Error in the server while searching for the image"});
+    }
+    if(doc[0] == undefined || doc[0].medias == undefined ||  doc[0].medias.thumbnail == undefined)
+    {
+      res.status(204).json({status:"thumbnail does not exist"});
+
+    }
+    else
+    {
+      
+      res.contentType(doc[0].medias.thumbnail.contentType);
+      res.send(doc[0].medias.thumbnail.data.buffer);
+    }
+    
   });
 });
 
@@ -74,16 +95,19 @@ router.get('/getimage/:id/',(req,res)=>{
       console.log(err);
       res.status(500).json({status:"Error in the server while searching for the image"});
     }
-    if(doc !=null)
+    else if(doc ==undefined || doc.medias == undefined || doc.medias[0].img == undefined)
     {
-      res.contentType(doc.medias[0].img.contentType);
-      res.send(doc.medias[0].img.data);
+      res.status(204).json({status:"Image does not exist"});
+      
     }
     else
     {
-      res.status(204).json({status:"Image does not exist"});
+      res.contentType(doc.medias[0].thumbnail.contentType);
+      res.send(doc.medias[0].thumbnail.data);
     }
-  });
+      
+    
+  });//end of query
 });
 
 module.exports = router

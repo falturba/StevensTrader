@@ -33,66 +33,127 @@ router.post('/postproduct',authenticate, (req, res) => {
   //   console.log('File uploaded')
   //   res.status(201).json({ success: true })
   // })
-  
-    const data = {medias:[],userId:req.userId};
+  // var totalCompleteNumber = 0;
+  // var currentCompleteNumber = 0;
+  // var alreadyEnd = false;
+  // var waitingForImage = true;
+  var promises = [];
 
-    var form = new formidable.IncomingForm()
-var thumbnailSet = false;
-    form.parse(req, function(err, fields, files) {
+  const data = {medias:[],userId:req.userId};
+
+
+
+  var form = new formidable.IncomingForm()
+
+  form.parse(req, function(err, fields, files) {
         // console.dir(fields)
         // console.dir(files)
         
-    })
-    .on('fileBegin', function (name, file){
+      })
+  .on('fileBegin', function (name, file){
         // before start buffer
-        
-    //   file.path =  imagePath+ file.name
-        const id = crypto.randomBytes(16).toString("hex")
+        //filesCount++;
+      //file.path =  imagePath+ file.name
+      const id = crypto.randomBytes(16).toString("hex")
         file.path =  imageDir+id //tell Formidable the path and name for saving image
         file.thumbnailSaveName = id+"_small" //inject value attach to 'file' envent
         file.saveName = id // inject value attach to 'file' envent
 
-    })
-    .on('file', function (name, file){
+
+
+      })
+  .on('file', function (name, file){
+
+
         //receive file argument
-        sharp(file.path).resize(320, 240).toFile(imageDir+file.thumbnailSaveName, (err, info) => console.log(err,info) )
-        
-        //setting the first image only as a thumbnail in the DB
-        //This should be smaller (for the IOS)
-        if(!thumbnailSet)
-        {
-          data["thumbnail"] = {data:fs.readFileSync(file.path),contentType :file.type};
-          thumbnailSet = true; //to skip the other images
-        }
-        data.medias.push({
-            type:file.type,
-            img:{data: fs.readFileSync(file.path),contentType :file.type}, //saving the image in the DB
-            imageName:file.saveName,
-            thumbnailName:file.thumbnailSaveName
-        })
-    })
-    .on('field', function(field, value) {
+        var imageInsertPromise = new Promise ((resolve,reject) => {
+
+
+
+          sharp(file.path).resize(398, 398).toBuffer(function(err,img){
+
+
+
+            if(err)
+            {
+              console.log(err);
+              reject();
+
+            } 
+            else 
+            {
+             sharp(file.path).resize(200, 150).toBuffer(function(err,thmbnail){
+              if(err)
+              {
+                console.log(err);
+                reject();
+
+              } 
+              else
+              {
+                console.log("inside function to Buffer");
+                data.medias.push({
+                  type:file.type,
+            img:{data: img,contentType :file.type}, //saving the image in the DB
+            thumbnail:{data: thmbnail,contentType :file.type}
+          });
+                resolve();
+              }
+
+
+      });//second sharp
+
+
+           }
+    });//first sharp
+
+
+        });
+
+
+        promises.push(imageInsertPromise)
+      })
+
+
+
+      
+      .on('field', function(field, value) {
         //receive field argument
         data[field] = value;
-    })
-    .on('end', function() {
-        var item = new Item(data)
-        item.save(function(err,result){
-            if(err){
-              console.log(err)
-                data.medias.forEach(media=>{
-                    fs.unlink(imageDir+media.imageName, ()=>{})
-                    fs.unlink(imageDir+media.thumbnailName, ()=>{})
-                })
+
+      })
+      .on('end', function()
+      {
+
+
+        Promise.all(promises).then(()=>{
+          console.log("started saving the item in the DB");
+       var item = new Item(data);
+       item.save(function(err,result){
+        if(err){
+
+          data.medias.forEach(media=>{
+            fs.unlink(imageDir+media.imageName, ()=>{})
+            fs.unlink(imageDir+media.thumbnailName, ()=>{})
+          });
+          console.log(err)
                 res.status(412).json(err)//db value is not valid
-            }else{
+              }else{
 
                 console.log("Complete save item.")
                 res.status(200).json({status:"post complete.",postId:result._doc._id.toString()})
-            }
-        });
-    });
+              }
+            });
+       console.log("done trying to save the item");
+     });
+
+        })
+       
+
+
 });
+
+    
 
 //export default router;
 module.exports = router

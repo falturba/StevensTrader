@@ -38,3 +38,5 @@ jspm_packages
 #generated folder
 production
 dev/public/images
+
+dev/public/index_bundle.js
