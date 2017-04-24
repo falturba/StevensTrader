@@ -17,7 +17,10 @@ class Product: NSObject {
     var id:String?
     var ownerName:String?
     var ownerEmail:String?
+    var category:Category?
     var medias = [String]()
+    var createdAt:String?
+    var updatedAt:String?
 }
 
 //["New","Refurbished","Used","Very Good","Good","Acceptable"]
@@ -29,4 +32,14 @@ enum Condition:String
     case veryGood = "Very Good"
     case good = "Good"
     case acceptable = "Acceptable"
+}
+
+enum Category:String
+{
+    case electronics = "Electronics"
+    case books = "Books"
+    case bikes = "Bikes"
+    case skateBoards = "Video Games"
+    case bags = "Bags"
+    case everythihngelse = "Misc"
 }

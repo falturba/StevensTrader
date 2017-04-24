@@ -19,7 +19,7 @@ class ItemViewController: UIViewController {
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var email: UILabel!
     
-    @IBOutlet weak var navBar: UINavigationBar!
+  
     
     
     var product:Product!
@@ -27,10 +27,7 @@ class ItemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        navBar.translatesAutoresizingMaskIntoConstraints = false
-//        let navBarHeightConstrains = navBar.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.1)
-//        NSLayoutConstraint.activate([navBarHeightConstrains])
-//        navBar.backgroundColor = .white
+
         self.productTitle.text = product.title!
         self.condition.text = product.condition?.rawValue
         self.price.text = (product.price?.stringValue)!+"$"
@@ -118,9 +115,7 @@ class ItemViewController: UIViewController {
             
         
     }
-    @IBAction func goBack(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
+  
 
 
 

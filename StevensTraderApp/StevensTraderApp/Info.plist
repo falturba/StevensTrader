@@ -7,7 +7,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Stevens Trader needs to access your photo library in order to upload images</string>
 	<key>serverip</key>
-	<string>http://stevenstrader.herokuapp.com</string>
+	<string>http://192.168.1.3:3000</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>

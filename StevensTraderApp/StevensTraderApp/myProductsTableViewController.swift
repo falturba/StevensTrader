@@ -38,7 +38,7 @@ class myProductsTableViewController: UITableViewController {
     
     func loadItems()
     {
-        let token = KeychainAccess.getPasscode()
+        let token = KeychainAccess.getToken()
         if token == nil
         {
             self.dismiss(animated: true, completion: nil)

@@ -11,6 +11,7 @@
 		902EE4A6E080AD11EDB68FDA /* Pods_StevensTraderApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 124A6F5305DC26BB46BB53C4 /* Pods_StevensTraderApp.framework */; };
 		CC0FFDED1E9EA0B000019635 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0FFDEC1E9EA0AF00019635 /* UIImageExtension.swift */; };
 		CC0FFDEF1E9EEBCE00019635 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0FFDEE1E9EEBCE00019635 /* ItemViewController.swift */; };
+		CC186AF61EAD2E250005C560 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC186AF51EAD2E250005C560 /* SearchViewController.swift */; };
 		CC35125C1E90C0910050B97E /* CustomTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC35125B1E90C0910050B97E /* CustomTabBarViewController.swift */; };
 		CC4EB2D11E9237D8002AF07B /* BuyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4EB2D01E9237D8002AF07B /* BuyTableViewController.swift */; };
 		CC4EB2EB1E98311B002AF07B /* product.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4EB2EA1E98311B002AF07B /* product.swift */; };
@@ -24,7 +25,6 @@
 		CC8D21AB1EA0529C00EFBA4A /* myProductsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8D21AA1EA0529C00EFBA4A /* myProductsTableViewController.swift */; };
 		CCB87FC31E7DB4E700EF6514 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB87FC21E7DB4E700EF6514 /* KeychainService.swift */; };
 		CCB87FC71E7DD78500EF6514 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB87FC61E7DD78500EF6514 /* Config.swift */; };
-		CCB87FC91E7E078E00EF6514 /* MenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB87FC81E7E078E00EF6514 /* MenueViewController.swift */; };
 		CCE339F61E5E659600E3FFB7 /* SellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE339F51E5E659600E3FFB7 /* SellViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +59,7 @@
 		86F0507811D0B82D334EB63A /* Pods-StevensTraderApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StevensTraderApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-StevensTraderApp/Pods-StevensTraderApp.release.xcconfig"; sourceTree = "<group>"; };
 		CC0FFDEC1E9EA0AF00019635 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		CC0FFDEE1E9EEBCE00019635 /* ItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
+		CC186AF51EAD2E250005C560 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		CC35125B1E90C0910050B97E /* CustomTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarViewController.swift; sourceTree = "<group>"; };
 		CC4EB2D01E9237D8002AF07B /* BuyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyTableViewController.swift; sourceTree = "<group>"; };
 		CC4EB2EA1E98311B002AF07B /* product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = product.swift; sourceTree = "<group>"; };
@@ -76,7 +77,6 @@
 		CC8D21AA1EA0529C00EFBA4A /* myProductsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myProductsTableViewController.swift; sourceTree = "<group>"; };
 		CCB87FC21E7DB4E700EF6514 /* KeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		CCB87FC61E7DD78500EF6514 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		CCB87FC81E7E078E00EF6514 /* MenueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenueViewController.swift; sourceTree = "<group>"; };
 		CCE339F51E5E659600E3FFB7 /* SellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellViewController.swift; sourceTree = "<group>"; };
 		DC6A327DF3016C199F408383 /* Pods-StevensTraderAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StevensTraderAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StevensTraderAppTests/Pods-StevensTraderAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -197,10 +197,10 @@
 				CC641CEB1E4EDC9500CD6998 /* SignupViewController.swift */,
 				CC641CCB1E4E73E600CD6998 /* LoginViewController.swift */,
 				CCE339F51E5E659600E3FFB7 /* SellViewController.swift */,
-				CCB87FC81E7E078E00EF6514 /* MenueViewController.swift */,
 				CC4EB2D01E9237D8002AF07B /* BuyTableViewController.swift */,
 				CC0FFDEE1E9EEBCE00019635 /* ItemViewController.swift */,
 				CC8D21AA1EA0529C00EFBA4A /* myProductsTableViewController.swift */,
+				CC186AF51EAD2E250005C560 /* SearchViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -427,9 +427,9 @@
 				CC0FFDED1E9EA0B000019635 /* UIImageExtension.swift in Sources */,
 				CC0FFDEF1E9EEBCE00019635 /* ItemViewController.swift in Sources */,
 				CC35125C1E90C0910050B97E /* CustomTabBarViewController.swift in Sources */,
+				CC186AF61EAD2E250005C560 /* SearchViewController.swift in Sources */,
 				CCB87FC71E7DD78500EF6514 /* Config.swift in Sources */,
 				CCE339F61E5E659600E3FFB7 /* SellViewController.swift in Sources */,
-				CCB87FC91E7E078E00EF6514 /* MenueViewController.swift in Sources */,
 				CCB87FC31E7DB4E700EF6514 /* KeychainService.swift in Sources */,
 				CC641CCA1E4E73E600CD6998 /* AppDelegate.swift in Sources */,
 			);

@@ -27,7 +27,9 @@ class CustomTabBarViewController: UITabBarController,UITabBarControllerDelegate 
             
             actionSheet.addAction(UIAlertAction(title: "Logout", style: .default, handler: {(action:UIAlertAction) in
                 
-                    KeychainAccess.resetPasscode()
+                    KeychainAccess.resetUsername()
+                    KeychainAccess.resetToken()
+                    KeychainAccess.resetPassword()
                     self.dismiss(animated: true, completion: nil)
                     
                         

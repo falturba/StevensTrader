@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import {condintionEnum, priceMin, priceMax} from './enum'
+import {condintionEnum, categoryEnum, priceMin, priceMax,} from './enum'
 var Schema = mongoose.Schema;
 
 
@@ -15,6 +15,7 @@ var itemSchema = new Schema({
   description: {type: String},
   condition: {type: String, required: true, enum:condintionEnum},
   price:{type: Number, required: true,min:priceMin,max:priceMax},
+  category:{type:String,required:true, enum:categoryEnum},
   medias:[
     {
       id:mongoose.Schema.Types.ObjectId,

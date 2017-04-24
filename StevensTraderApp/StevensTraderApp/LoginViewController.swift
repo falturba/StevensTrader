@@ -16,7 +16,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var button: UIButton!
-    @IBOutlet weak var touchlogin: UIButton!
+    @IBOutlet weak var rememberSwitch: UISwitch!
     var activityIndicator = UIActivityIndicatorView()
    
     typealias JSONStandard = Dictionary<String, AnyObject>
@@ -34,9 +34,7 @@ class LoginViewController: UIViewController {
         tap.cancelsTouchesInView = true
         view.addGestureRecognizer(tap)
         name.isHidden = true
-        if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: nil) {
-            touchlogin.isHidden = false
-        }
+       
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
@@ -71,16 +69,17 @@ class LoginViewController: UIViewController {
     /*----------------------------------------------------------------------------*/
     
     @IBAction func changeSegmant(_ sender: Any) {
+        clear()
         if segmantControl.selectedSegmentIndex == 0
         {
+            
             button.setTitle("login", for: [])
             name.isHidden = true
-            touchlogin.isEnabled = true
             
         }else {
+            
             button.setTitle("Signup", for: [])
             name.isHidden = false
-            touchlogin.isEnabled = false
         }
         
     }
@@ -91,9 +90,23 @@ class LoginViewController: UIViewController {
     }
     func loadLoggedInUser() {
         
-        let key = KeychainAccess.getPasscode()
-        if(key != nil) {
-            self.performSegue(withIdentifier: "menueSegue", sender: self)
+        let username = KeychainAccess.getUsername()
+        if(username != nil) {
+            let password = KeychainAccess.getPassword()
+            if(password != nil)
+            {
+                login(username!,password!)
+            }
+            else
+            {
+                KeychainAccess.resetToken()
+                KeychainAccess.resetUsername()
+            }
+            
+        } else {
+            KeychainAccess.resetToken()
+            KeychainAccess.resetPassword()
+            KeychainAccess.resetUsername()
         }
     }
     
@@ -104,7 +117,7 @@ class LoginViewController: UIViewController {
         {
             UIApplication.shared.beginIgnoringInteractionEvents()
             activityIndicator.startAnimating()
-            login()
+            login(email.text!,password.text!)
             activityIndicator.stopAnimating()
             UIApplication.shared.endIgnoringInteractionEvents()
         }
@@ -121,10 +134,10 @@ class LoginViewController: UIViewController {
     }
     
     
-    func login() {
+    func login(_ email:String,_ password:String) {
         
-        let emailText = email.text!+"@stevens.edu"
-        let passwrodText = password.text!
+        let emailText = email + "@stevens.edu"
+        let passwrodText = password
         let serverip =  Config.getServerIP()
         let url = URL(string:serverip+"/services/login")
         var request =  URLRequest( url:url!)
@@ -162,9 +175,15 @@ class LoginViewController: UIViewController {
                 }
                 
                 
-                KeychainAccess.setPasscode(passcode: jwt)
-                print(jwt)
+                if self.rememberSwitch.isOn {
+                    KeychainAccess.setUsername(email)
+                    KeychainAccess.setPassword(password)
+                }
+                
+                KeychainAccess.setToken(jwt)
+                
                 self.performSegue(withIdentifier: "menueSegue", sender: nil)
+                self.clear()
             }
         })
     }
@@ -281,64 +300,15 @@ class LoginViewController: UIViewController {
                 return false
             }
         }
-        
-        @IBAction func touchLogin(_ sender: Any) {
-            // 1.
-            if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error:nil) {
-                
-                // 2.
-                context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics,
-                                       localizedReason: "Logging in with Touch ID") {
-                                        (success, evaluateError) in
-                                        
-                                        if (success) {
-                                            DispatchQueue.main.async {
-                                                // User authenticated successfully, take appropriate action
-                                                
-                                                self.performSegue(withIdentifier: "menueSegue", sender: self)
-                                            }
-                                        } else {
-                                            
-                                            if let error: LAError = evaluateError as! LAError? {
-                                                var message: String
-                                                var showAlert : Bool
-                                                
-                                                switch error {
-                                                    
-                                                case LAError.authenticationFailed:
-                                                    message = "There was a problem verifying your identity."
-                                                    showAlert = true
-                                                case LAError.userCancel:
-                                                    message = "You pressed cancel."
-                                                    showAlert = true
-                                                case LAError.userFallback:
-                                                    message = "You pressed password."
-                                                    showAlert = true
-                                                default:
-                                                    showAlert = true
-                                                    message = "Touch ID may not be configured"
-                                                }
-                                                
-                                                if showAlert {
-                                                    let alertView = UIAlertController(title: "Error",
-                                                                                      message: message as String, preferredStyle:.alert)
-                                                    let okAction = UIAlertAction(title: "Darn!", style: .default, handler: nil)
-                                                    alertView.addAction(okAction)
-                                                    self.present(alertView, animated: true, completion: nil)
-                                                }
-                                            }
-                                        }
-                                        
-                }
-            } else {
-                // 5.
-                let alertView = UIAlertController(title: "Error",
-                                                  message: "Touch ID not available" as String, preferredStyle:.alert)
-                let okAction = UIAlertAction(title: "Darn!", style: .default, handler: nil)
-                alertView.addAction(okAction)
-                self.present(alertView, animated: true, completion: nil)
-            }
-}
+    
+
+    
+    func clear()
+    {
+        name.text = ""
+        email.text = ""
+        password.text = ""
+    }
 
 }
 

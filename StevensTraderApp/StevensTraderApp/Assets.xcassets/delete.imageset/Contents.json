@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "cancel-button.png",
+      "filename" : "DeleteIcon.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "cancel-button-1.png",
+      "filename" : "DeleteIcon-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "cancel-button-2.png",
+      "filename" : "DeleteIcon-2.png",
       "scale" : "3x"
     }
   ],

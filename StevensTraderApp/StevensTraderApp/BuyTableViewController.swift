@@ -9,32 +9,61 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-class BuyTableViewController: UITableViewController {
+class BuyTableViewController: UITableViewController, UINavigationBarDelegate {
     let cellId = "productCell"
     var products = [Product]()
     var product:Product!
+    var maxPrice:Int?
+    var minPrice:Int?
+    var searchCategory:String?
+    
+    @IBOutlet weak var navBar:UINavigationBar?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        
+        self.navBar?.delegate = self
+        let backButton = UIBarButtonItem(title: "Search", style: .done, target: self, action: #selector(back(_ :)))
+    
+        self.navigationItem.leftBarButtonItem = backButton
         if #available(iOS 10.0, *) {
             tableView.refreshControl = refreshControl
         } else {
             tableView.backgroundView = refreshControl
         }
     
-    
-
+    reloadData()
+//        let searchBar:UISearchBar = UISearchBar.init(frame: CGRect(x: 0, y: 0, width: 320, height: 44))
+//        self.tableView.tableHeaderView = searchBar
         
         
     }
 
     func reloadData()
     {
-        let serverip =  Config.getServerIP()
-        Alamofire.request(serverip+"/services/getproductsforios").responseJSON { (responseData) -> Void in
+        
+        var service:String = Config.getServerIP()
+        if searchCategory == "Any"
+        {
+            service.append( "/services/getproductsforios/")
+            service.append(String(describing: minPrice!))
+            service.append("/")
+            service.append(String(describing: maxPrice!))
+        }
+        else
+        {
+            service.append( "/services/getproductsforioswithcategory/")
+            service.append(String(describing: minPrice!))
+            service.append("/")
+            service.append(String(describing: maxPrice!))
+            service.append("/")
+            service.append(searchCategory!)
+        }
+
+        
+        Alamofire.request(service).responseJSON { (responseData) -> Void in
             if((responseData.result.value) != nil) {
                 let json = JSON(responseData.result.value!)
                 self.parseJson(json)
@@ -56,8 +85,9 @@ func refresh(_ refreshControl: UIRefreshControl) {
         
         
             for jsonProduct in json["products"].arrayValue {
-               // print (jsonProduct["thumbnail"]["data"]["data"])
+               
                 let product = Product()
+                
                 product.title = jsonProduct["title"].stringValue
                 product.condition = Condition(rawValue: jsonProduct["condition"].stringValue)
                 product.price = jsonProduct["price"].number
@@ -65,7 +95,8 @@ func refresh(_ refreshControl: UIRefreshControl) {
                 product.thumbnailUrl = Config.getServerIP()+"/services/getthumbnail/"+product.id!
                 product.ownerName = jsonProduct["userData"]["name"].stringValue
                 product.ownerEmail = jsonProduct["userData"]["email"].stringValue
-                
+                product.createdAt = jsonProduct["createdAt"].stringValue
+                product.updatedAt = jsonProduct["updatedAt"].stringValue
                 
                 for (_,subjson) in jsonProduct["medias"]
                 {
@@ -127,6 +158,8 @@ func refresh(_ refreshControl: UIRefreshControl) {
         
        cell.productImage.image = #imageLiteral(resourceName: "buy")
         cell.productImage.contentMode = .scaleAspectFit
+        cell.lastUpdated?.text = product.updatedAt
+        
         if let productImageUrl = product.thumbnailUrl {
             
             cell.productImage.loadImageWithCache(url: productImageUrl)
@@ -135,15 +168,19 @@ func refresh(_ refreshControl: UIRefreshControl) {
     }
     
     
-   
+    func back(_ sender:UIBarButtonItem)
+   {
+     self.dismiss(animated: true, completion: nil)
+    }
     
 
 }
 
 
-class ProductCell : UITableViewCell {
+class ProductCell : UITableViewCell
+{
     @IBOutlet weak var productImage: UIImageView!
-    
+    @IBOutlet weak var lastUpdated:UILabel?
     @IBOutlet weak var productTitle: UILabel!
     @IBOutlet weak var productCondition: UILabel!
     @IBOutlet weak var productPrice: UILabel!
