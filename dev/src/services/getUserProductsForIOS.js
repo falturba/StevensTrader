@@ -37,6 +37,7 @@ Account.aggregate(
             
  { $project: 
   {
+    _id:0,
     itemData:
     {
         _id:1,

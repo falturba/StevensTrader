@@ -17,14 +17,14 @@ class BuyTableViewController: UITableViewController, UINavigationBarDelegate {
     var minPrice:Int?
     var searchCategory:String?
     
-    @IBOutlet weak var navBar:UINavigationBar?
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        self.navBar?.delegate = self
+        
         let backButton = UIBarButtonItem(title: "Search", style: .done, target: self, action: #selector(back(_ :)))
     
         self.navigationItem.leftBarButtonItem = backButton
@@ -81,9 +81,6 @@ func refresh(_ refreshControl: UIRefreshControl) {
 
     func parseJson(_ json:JSON)
     {
-        
-        
-        
             for jsonProduct in json["products"].arrayValue {
                
                 let product = Product()
@@ -97,6 +94,11 @@ func refresh(_ refreshControl: UIRefreshControl) {
                 product.ownerEmail = jsonProduct["userData"]["email"].stringValue
                 product.createdAt = jsonProduct["createdAt"].stringValue
                 product.updatedAt = jsonProduct["updatedAt"].stringValue
+                
+                if(product.title == "" || product.condition == nil || product.price == nil || product.id == "" || product.ownerName == "" || product.ownerEmail == "")
+                {
+                    continue
+                }
                 
                 for (_,subjson) in jsonProduct["medias"]
                 {

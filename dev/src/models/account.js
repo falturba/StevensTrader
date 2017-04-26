@@ -1,3 +1,4 @@
+import {statusEnum} from './enum'
 var bcrypt = require('bcrypt');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
@@ -7,7 +8,8 @@ var accountSchema = new Schema({
   name: {type:String,required:true},
   email: { type: String, required: true, unique: true ,lowercase:true},
   password: { type: String, required: true },
-  token: {type: String, required:false}
+  token: {type: String, required:false},
+  status:{type:String,required:true,enum:statusEnum}
 });
 
 accountSchema.methods.validPassword = function(password) {

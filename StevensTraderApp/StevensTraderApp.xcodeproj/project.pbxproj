@@ -12,6 +12,7 @@
 		CC0FFDED1E9EA0B000019635 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0FFDEC1E9EA0AF00019635 /* UIImageExtension.swift */; };
 		CC0FFDEF1E9EEBCE00019635 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0FFDEE1E9EEBCE00019635 /* ItemViewController.swift */; };
 		CC186AF61EAD2E250005C560 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC186AF51EAD2E250005C560 /* SearchViewController.swift */; };
+		CC186AF81EAE71940005C560 /* forgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC186AF71EAE71940005C560 /* forgotPasswordViewController.swift */; };
 		CC35125C1E90C0910050B97E /* CustomTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC35125B1E90C0910050B97E /* CustomTabBarViewController.swift */; };
 		CC4EB2D11E9237D8002AF07B /* BuyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4EB2D01E9237D8002AF07B /* BuyTableViewController.swift */; };
 		CC4EB2EB1E98311B002AF07B /* product.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4EB2EA1E98311B002AF07B /* product.swift */; };
@@ -60,6 +61,7 @@
 		CC0FFDEC1E9EA0AF00019635 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		CC0FFDEE1E9EEBCE00019635 /* ItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		CC186AF51EAD2E250005C560 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		CC186AF71EAE71940005C560 /* forgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = forgotPasswordViewController.swift; sourceTree = "<group>"; };
 		CC35125B1E90C0910050B97E /* CustomTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarViewController.swift; sourceTree = "<group>"; };
 		CC4EB2D01E9237D8002AF07B /* BuyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyTableViewController.swift; sourceTree = "<group>"; };
 		CC4EB2EA1E98311B002AF07B /* product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = product.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				CC0FFDEE1E9EEBCE00019635 /* ItemViewController.swift */,
 				CC8D21AA1EA0529C00EFBA4A /* myProductsTableViewController.swift */,
 				CC186AF51EAD2E250005C560 /* SearchViewController.swift */,
+				CC186AF71EAE71940005C560 /* forgotPasswordViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC186AF81EAE71940005C560 /* forgotPasswordViewController.swift in Sources */,
 				CC4EB2EB1E98311B002AF07B /* product.swift in Sources */,
 				CC641CEC1E4EDC9500CD6998 /* SignupViewController.swift in Sources */,
 				CC641CCC1E4E73E600CD6998 /* LoginViewController.swift in Sources */,
@@ -572,12 +576,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = GDQ7F4DRAZ;
 				INFOPLIST_FILE = StevensTraderApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stevens.fawaz.StevensTraderApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -587,12 +593,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = GDQ7F4DRAZ;
 				INFOPLIST_FILE = StevensTraderApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stevens.fawaz.StevensTraderApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

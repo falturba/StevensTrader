@@ -33,6 +33,7 @@ class LoginViewController: UIViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(UIInputViewController.dismissKeyboard))
         tap.cancelsTouchesInView = true
         view.addGestureRecognizer(tap)
+        
         name.isHidden = true
        
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -273,11 +274,11 @@ class LoginViewController: UIViewController {
             {
                 switch(type){
                 case "email":
-                    regex = try NSRegularExpression(pattern: "^[a-zA-Z]+[a-zA-Z]*$")
+                    regex = try NSRegularExpression(pattern: "^[a-zA-Z]+$")
                     input = email.text!
                     break
                 case "name":
-                    regex = try NSRegularExpression(pattern: "^[a-zA-Z]+[a-zA-Z]*$")
+                    regex = try NSRegularExpression(pattern: "^[a-zA-Z\\s]+$")
                     input = name.text!
                     break
                 case "password":

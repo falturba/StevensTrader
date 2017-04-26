@@ -13,7 +13,8 @@ var products = [Product]()
 let myCellId = "myProductCell"
 class myProductsTableViewController: UITableViewController {
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         self.tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         
@@ -41,7 +42,9 @@ class myProductsTableViewController: UITableViewController {
         let token = KeychainAccess.getToken()
         if token == nil
         {
-            self.dismiss(animated: true, completion: nil)
+            let alert = UIAlertController(title: "Session Expired", message: "The token has been deleted, please login again to get a new token", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action:UIAlertAction) in self.dismiss(animated: true, completion: nil)}))
+            self.present(alert,animated: true,completion: nil)
         }
         else
         {
@@ -79,7 +82,10 @@ class myProductsTableViewController: UITableViewController {
             product.id = jsonProduct["itemData"]["_id"].stringValue
             product.thumbnailUrl = Config.getServerIP()+"/services/getthumbnail/"+product.id!
             
-            
+            if(product.title == "" || product.condition == nil || product.price == nil || product.id == "")
+            {
+                continue
+            }
             
             for (_,subjson) in jsonProduct["itemData"]["medias"]
             {
@@ -106,7 +112,7 @@ class myProductsTableViewController: UITableViewController {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-        print(products.count)
+       
         
     }
     
@@ -116,14 +122,25 @@ class myProductsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
+  
         let product = products[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: myCellId, for: indexPath) as! myProductCell
         
-        cell.myProductTitle.text = product.title
-        cell.myProductCondition.text
-            = product.condition!.rawValue
-        cell.myProductPrice.text = (product.price?.stringValue)!+"$"
+        if(product.title != nil )
+        {
+          cell.myProductTitle.text = product.title
+        }
+        
+        if(product.condition != nil)
+        {
+            cell.myProductCondition.text = product.condition?.rawValue
+        }
+        
+        if(product.price != nil)
+        {
+           cell.myProductPrice.text = (product.price?.stringValue)!+"$"
+        }
+        
         
         cell.myProductImage.image = #imageLiteral(resourceName: "buy")
         cell.myProductImage.contentMode = .scaleAspectFit

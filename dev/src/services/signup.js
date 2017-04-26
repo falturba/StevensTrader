@@ -16,6 +16,7 @@ services.post('/signup',function(req,res){
 		name: req.body.name,
 		email: email,
 		password: req.body.password,
+    status:'Active'
 	});
 	    email_verfier.createTempUser(newAccount, function(err, existingPersistentUser, newTempUser) {
       if (err) {

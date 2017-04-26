@@ -467,6 +467,10 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         let image1Set:Bool = imageView1.set
         let image2Set:Bool = imageView2.set
         let image3Set:Bool = imageView3.set
+        let image1 = imageView1.image!
+        let image2 = imageView2.image!
+        let image3 = imageView3.image!
+
         Alamofire.upload(multipartFormData: { multipartFormData in
             
             for (key, value) in params!
@@ -478,17 +482,17 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             }
             if(image1Set)
             {
-                let imageData1 = UIImageJPEGRepresentation(self.imageView1.image!, 0.1)!
+                let imageData1 = UIImageJPEGRepresentation(image1, 0.1)!
                 multipartFormData.append(imageData1, withName: "image", fileName: "image1.jpg", mimeType: "image/jpeg")
             }
             if(image2Set)
             {
-                let imageData2 = UIImageJPEGRepresentation(self.imageView2.image!, 0.1)!
+                let imageData2 = UIImageJPEGRepresentation(image2, 0.1)!
                 multipartFormData.append(imageData2, withName: "image", fileName: "image2.jpg", mimeType: "image/jpeg")
             }
             if(image3Set)
             {
-                let imageData3 = UIImageJPEGRepresentation(self.imageView3.image!, 0.1)!
+                let imageData3 = UIImageJPEGRepresentation(image3, 0.1)!
                 multipartFormData.append(imageData3, withName: "image", fileName: "image3.jpg", mimeType: "image/jpeg")
             }
             
