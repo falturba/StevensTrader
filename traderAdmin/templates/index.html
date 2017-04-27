@@ -67,7 +67,7 @@
 								<th>Last Login</th>
 								<th>#Times Logged-in</th>
 								<th>#Items Posted</th>
-								<th>#Items Sold</th>
+								<th>Status</th>
 							</tr>
 							{% for acct in accounts %}
 							<tr class="odd">
@@ -76,7 +76,12 @@
 								<td>4/15/2017 12:00:00</td>
 								<td>30</td>
 								<td>10</td>
-								<td>5</td>
+								<td>
+								<form action="/users" method="post"> 
+									<input type="hidden" name="user_id" value="{{acct._id}}"/>
+									<button type="submit" value="{{acct.status}}">{{acct.status}}</button> 
+								</form>
+								</td>
 							</tr>
 							{% endfor %}
 						</table>
