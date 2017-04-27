@@ -20,7 +20,9 @@ router.post('/login',function(req,res){
             return;
         }else if(data){
             var account = new Account(data);
-            var isCorrectPassword = account.validPassword(password);
+            if(account.statusCheck(account.status))
+            {
+                 var isCorrectPassword = account.validPassword(password);
             //check hash password
             if(isCorrectPassword){
                 const token = jwt.sign({
@@ -35,6 +37,11 @@ router.post('/login',function(req,res){
             }else{
                 res.status(401).json({ errors: { form: 'Password incorrect.' } });
             }
+        } else
+        {
+            res.status(401).json({ errors: { form: 'user is suspended' } });
+        }
+           
         }else{
             res.status(401).json({ errors: { form: 'Cannot find user.' } });
         }

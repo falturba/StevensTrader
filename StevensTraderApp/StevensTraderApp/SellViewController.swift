@@ -341,26 +341,13 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         if(price.text! == "") { return false }
         do
         {
-            let regex = try NSRegularExpression(pattern:"^[1-9][1-9]?[1-9]?[1-9]?[1-9]?$")
-            let matches = regex.matches(in: price.text!, options:[], range:NSRange(location:0,length:price.text!.utf16.count))
-            if (matches.count>0)
+           let priceInt = try Int(price.text!)
+            if(priceInt! >= 0 && priceInt! <= 5000)
             {
-                let priceValue:Int? = Int(price.text!)
-                if (priceValue != nil) {
-                    if(priceValue! > 5000 || priceValue! < 0)
-                    {
-                        return false
-                    }
-                    else {
-                        return true
-                    }
-                }
-                else{
-                    return false
-                }
+                return true
             }
+            return false
         } catch {
-            print("wrong regular expression")
             return false
         }
         

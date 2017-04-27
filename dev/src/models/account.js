@@ -12,10 +12,19 @@ var accountSchema = new Schema({
   status:{type:String,required:true,enum:statusEnum}
 });
 
+accountSchema.methods.statusCheck = function(status) {
+  
+  if(status == 'active') return true
+  if(status == statusEnum[1]) return false
+  else return true
+};
+
 accountSchema.methods.validPassword = function(password) {
-  console.log(password, this.password);
+
   return bcrypt.compareSync(password, this.password);
 };
+
+
 
 // the schema is useless so far
 // we need to create a model using it
