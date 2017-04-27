@@ -80,7 +80,7 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: self.view.window)
     }
-    
+
     /*--------------------- Keyboard handlers functions -----------------------*/
     func dismissKeyboard()
     {
@@ -155,16 +155,17 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        
         if(textField == condition)
         {
             self.conditionDropDown.isHidden = false
+            categoryDropDown.isHidden = true
             self.view.bringSubview(toFront: self.conditionDropDown)
             condition.endEditing(true)
         }
         if(textField == category)
         {
             self.categoryDropDown.isHidden = false
+            conditionDropDown.isHidden = true
             self.view.bringSubview(toFront: self.categoryDropDown)
             category.endEditing(true)
         }

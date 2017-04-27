@@ -93,7 +93,7 @@ func refresh(_ refreshControl: UIRefreshControl) {
                 product.ownerName = jsonProduct["userData"]["name"].stringValue
                 product.ownerEmail = jsonProduct["userData"]["email"].stringValue
                 product.createdAt = jsonProduct["createdAt"].stringValue
-                product.updatedAt = jsonProduct["updatedAt"].stringValue
+                product.updatedAt = jsonProduct["updatedAt"].stringValue.components(separatedBy: "T")[0]
                 
                 if(product.title == "" || product.condition == nil || product.price == nil || product.id == "" || product.ownerName == "" || product.ownerEmail == "")
                 {

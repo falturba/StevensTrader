@@ -16,7 +16,7 @@ services.post('/signup',function(req,res){
 		name: req.body.name,
 		email: email,
 		password: req.body.password,
-    status:'Active'
+    status:'active'
 	});
 	    email_verfier.createTempUser(newAccount, function(err, existingPersistentUser, newTempUser) {
       if (err) {
@@ -84,12 +84,11 @@ services.get('/verification/:URL', function(req, res) {
           return res.status(404).send('ERROR: sending confirmation email FAILED');
         }
         res.json({
-          msg: 'CONFIRMED!',
-          info: info
+          msg: 'CONFIRMED!'
         });
       });
     } else {
-      return res.status(404).send('ERROR: confirming temp user FAILED');
+      return res.status(409).send('Your account already has been verified');
     }
   });
 });
