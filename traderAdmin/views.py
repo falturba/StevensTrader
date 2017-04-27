@@ -20,5 +20,5 @@ def users():
     #else get query and render in front end            
     # query for user info    
     accts= mongo.db.accounts.find({},{'name':1, 'email': 1,'status':1, '_id':1}) 
-    return render_template('indexA.html',
+    return render_template('index.html',
                             accounts=accts)# render html in users route
