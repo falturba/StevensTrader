@@ -7,9 +7,9 @@
 //
 
 import UIKit
-
+import Alamofire
 class forgotPasswordViewController: UIViewController, UINavigationBarDelegate {
-
+    
     @IBOutlet weak var email: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,12 +50,31 @@ class forgotPasswordViewController: UIViewController, UINavigationBarDelegate {
     {
         if(checkEmail())
         {
+           
             
+            let parameters:[String:String] = ["email":email.text!+"@stevens.edu"]
+            let url = URL(string:Config.getServerIP() + "/services/changepassword")
+            var request = URLRequest(url: url!)
+            request.httpMethod = "POST"
+            request.httpBody = try! JSONSerialization.data(withJSONObject: parameters)
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            Alamofire.request(request).responseJSON(completionHandler: { response in
+                switch response.result {
+                case .success(let value):
+                    print(value)
+                    
+                case.failure(let err):
+                    print(err)
+                    
+                }
+            })
             
-        } else {
-            let alert = UIAlertController(title: "Invalid Email", message: "Please enter letters only, and don't include @stevens.edu", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert,animated: true,completion: nil)
-        }
+        
+        
+    } else {
+    let alert = UIAlertController(title: "Invalid Email", message: "Please enter letters only, and don't include @stevens.edu", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+    self.present(alert,animated: true,completion: nil)
     }
+}
 }

@@ -11,6 +11,7 @@ import Alamofire
 import LocalAuthentication
 class LoginViewController: UIViewController {
     
+    var userInfo:User?
     @IBOutlet weak var segmantControl: UISegmentedControl!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var name: UITextField!
@@ -96,6 +97,8 @@ class LoginViewController: UIViewController {
             let password = KeychainAccess.getPassword()
             if(password != nil)
             {
+                userInfo = User()
+                userInfo?.email = username
                 login(username!,password!)
             }
             else
@@ -182,7 +185,8 @@ class LoginViewController: UIViewController {
                 }
                 
                 KeychainAccess.setToken(jwt)
-                
+                self.userInfo = User()
+                self.userInfo?.email = email
                 self.performSegue(withIdentifier: "menueSegue", sender: nil)
                 self.clear()
             }

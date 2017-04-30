@@ -338,19 +338,14 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     func checkPrice() -> Bool
     {
-        if(price.text! == "") { return false }
-        do
+        let priceInt = Int(price.text!)
+        if price != nil
         {
-           let priceInt = try Int(price.text!)
-            if(priceInt! >= 0 && priceInt! <= 5000)
+            if priceInt! >= 0 && priceInt! <= 5000
             {
                 return true
             }
-            return false
-        } catch {
-            return false
         }
-        
         return false
     }
     
