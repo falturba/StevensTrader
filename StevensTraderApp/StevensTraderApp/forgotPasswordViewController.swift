@@ -53,7 +53,7 @@ class forgotPasswordViewController: UIViewController, UINavigationBarDelegate {
            
             
             let parameters:[String:String] = ["email":email.text!+"@stevens.edu"]
-            let url = URL(string:Config.getServerIP() + "/services/changepassword")
+            let url = URL(string:Config.getServerIP() + "/services/forgotpassword")
             var request = URLRequest(url: url!)
             request.httpMethod = "POST"
             request.httpBody = try! JSONSerialization.data(withJSONObject: parameters)

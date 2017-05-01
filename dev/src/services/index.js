@@ -6,6 +6,7 @@ import signup from './signup'
 import getProductsForIOS from './getProductsForIOS'
 import getUserProductsForIOS from './getUserProductsForIOS'
 import changePassword from './changePassword'
+import userManagment from './UserManagment'
 export function initServices(app){
   console.log("init service...")
   app.use('/services',getProduct)
@@ -16,6 +17,7 @@ export function initServices(app){
   app.use('/services',getProductsForIOS)
   app.use('/services',getUserProductsForIOS)
   app.use('/services',changePassword)
+  app.use('/services',userManagment)
 }
 
 

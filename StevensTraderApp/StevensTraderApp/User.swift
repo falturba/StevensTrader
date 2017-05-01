@@ -11,5 +11,11 @@ import UIKit
 class User: NSObject {
 
     var email:String?
+    var name:String?
+    init(name:String,email:String)
+    {
+        self.email = email
+        self.name = name
+    }
     
 }

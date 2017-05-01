@@ -23,7 +23,11 @@ class CustomTabBarViewController: UITabBarController,UITabBarControllerDelegate 
         {
           let actionSheet = UIAlertController(title: "Options", message: "select an option", preferredStyle: .actionSheet)
             actionSheet.addAction(UIAlertAction(title: "Cancel", style: .default, handler:nil))
-            
+            actionSheet.addAction(UIAlertAction(title: "Account", style: .default, handler:{(action:UIAlertAction) in
+                
+                self.performSegue(withIdentifier: "showAccountSegue", sender: self)
+                
+            }))
             
             actionSheet.addAction(UIAlertAction(title: "Logout", style: .default, handler: {(action:UIAlertAction) in
                 

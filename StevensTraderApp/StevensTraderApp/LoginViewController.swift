@@ -11,7 +11,7 @@ import Alamofire
 import LocalAuthentication
 class LoginViewController: UIViewController {
     
-    var userInfo:User?
+    
     @IBOutlet weak var segmantControl: UISegmentedControl!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var name: UITextField!
@@ -97,8 +97,6 @@ class LoginViewController: UIViewController {
             let password = KeychainAccess.getPassword()
             if(password != nil)
             {
-                userInfo = User()
-                userInfo?.email = username
                 login(username!,password!)
             }
             else
@@ -161,7 +159,7 @@ class LoginViewController: UIViewController {
                     print(responseString)
                 }
             case .success(_):
-                guard let json = response.value as? [String:String],let jwt = json["token"] else
+                guard let json = response.value as? [String:String],let jwt = json["token"] , let nameInfo = json["name"] else
                 {
                     var errorMessage = "Something wrong with the server. Please try again later"
                      if response.response?.statusCode == 401
@@ -180,13 +178,19 @@ class LoginViewController: UIViewController {
                 
                 
                 if self.rememberSwitch.isOn {
-                    KeychainAccess.setUsername(email)
+                    KeychainAccess.setUsername(emailText)
                     KeychainAccess.setPassword(password)
                 }
                 
                 KeychainAccess.setToken(jwt)
-                self.userInfo = User()
-                self.userInfo?.email = email
+                Config.setUser(name:nameInfo,email:emailText)
+                
+                
+                
+            
+                
+                
+                
                 self.performSegue(withIdentifier: "menueSegue", sender: nil)
                 self.clear()
             }

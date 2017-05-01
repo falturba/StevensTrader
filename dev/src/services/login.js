@@ -33,7 +33,7 @@ router.post('/login',function(req,res){
                 console.dir(account._id.toString());
                 
                 Account.update(account,{token:token}).exec();
-                res.json({ token });
+                res.json({ token:token,name:account.name });
             }else{
                 res.status(401).json({ errors: { form: 'Password incorrect.' } });
             }
