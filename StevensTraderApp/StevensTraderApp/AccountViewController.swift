@@ -125,10 +125,12 @@ class AccountViewController: UIViewController, UINavigationBarDelegate {
         
                 print("ssuccessfully account deleted")
                 let alert = UIAlertController(title: "Message", message: "Account and items successfully deleted", preferredStyle: .alert)
+                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil))
                 self.present(alert,animated: true,completion: nil)
             case.failure(let err):
                 print(err)
                 let alert = UIAlertController(title: "Error!", message: "The database connections failed. We have been notified, and we will be working on this soon", preferredStyle: .alert)
+                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil))
                 self.present(alert,animated: true,completion: nil)
                 
             }

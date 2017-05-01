@@ -7,10 +7,12 @@
 //
 
 import UIKit
-
+import Alamofire
 class ItemViewController: UIViewController {
     
    
+    @IBOutlet weak var bidButton: UIButton!
+    @IBOutlet weak var bid: UITextField!
     @IBOutlet weak var desc: UITextView!
     @IBOutlet weak var image3: UIImageView!
     @IBOutlet weak var image2: UIImageView!
@@ -29,7 +31,14 @@ class ItemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if product.auction != nil
+        {
+            if product.auction!
+            {
+                bidButton.isHidden = false
+                bid.isHidden = false
+            }
+        }
         self.productTitle.text = product.title!
         self.condition.text = product.condition?.rawValue
         self.price.text = (product.price?.stringValue)!+"$"
@@ -120,6 +129,89 @@ class ItemViewController: UIViewController {
     }
   
 
+    @IBAction func bid(_ sender: UIButton) {
+        
+        if checkBid()
+        {
+            
+            
+            
+            
+            
+            let token = KeychainAccess.getToken()
+            if token == nil
+            {
+                let alert = UIAlertController(title: "Session Expired", message: "The token has been deleted, please login again to get a new token", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
+                    
+                    KeychainAccess.resetToken()
+                    KeychainAccess.resetPassword()
+                    KeychainAccess.resetUsername()
+                    self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
+                }))
+                self.present(alert,animated: true,completion: nil)
+                return
+            }
+            let user:User = Config.getUser()!
+           
+            let parameters:[String:String] =
+                [
+                "email":user.email! as String,
+                "bid":bid.text! as String,
+                "prodid":product.id! as String
+            ]
+            let headers: HTTPHeaders = ["authorization":"Bearer "+token!]
+            
+            var URL = try! URLRequest(url: Config.getServerIP()+"/services/placebid", method: .post, headers: headers)
+            URL.httpBody = try! JSONSerialization.data(withJSONObject: parameters)
+            URL.httpMethod = "POST"
+            URL.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            Alamofire.request(URL).responseJSON(completionHandler: { response in
+                switch response.result {
+                case .success( _):
+                    
+                    let alert = UIAlertController(title: "Message", message: "Successfully bid placed", preferredStyle: .alert)
+                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil))
+                    self.present(alert,animated: true,completion: nil)
+                case.failure(let err):
+                    print(err)
+                    let alert = UIAlertController(title: "Error!", message: "Internal error, The database connections failed", preferredStyle: .alert)
+                      alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil))
+                    self.present(alert,animated: true,completion: nil)
+                    
+                }
+                
+                
+            })
 
+            
+            
+            
+            
+            
+            
+            
+            
+        }
+        else
+        {
+            let alert = UIAlertController(title: "Wrong bid", message: "please enter a valid number greater than the price and less than 5000", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
+            self.present(alert,animated: true,completion: nil)
+        }
+        
+    }
+    func checkBid() -> Bool
+    {
+        let bidInt = Int(bid.text!)
+        if bidInt != nil
+        {
+            if bidInt! > 0 && bidInt! <= 5000 && bidInt! > Int(product.price!)
+            {
+                return true
+            }
+        }
+        return false
+    }
 
 }

@@ -13,9 +13,11 @@ import AVFoundation
 class SellViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate,UIPickerViewDataSource, UITextFieldDelegate, UITextViewDelegate
 {
     
+    @IBOutlet weak var auctionSwitch: UISwitch!
     @IBOutlet weak var price: UITextField!
     @IBOutlet weak var itemTitle: UITextField!
     
+    @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var deleteButton1: UIButton!
     @IBOutlet weak var deleteButton2: UIButton!
     @IBOutlet weak var deleteButton3: UIButton!
@@ -339,7 +341,7 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     func checkPrice() -> Bool
     {
         let priceInt = Int(price.text!)
-        if price != nil
+        if priceInt != nil
         {
             if priceInt! >= 0 && priceInt! <= 5000
             {
@@ -421,7 +423,9 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             "condition" : condition.text!,
             "price" : price.text!,
             "description":productDesc.text!,
-            "category":category.text!]
+            "category":category.text!,
+            "auction": auctionSwitch.isOn.description
+        ]
         let token = KeychainAccess.getToken()
         if token == nil
         {
@@ -534,6 +538,24 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         price.text = ""
         
     }
+    
+    
+    @IBAction func switchedAuction(_ sender: UISwitch) {
+        
+        if sender.isOn
+        {
+            priceLabel.text = "Initial Price"
+        }
+        else
+        {
+            priceLabel.text = "Price"
+        }
+        
+        
+        
+    }
+    
+    
     
 }
 

@@ -95,7 +95,7 @@ func refresh(_ refreshControl: UIRefreshControl) {
                 product.createdAt = jsonProduct["createdAt"].stringValue
                 product.updatedAt = jsonProduct["updatedAt"].stringValue.components(separatedBy: "T")[0]
                 product.desc = jsonProduct["description"].stringValue
-                print(product.desc!)
+                product.auction = jsonProduct["auction"].bool
                 
                 if(product.title == "" || product.condition == nil || product.price == nil || product.id == "" || product.ownerName == "" || product.ownerEmail == "")
                 {
@@ -155,6 +155,20 @@ func refresh(_ refreshControl: UIRefreshControl) {
        let product = products[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ProductCell
         
+        if product.auction != nil
+        {
+            if product.auction!
+            {
+                cell.sellingType.image = #imageLiteral(resourceName: "auction")
+            }
+            else
+            {
+                cell.sellingType.image = #imageLiteral(resourceName: "priceTag")
+            }
+        }
+
+        
+        
         cell.productTitle.text = product.title
         cell.productCondition.text
             = product.condition!.rawValue
@@ -183,6 +197,7 @@ func refresh(_ refreshControl: UIRefreshControl) {
 
 class ProductCell : UITableViewCell
 {
+    @IBOutlet weak var sellingType: UIImageView!
     @IBOutlet weak var productImage: UIImageView!
     @IBOutlet weak var lastUpdated:UILabel?
     @IBOutlet weak var productTitle: UILabel!

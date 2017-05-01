@@ -181,11 +181,6 @@ class LoginViewController: UIViewController {
                     KeychainAccess.setUsername(email)
                     KeychainAccess.setPassword(password)
                 }
-                else
-                {
-                    KeychainAccess.resetUsername()
-                    KeychainAccess.resetPassword()
-                }
                 KeychainAccess.setToken(jwt)
                 Config.setUser(name:nameInfo,email:emailText)
                 

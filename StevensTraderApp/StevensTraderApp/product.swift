@@ -21,6 +21,7 @@ class Product: NSObject {
     var medias = [String]()
     var createdAt:String?
     var updatedAt:String?
+    var auction:Bool?
 }
 
 //["New","Refurbished","Used","Very Good","Good","Acceptable"]

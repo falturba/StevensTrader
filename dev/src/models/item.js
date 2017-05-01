@@ -16,6 +16,14 @@ var itemSchema = new Schema({
   condition: {type: String, required: true, enum:condintionEnum},
   price:{type: Number, required: true,min:priceMin,max:priceMax},
   category:{type:String,required:false, enum:categoryEnum},
+  auction:{type:Boolean,required:false},
+  bidders:[
+  {
+    email: {type:String},
+    bid: {type: Number,min:priceMin,max:priceMax},
+    time: {type:Date,default: Date.now}
+  }
+  ],
   medias:[
     {
       id:mongoose.Schema.Types.ObjectId,

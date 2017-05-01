@@ -43,6 +43,7 @@ router.get('/getproductsforioswithcategory/:min/:max/:category',(req,res)=>{
                   price:1,
                   condition:1,
                   description:1,
+                  auction:1,
                   category:1,
                   userData: {
                     name:1,
@@ -58,7 +59,6 @@ router.get('/getproductsforioswithcategory/:min/:max/:category',(req,res)=>{
 
 
               , function(error, data){
-                console.log(data);
                 res.status(200).json({products:data});
               })
 
@@ -103,6 +103,7 @@ router.get('/getproductsforios/:min/:max',(req,res)=>{
                   price:1,
                   condition:1,
                   description:1,
+                  auction:1,
                   category:1,
                   userData: {
                     name:1,
@@ -118,7 +119,6 @@ router.get('/getproductsforios/:min/:max',(req,res)=>{
 
 
               , function(error, data){
-                console.log(data);
                 res.status(200).json({products:data});
               })
 
