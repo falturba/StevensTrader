@@ -16,6 +16,9 @@
 		CC35125C1E90C0910050B97E /* CustomTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC35125B1E90C0910050B97E /* CustomTabBarViewController.swift */; };
 		CC4EB2D11E9237D8002AF07B /* BuyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4EB2D01E9237D8002AF07B /* BuyTableViewController.swift */; };
 		CC4EB2EB1E98311B002AF07B /* product.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4EB2EA1E98311B002AF07B /* product.swift */; };
+		CC5B352A1EB55B9900B47A82 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5B35291EB55B9900B47A82 /* User.swift */; };
+		CC5B352C1EB681AE00B47A82 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5B352B1EB681AE00B47A82 /* AccountViewController.swift */; };
+		CC5B352E1EB6862A00B47A82 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5B352D1EB6862A00B47A82 /* ChangePasswordViewController.swift */; };
 		CC641CCA1E4E73E600CD6998 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC641CC91E4E73E600CD6998 /* AppDelegate.swift */; };
 		CC641CCC1E4E73E600CD6998 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC641CCB1E4E73E600CD6998 /* LoginViewController.swift */; };
 		CC641CCF1E4E73E600CD6998 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC641CCD1E4E73E600CD6998 /* Main.storyboard */; };
@@ -65,6 +68,9 @@
 		CC35125B1E90C0910050B97E /* CustomTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarViewController.swift; sourceTree = "<group>"; };
 		CC4EB2D01E9237D8002AF07B /* BuyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyTableViewController.swift; sourceTree = "<group>"; };
 		CC4EB2EA1E98311B002AF07B /* product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = product.swift; sourceTree = "<group>"; };
+		CC5B35291EB55B9900B47A82 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CC5B352B1EB681AE00B47A82 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		CC5B352D1EB6862A00B47A82 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		CC641CC61E4E73E600CD6998 /* StevensTraderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StevensTraderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC641CC91E4E73E600CD6998 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC641CCB1E4E73E600CD6998 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -123,14 +129,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		CC0FFDEB1E9EA09000019635 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				CC0FFDEC1E9EA0AF00019635 /* UIImageExtension.swift */,
-			);
-			name = Helper;
-			sourceTree = "<group>";
-		};
 		CC35125A1E90C02F0050B97E /* Custom */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				CC4EB2EA1E98311B002AF07B /* product.swift */,
+				CC5B35291EB55B9900B47A82 /* User.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -170,7 +169,6 @@
 		CC641CC81E4E73E600CD6998 /* StevensTraderApp */ = {
 			isa = PBXGroup;
 			children = (
-				CC0FFDEB1E9EA09000019635 /* Helper */,
 				CC4EB2E91E983084002AF07B /* models */,
 				CC35125A1E90C02F0050B97E /* Custom */,
 				CCB87FC11E7DB4A300EF6514 /* Utilities */,
@@ -204,6 +202,8 @@
 				CC8D21AA1EA0529C00EFBA4A /* myProductsTableViewController.swift */,
 				CC186AF51EAD2E250005C560 /* SearchViewController.swift */,
 				CC186AF71EAE71940005C560 /* forgotPasswordViewController.swift */,
+				CC5B352B1EB681AE00B47A82 /* AccountViewController.swift */,
+				CC5B352D1EB6862A00B47A82 /* ChangePasswordViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -211,6 +211,7 @@
 		CCB87FC11E7DB4A300EF6514 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				CC0FFDEC1E9EA0AF00019635 /* UIImageExtension.swift */,
 				CCB87FC21E7DB4E700EF6514 /* KeychainService.swift */,
 				CCB87FC61E7DD78500EF6514 /* Config.swift */,
 			);
@@ -425,10 +426,13 @@
 				CC186AF81EAE71940005C560 /* forgotPasswordViewController.swift in Sources */,
 				CC4EB2EB1E98311B002AF07B /* product.swift in Sources */,
 				CC641CEC1E4EDC9500CD6998 /* SignupViewController.swift in Sources */,
+				CC5B352E1EB6862A00B47A82 /* ChangePasswordViewController.swift in Sources */,
 				CC641CCC1E4E73E600CD6998 /* LoginViewController.swift in Sources */,
+				CC5B352A1EB55B9900B47A82 /* User.swift in Sources */,
 				CC8D21AB1EA0529C00EFBA4A /* myProductsTableViewController.swift in Sources */,
 				CC4EB2D11E9237D8002AF07B /* BuyTableViewController.swift in Sources */,
 				CC0FFDED1E9EA0B000019635 /* UIImageExtension.swift in Sources */,
+				CC5B352C1EB681AE00B47A82 /* AccountViewController.swift in Sources */,
 				CC0FFDEF1E9EEBCE00019635 /* ItemViewController.swift in Sources */,
 				CC35125C1E90C0910050B97E /* CustomTabBarViewController.swift in Sources */,
 				CC186AF61EAD2E250005C560 /* SearchViewController.swift in Sources */,

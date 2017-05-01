@@ -8,7 +8,9 @@
 
 import UIKit
 
-class Config: NSObject {
+class Config: NSObject
+{
+    static var userInfo:User? = nil
     static func getServerIP()  -> String {
         guard let infoPlist = Bundle.main.infoDictionary,
             let serverip = infoPlist["serverip"] as? String else {
@@ -17,9 +19,17 @@ class Config: NSObject {
         }
         return serverip
     }
-    enum ConfigError:Error {
-        case serverip
+    
+    static func setUser(name:String,email:String)
+    {
+        self.userInfo = User(name:name,email:email)
     }
+    
+    static func getUser() -> User?
+    {
+        return self.userInfo
+    }
+    
 
 }
 

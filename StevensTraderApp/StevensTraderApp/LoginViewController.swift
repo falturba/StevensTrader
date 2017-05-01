@@ -11,6 +11,7 @@ import Alamofire
 import LocalAuthentication
 class LoginViewController: UIViewController {
     
+    
     @IBOutlet weak var segmantControl: UISegmentedControl!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var name: UITextField!
@@ -84,8 +85,9 @@ class LoginViewController: UIViewController {
         }
         
     }
+    
     override func viewDidAppear(_ animated: Bool) {
-        loadLoggedInUser()
+        //loadLoggedInUser()
         super.viewDidAppear(false)
         
     }
@@ -136,7 +138,6 @@ class LoginViewController: UIViewController {
     
     
     func login(_ email:String,_ password:String) {
-        
         let emailText = email + "@stevens.edu"
         let passwrodText = password
         let serverip =  Config.getServerIP()
@@ -158,7 +159,7 @@ class LoginViewController: UIViewController {
                     print(responseString)
                 }
             case .success(_):
-                guard let json = response.value as? [String:String],let jwt = json["token"] else
+                guard let json = response.value as? [String:String],let jwt = json["token"] , let nameInfo = json["name"] else
                 {
                     var errorMessage = "Something wrong with the server. Please try again later"
                      if response.response?.statusCode == 401
@@ -180,8 +181,19 @@ class LoginViewController: UIViewController {
                     KeychainAccess.setUsername(email)
                     KeychainAccess.setPassword(password)
                 }
-                
+                else
+                {
+                    KeychainAccess.resetUsername()
+                    KeychainAccess.resetPassword()
+                }
                 KeychainAccess.setToken(jwt)
+                Config.setUser(name:nameInfo,email:emailText)
+                
+                
+                
+            
+                
+                
                 
                 self.performSegue(withIdentifier: "menueSegue", sender: nil)
                 self.clear()

@@ -338,19 +338,14 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     func checkPrice() -> Bool
     {
-        if(price.text! == "") { return false }
-        do
+        let priceInt = Int(price.text!)
+        if price != nil
         {
-           let priceInt = try Int(price.text!)
-            if(priceInt! >= 0 && priceInt! <= 5000)
+            if priceInt! >= 0 && priceInt! <= 5000
             {
                 return true
             }
-            return false
-        } catch {
-            return false
         }
-        
         return false
     }
     
@@ -507,6 +502,14 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                                 KeychainAccess.resetPassword()
                                 KeychainAccess.resetToken()
                                 KeychainAccess.resetUsername()
+                                
+                            }
+                            if(response.response?.statusCode == 406)
+                            {
+                                let alert = UIAlertController(title: "Maximum Items Reached", message: "We apologized, our resources are very limited and we put a threashold of five items per user", preferredStyle:.alert)
+                                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                                self.present(alert, animated: true, completion: nil)
+                               
                                 
                             }
                         }

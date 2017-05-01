@@ -25,7 +25,7 @@ class BuyTableViewController: UITableViewController, UINavigationBarDelegate {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         
-        let backButton = UIBarButtonItem(title: "Search", style: .done, target: self, action: #selector(back(_ :)))
+        let backButton = UIBarButtonItem(title: "<Search", style: .done, target: self, action: #selector(back(_ :)))
     
         self.navigationItem.leftBarButtonItem = backButton
         if #available(iOS 10.0, *) {
@@ -43,7 +43,7 @@ class BuyTableViewController: UITableViewController, UINavigationBarDelegate {
 
     func reloadData()
     {
-        
+        products = []
         var service:String = Config.getServerIP()
         if searchCategory == "Any"
         {

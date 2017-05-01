@@ -9,7 +9,8 @@ var accountSchema = new Schema({
   email: { type: String, required: true, unique: true ,lowercase:true},
   password: { type: String, required: true },
   token: {type: String, required:false},
-  status:{type:String,required:true,enum:statusEnum}
+  status:{type:String,required:true,enum:statusEnum},
+  chngpswdlnk:{type: String, required:false}
 });
 
 accountSchema.methods.statusCheck = function(status) {

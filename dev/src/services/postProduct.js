@@ -1,5 +1,6 @@
 import express from 'express'
 import authenticate from '../middlewares/authenticate'
+import postItemPolicy from '../middlewares/PostItemPolicy'
 import formidable from 'formidable'
 import crypto from 'crypto'
 import sharp from 'sharp'
@@ -18,7 +19,7 @@ import fs from 'fs'
 /*************************************/
 
 let router = express.Router()
-router.post('/postproduct',authenticate, (req, res) => {
+router.post('/postproduct',authenticate,postItemPolicy, (req, res) => {
   /**************************
   *** Raw function
   ****************************/

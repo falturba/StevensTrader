@@ -20,6 +20,7 @@ router.post('/login', function (req, res) {
             return;
         } else if (data) {
             var account = new Account(data);
+<<<<<<< HEAD
             if (account.statusCheck(account.status)) {
                 var isCorrectPassword = account.validPassword(password);
                 //check hash password
@@ -38,6 +39,24 @@ router.post('/login', function (req, res) {
                 }
             } else {
                 res.status(401).json({ errors: { form: 'user is suspended' } });
+=======
+            if(account.statusCheck(account.status))
+            {
+                 var isCorrectPassword = account.validPassword(password);
+            //check hash password
+            if(isCorrectPassword){
+                const token = jwt.sign({
+                    id: account._id.toString(),
+                    name: account.name,
+                    email: account.email
+                }, config.jwtSecret);
+                console.dir(account._id.toString());
+                
+                Account.update(account,{token:token}).exec();
+                res.json({ token:token,name:account.name });
+            }else{
+                res.status(401).json({ errors: { form: 'Password incorrect.' } });
+>>>>>>> origin/master
             }
 
         } else {
