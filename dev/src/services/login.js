@@ -9,37 +9,17 @@ let router = express.Router();
 router.use(bodyParser.json());
 
 
-router.post('/login', function (req, res) {
+router.post('/login',function(req,res){
     console.log("services/login", req.body);
     const { email, password } = req.body;
     Account.findOne({
-        email: email
-    }, function (error, data) {
-        if (error) {
+        email:email
+    }, function(error, data){
+        if(error){
             res.status(500).json({ errors: { form: 'There is database connection problem, please try again.' } });
             return;
-        } else if (data) {
+        }else if(data){
             var account = new Account(data);
-<<<<<<< HEAD
-            if (account.statusCheck(account.status)) {
-                var isCorrectPassword = account.validPassword(password);
-                //check hash password
-                if (isCorrectPassword) {
-                    const token = jwt.sign({
-                        id: account._id.toString(),
-                        name: account.name,
-                        email: account.email
-                    }, config.jwtSecret);
-                    console.dir(account._id.toString());
-
-                    Account.update(account, { token: token }).exec();
-                    res.json({ token });
-                } else {
-                    res.status(401).json({ errors: { form: 'Password incorrect.' } });
-                }
-            } else {
-                res.status(401).json({ errors: { form: 'user is suspended' } });
-=======
             if(account.statusCheck(account.status))
             {
                  var isCorrectPassword = account.validPassword(password);
@@ -53,13 +33,16 @@ router.post('/login', function (req, res) {
                 console.dir(account._id.toString());
                 
                 Account.update(account,{token:token}).exec();
-                res.json({ token:token,name:account.name });
+                res.json({ token });
             }else{
                 res.status(401).json({ errors: { form: 'Password incorrect.' } });
->>>>>>> origin/master
             }
-
-        } else {
+        } else
+        {
+            res.status(401).json({ errors: { form: 'user is suspended' } });
+        }
+           
+        }else{
             res.status(401).json({ errors: { form: 'Cannot find user.' } });
         }
     });
@@ -67,11 +50,3 @@ router.post('/login', function (req, res) {
 
 //can not use [export default] because the server.js use recursive require()
 module.exports = router;
-
-
-
-
-
-
-
-
