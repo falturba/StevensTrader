@@ -8,6 +8,7 @@ import getUserProductsForIOS from './getUserProductsForIOS'
 import changePassword from './changePassword'
 import userManagment from './UserManagment'
 import auction from './auction'
+import itemsManagment from './itemsmanagment'
 export function initServices(app){
   console.log("init service...")
   app.use('/services',getProduct)
@@ -20,6 +21,7 @@ export function initServices(app){
   app.use('/services',changePassword)
   app.use('/services',userManagment)
   app.use('/services',auction)
+  app.use('/services',itemsManagment)
 }
 
 

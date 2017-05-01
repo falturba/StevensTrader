@@ -17,8 +17,10 @@ class BuyTableViewController: UITableViewController, UINavigationBarDelegate {
     var minPrice:Int?
     var searchCategory:String?
     
-   
-    
+    override func viewWillAppear(_ animated: Bool) {
+        reloadData()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
@@ -34,7 +36,7 @@ class BuyTableViewController: UITableViewController, UINavigationBarDelegate {
             tableView.backgroundView = refreshControl
         }
     
-    reloadData()
+    //reloadData()
 //        let searchBar:UISearchBar = UISearchBar.init(frame: CGRect(x: 0, y: 0, width: 320, height: 44))
 //        self.tableView.tableHeaderView = searchBar
         

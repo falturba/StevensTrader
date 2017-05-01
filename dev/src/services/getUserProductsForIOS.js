@@ -43,10 +43,18 @@ Account.aggregate(
         _id:1,
        title:1,
        price:1,
+       auction:1,
+       description:1,
        condition:1,
        createdAt:1,
        updatedAt:1,
        userId:1,
+       bidders:
+       {
+        email:1,
+        bid:1,
+        time:1
+       },
        medias:
        {
           _id:1
@@ -59,7 +67,7 @@ Account.aggregate(
 , function(error, data)
   {
     if(error) console.log(error)
-    console.log(data);
+
     res.status(200).json({products:data});
   });
 });

@@ -83,6 +83,7 @@ services.get('/verification/:URL', function (req, res) {
           console.log(err);
           return res.status(404).send('ERROR: sending confirmation email FAILED');
         }
+        
         res.json({
           msg: 'CONFIRMED!'
         });

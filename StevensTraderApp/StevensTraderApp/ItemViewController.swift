@@ -31,6 +31,7 @@ class ItemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if product.auction != nil
         {
             if product.auction!
@@ -49,6 +50,7 @@ class ItemViewController: UIViewController {
         {
             loadImages(image1,product.medias[0])
             let imageTaps1 = UITapGestureRecognizer(target: self, action: #selector(handleImageTap))
+            imageTaps1.numberOfTapsRequired = 1
             image1.addGestureRecognizer(imageTaps1)
             
         }
@@ -169,10 +171,33 @@ class ItemViewController: UIViewController {
             Alamofire.request(URL).responseJSON(completionHandler: { response in
                 switch response.result {
                 case .success( _):
+                    if response.response?.statusCode == 400
+                    {
+                        let alert = UIAlertController(title: "Message", message: "You can't outbid yourself", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil))
+                        self.present(alert,animated: true,completion: nil)
+                    }
+                    else if response.response?.statusCode == 403
+                    {
+                        let alert = UIAlertController(title: "Message", message: "You can't bid on your item", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil))
+                        self.present(alert,animated: true,completion: nil)
+                    }
+                    else
+                    {
+                        let alert = UIAlertController(title: "Message", message: "Successfully bid placed, we will send you an email if you got outbid", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil))
+                        self.present(alert,animated: true,completion: nil)
+                        self.price.text = self.bid.text
+                        for prod in products
+                        {
+                            if prod.id == self.product.id!
+                            {
+                                prod.price = Int(self.price.text!)! as NSNumber
+                            }
+                        }
+                    }
                     
-                    let alert = UIAlertController(title: "Message", message: "Successfully bid placed", preferredStyle: .alert)
-                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil))
-                    self.present(alert,animated: true,completion: nil)
                 case.failure(let err):
                     print(err)
                     let alert = UIAlertController(title: "Error!", message: "Internal error, The database connections failed", preferredStyle: .alert)

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1E994D589148955DF9A3764A /* Pods_StevensTraderAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B3F419BDB055447052CA4A /* Pods_StevensTraderAppTests.framework */; };
 		902EE4A6E080AD11EDB68FDA /* Pods_StevensTraderApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 124A6F5305DC26BB46BB53C4 /* Pods_StevensTraderApp.framework */; };
+		CC002A4C1EB73CB100D883A0 /* MyItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC002A4B1EB73CB100D883A0 /* MyItemViewController.swift */; };
 		CC0FFDED1E9EA0B000019635 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0FFDEC1E9EA0AF00019635 /* UIImageExtension.swift */; };
 		CC0FFDEF1E9EEBCE00019635 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0FFDEE1E9EEBCE00019635 /* ItemViewController.swift */; };
 		CC186AF61EAD2E250005C560 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC186AF51EAD2E250005C560 /* SearchViewController.swift */; };
@@ -61,6 +62,7 @@
 		25773111695B81AE08DFE004 /* Pods-StevensTraderApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StevensTraderApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StevensTraderApp/Pods-StevensTraderApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7186AE9CD43866997F1F976B /* Pods-StevensTraderAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StevensTraderAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StevensTraderAppTests/Pods-StevensTraderAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		86F0507811D0B82D334EB63A /* Pods-StevensTraderApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StevensTraderApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-StevensTraderApp/Pods-StevensTraderApp.release.xcconfig"; sourceTree = "<group>"; };
+		CC002A4B1EB73CB100D883A0 /* MyItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyItemViewController.swift; sourceTree = "<group>"; };
 		CC0FFDEC1E9EA0AF00019635 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		CC0FFDEE1E9EEBCE00019635 /* ItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		CC186AF51EAD2E250005C560 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -194,16 +196,17 @@
 		CCB87FC01E7DB48F00EF6514 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				CC641CEB1E4EDC9500CD6998 /* SignupViewController.swift */,
-				CC641CCB1E4E73E600CD6998 /* LoginViewController.swift */,
-				CCE339F51E5E659600E3FFB7 /* SellViewController.swift */,
-				CC4EB2D01E9237D8002AF07B /* BuyTableViewController.swift */,
-				CC0FFDEE1E9EEBCE00019635 /* ItemViewController.swift */,
-				CC8D21AA1EA0529C00EFBA4A /* myProductsTableViewController.swift */,
-				CC186AF51EAD2E250005C560 /* SearchViewController.swift */,
-				CC186AF71EAE71940005C560 /* forgotPasswordViewController.swift */,
 				CC5B352B1EB681AE00B47A82 /* AccountViewController.swift */,
 				CC5B352D1EB6862A00B47A82 /* ChangePasswordViewController.swift */,
+				CC641CEB1E4EDC9500CD6998 /* SignupViewController.swift */,
+				CC641CCB1E4E73E600CD6998 /* LoginViewController.swift */,
+				CC186AF71EAE71940005C560 /* forgotPasswordViewController.swift */,
+				CCE339F51E5E659600E3FFB7 /* SellViewController.swift */,
+				CC186AF51EAD2E250005C560 /* SearchViewController.swift */,
+				CC4EB2D01E9237D8002AF07B /* BuyTableViewController.swift */,
+				CC8D21AA1EA0529C00EFBA4A /* myProductsTableViewController.swift */,
+				CC0FFDEE1E9EEBCE00019635 /* ItemViewController.swift */,
+				CC002A4B1EB73CB100D883A0 /* MyItemViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC186AF81EAE71940005C560 /* forgotPasswordViewController.swift in Sources */,
+				CC002A4C1EB73CB100D883A0 /* MyItemViewController.swift in Sources */,
 				CC4EB2EB1E98311B002AF07B /* product.swift in Sources */,
 				CC641CEC1E4EDC9500CD6998 /* SignupViewController.swift in Sources */,
 				CC5B352E1EB6862A00B47A82 /* ChangePasswordViewController.swift in Sources */,

@@ -10,9 +10,14 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 var products = [Product]()
-let myCellId = "myProductCell"
-class myProductsTableViewController: UITableViewController {
+class myProductsTableViewController: UITableViewController,UINavigationBarDelegate {
     
+    var product:Product!
+    let myCellId = "myProductCell"
+    
+    override func viewWillAppear(_ animated: Bool) {
+        loadItems()
+    }
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -26,12 +31,13 @@ class myProductsTableViewController: UITableViewController {
         } else {
             tableView.backgroundView = refreshControl
         }
-
+        
         loadItems()
     }
     
+    
     func refresh(_ refreshControl: UIRefreshControl) {
-        // Do your job, when done:
+        
         loadItems()
         refreshControl.endRefreshing()
     }
@@ -82,7 +88,8 @@ class myProductsTableViewController: UITableViewController {
             product.price = jsonProduct["itemData"]["price"].number
             product.id = jsonProduct["itemData"]["_id"].stringValue
             product.thumbnailUrl = Config.getServerIP()+"/services/getthumbnail/"+product.id!
-            
+            product.desc = jsonProduct["itemData"]["description"].stringValue
+            product.auction = jsonProduct["itemData"]["auction"].bool
             if(product.title == "" || product.condition == nil || product.price == nil || product.id == "")
             {
                 continue
@@ -113,9 +120,31 @@ class myProductsTableViewController: UITableViewController {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-       
+        
         
     }
+    
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        self.product = products[indexPath.item]
+        performSegue(withIdentifier: "showMyItemSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier! == "showMyItemSegue")
+        {
+            
+            if let nav = segue.destination as? UINavigationController {
+                if  let myitemview = nav.topViewController as? MyItemViewController
+                {
+                    myitemview.product = product
+                }
+            }
+        }
+    }
+    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return products.count
@@ -123,13 +152,28 @@ class myProductsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-  
+        
         let product = products[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: myCellId, for: indexPath) as! myProductCell
         
+        
+        
+        if product.auction != nil
+        {
+            if product.auction!
+            {
+                cell.productType.image = #imageLiteral(resourceName: "auction")
+            }
+            else
+            {
+                cell.productType.image = #imageLiteral(resourceName: "priceTag")
+            }
+        }
+        
+        
         if(product.title != nil )
         {
-          cell.myProductTitle.text = product.title
+            cell.myProductTitle.text = product.title
         }
         
         if(product.condition != nil)
@@ -139,7 +183,7 @@ class myProductsTableViewController: UITableViewController {
         
         if(product.price != nil)
         {
-           cell.myProductPrice.text = (product.price?.stringValue)!+"$"
+            cell.myProductPrice.text = (product.price?.stringValue)!+"$"
         }
         
         
@@ -159,6 +203,7 @@ class myProductsTableViewController: UITableViewController {
 
 class myProductCell : UITableViewCell {
     @IBOutlet weak var myProductTitle: UILabel!
+    @IBOutlet weak var productType: UIImageView!
     
     @IBOutlet weak var myProductCondition: UILabel!
     

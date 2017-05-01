@@ -31,4 +31,27 @@ transporter.sendMail(mailOptions, (error, info) => {
 });
 }
 
+var sendoutbidnotification = function(bidder,title,bid)
+{
+    
+    let mailOptions = {
+    from: '"Stevens Trader" <stevenstradersystem@gmail.com>', // sender address
+    to: bidder.email, // list of receivers
+    subject: 'Stevens Trader  Outbid Notification', // Subject line
+    text: 'You got outbid on this item ('+title+') new price is '+bid+'$', // plain text body
+    //html: '<b>Hello world ?</b>' // html body
+};
+
+transporter.sendMail(mailOptions, (error, info) => {
+    if (error)
+     {
+        console.log("Error in nodemailer while sending email Outbid notification");
+        //console.log(error);
+    }
+    
+});
+}
+
 exports.sendChangePasswordEmail = sendChangePasswordEmail
+exports.sendoutbidnotification = sendoutbidnotification
+

@@ -9,9 +9,9 @@ let kSecMatchLimitValue = String(format: kSecMatchLimit as String)
 let kSecReturnDataValue = String(format: kSecReturnData as String)
 let kSecMatchLimitOneValue = String(format: kSecMatchLimitOne as String)
 let kSecAttrAccountValue = String(format: kSecAttrAccount as String)
-let tokenIdentifier:String = "StevensTraderToken"
-let usernameIdentifier:String = "StevensTraderUsername"
-let passwordIdentifier:String = "StevensTraderPassword"
+let tokenIdentifier:String = "edu.stevens.StevensTraderToken"
+let usernameIdentifier:String = "edu.stevens.StevensTraderUsername"
+let passwordIdentifier:String = "edu.StevensTraderPassword"
 struct KeychainAccess {
     
     
