@@ -8,17 +8,17 @@ var email_verfier = require("../libs/email_verifier.js");
 services.use(bodyParser.json());
 
 
-services.post('/signup',function(req,res){
-	var email = req.body.email;
-	console.log(req.body);
-	if (req.body.type === 'register') {
-	var newAccount = new Account({
-		name: req.body.name,
-		email: email,
-		password: req.body.password,
-    status:'active'
-	});
-	    email_verfier.createTempUser(newAccount, function(err, existingPersistentUser, newTempUser) {
+services.post('/signup', function (req, res) {
+  var email = req.body.email;
+  console.log(req.body);
+  if (req.body.type === 'register') {
+    var newAccount = new Account({
+      name: req.body.name,
+      email: email,
+      password: req.body.password,
+      status: 'active'
+    });
+    email_verfier.createTempUser(newAccount, function (err, existingPersistentUser, newTempUser) {
       if (err) {
         return res.status(404).send('ERROR: creating temp user FAILED');
 
@@ -35,9 +35,9 @@ services.post('/signup',function(req,res){
       if (newTempUser) {
         var URL = newTempUser[email_verfier.options.URLFieldName];
 
-        email_verfier.sendVerificationEmail(email, URL, function(err, info) {
+        email_verfier.sendVerificationEmail(email, URL, function (err, info) {
           if (err) {
-          	console.log(err);
+            console.log(err);
             return res.status(404).send('ERROR: sending verification email FAILED');
           }
           res.json({
@@ -46,7 +46,7 @@ services.post('/signup',function(req,res){
           });
         });
 
-      // user already exists in temporary collection!
+        // user already exists in temporary collection!
       } else {
         res.json({
           msg: 'You have already signed up. Please check your email to verify your account.'
@@ -54,9 +54,9 @@ services.post('/signup',function(req,res){
       }
     });
 
-  // resend verification button was clicked
+    // resend verification button was clicked
   } else {
-    email_verfier.resendVerificationEmail(email, function(err, accountFound) {
+    email_verfier.resendVerificationEmail(email, function (err, accountFound) {
       if (err) {
         return res.status(404).send('ERROR: resending verification email FAILED');
       }
@@ -74,13 +74,13 @@ services.post('/signup',function(req,res){
 });
 
 // user accesses the link that is sent
-services.get('/verification/:URL', function(req, res) {
+services.get('/verification/:URL', function (req, res) {
   var url = req.params.URL;
-  email_verfier.confirmTempUser(url, function(err, user) {
+  email_verfier.confirmTempUser(url, function (err, user) {
     if (user) {
-      email_verfier.sendConfirmationEmail(user.email, function(err, info) {
+      email_verfier.sendConfirmationEmail(user.email, function (err, info) {
         if (err) {
-        	console.log(err);
+          console.log(err);
           return res.status(404).send('ERROR: sending confirmation email FAILED');
         }
         res.json({

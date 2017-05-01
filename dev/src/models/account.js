@@ -1,6 +1,6 @@
 import {statusEnum} from './enum'
-var bcrypt = require('bcrypt');
-var mongoose = require('mongoose');
+var bcrypt = require('bcrypt')
+var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
 
 // create a schema
