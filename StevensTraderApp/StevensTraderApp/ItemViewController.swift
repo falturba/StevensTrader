@@ -10,6 +10,8 @@ import UIKit
 
 class ItemViewController: UIViewController {
     
+   
+    @IBOutlet weak var desc: UITextView!
     @IBOutlet weak var image3: UIImageView!
     @IBOutlet weak var image2: UIImageView!
     @IBOutlet weak var image1: UIImageView!
@@ -33,6 +35,7 @@ class ItemViewController: UIViewController {
         self.price.text = (product.price?.stringValue)!+"$"
         self.email.text = product.ownerEmail
         self.name.text = product.ownerName
+        self.desc.text = product.desc!
         if(product.medias.count > 0)
         {
             loadImages(image1,product.medias[0])

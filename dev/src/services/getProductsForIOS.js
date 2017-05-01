@@ -42,6 +42,7 @@ router.get('/getproductsforioswithcategory/:min/:max/:category',(req,res)=>{
                   title:1,
                   price:1,
                   condition:1,
+                  description:1,
                   category:1,
                   userData: {
                     name:1,
@@ -101,6 +102,7 @@ router.get('/getproductsforios/:min/:max',(req,res)=>{
                   title:1,
                   price:1,
                   condition:1,
+                  description:1,
                   category:1,
                   userData: {
                     name:1,

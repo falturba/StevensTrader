@@ -486,7 +486,7 @@
                                 <rect key="frame" x="148" y="508" width="79" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-Bold" family="Avenir Next Condensed" pointSize="27"/>
-                                <color key="textColor" red="0.32629638909999997" green="0.48049283030000001" blue="0.74609643219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.133256495" green="0.2067339718" blue="0.4018618464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IvV-1e-uKR">
@@ -500,7 +500,7 @@
                                 <rect key="frame" x="16" y="84" width="79" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-Bold" family="Avenir Next Condensed" pointSize="20"/>
-                                <color key="textColor" red="0.2944520712" green="0.45268917079999998" blue="0.72659319639999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.133256495" green="0.2067339718" blue="0.4018618464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Condition" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSe-zI-Jmb">
@@ -521,22 +521,38 @@
                                 <rect key="frame" x="31" y="326" width="130" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-Bold" family="Avenir Next Condensed" pointSize="20"/>
-                                <color key="textColor" red="0.29445207118988037" green="0.45268917083740234" blue="0.72659319639205933" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.13325649499893188" green="0.20673397183418274" blue="0.40186184644699097" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kS-WN-29g">
                                 <rect key="frame" x="82" y="373" width="79" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-Bold" family="Avenir Next Condensed" pointSize="20"/>
-                                <color key="textColor" red="0.29445207118988037" green="0.45268917083740234" blue="0.72659319639205933" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.16742280125617981" green="0.26040273904800415" blue="0.50122272968292236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yWR-F2-Wbt">
+                                <rect key="frame" x="36" y="421" width="125" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Bold" family="Avenir Next Condensed" pointSize="20"/>
+                                <color key="textColor" red="0.16749894619999997" green="0.25884151454999998" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Scg-J0-fKy">
+                                <rect key="frame" x="169" y="409" width="174" height="88"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.67750626802444458" green="0.23812481760978699" blue="0.29550772905349731" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.70458763837814331" green="0.32180643081665039" blue="0.37181821465492249" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="condition" destination="HSe-zI-Jmb" id="HBX-YA-ASi"/>
+                        <outlet property="desc" destination="Scg-J0-fKy" id="dN2-BQ-ZzG"/>
                         <outlet property="email" destination="DaC-LW-lLQ" id="RrT-gz-OTI"/>
                         <outlet property="image1" destination="FjE-YM-uZT" id="ukE-e3-xeI"/>
                         <outlet property="image2" destination="EgM-Cu-Ftg" id="Ien-Ta-dLL"/>

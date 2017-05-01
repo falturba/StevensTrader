@@ -87,7 +87,7 @@ class LoginViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //loadLoggedInUser()
+        loadLoggedInUser()
         super.viewDidAppear(false)
         
     }
