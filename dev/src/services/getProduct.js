@@ -3,7 +3,6 @@ import Item from '../models/item'
 import Mongoose from 'mongoose'
 const router = express.Router()
 router.get('/getproduct/:id',(req,res)=>{
-    console.log("--- server --- ",req.params.id)
     // console.dir(req)
     // Item.findOne({_id:req.params.id}, function(error, data){
     //     console.dir(data)

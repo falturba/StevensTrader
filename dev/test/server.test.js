@@ -127,7 +127,7 @@ describe('/GET product', () => {
             .end((err, res) => {
                 expect(res).to.have.status(200)
                 expect(res).to.be.json
-
+                //remove all images that are created by this test case
                 res.body.products.forEach(product => {
                     product.medias.forEach(media => {
                         fs.unlink(imageDir + media.imageName, () => { })
@@ -177,6 +177,12 @@ function testGetItem(id){
                 .end((err, res) => {
                     console.log('product____')
                     console.log(res.body)
+                    expect(res.body.product._id).to.be.eql(id)
+                    expect(res.body.product.title).to.be.eql('t1')
+                    expect(res.body.product.description).to.be.eql('des1')
+                    expect(res.body.product.condition).to.be.eql('Very Good')
+                    expect(res.body.product.price).to.be.eql(6)
+                    done()
                     //expect(res).to.have.status(200)
                 })
         })
