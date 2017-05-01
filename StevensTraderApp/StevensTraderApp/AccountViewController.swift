@@ -79,4 +79,62 @@ class AccountViewController: UIViewController, UINavigationBarDelegate {
         performSegue(withIdentifier: "changePassSegue", sender: self)
     }
 
+    @IBAction func deleteAccount(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Are you sure?", message: "This will delete all your items as well", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
+            self.confirmDeleteAccount()
+            KeychainAccess.resetToken()
+            KeychainAccess.resetPassword()
+            KeychainAccess.resetUsername()
+            self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler:nil))
+        self.present(alert,animated: true,completion: nil)
+        
+        
+    }
+    
+    func confirmDeleteAccount()
+    {
+        let token = KeychainAccess.getToken()
+        if token == nil
+        {
+            let alert = UIAlertController(title: "Session Expired", message: "The token has been deleted, please login again to get a new token", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
+                
+                KeychainAccess.resetToken()
+                KeychainAccess.resetPassword()
+                KeychainAccess.resetUsername()
+                self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
+            }))
+            self.present(alert,animated: true,completion: nil)
+            return
+        }
+        
+        let parameters:[String:String] = ["email":email.text!]
+        let headers: HTTPHeaders = ["authorization":"Bearer "+token!]
+        
+        var URL = try! URLRequest(url: Config.getServerIP()+"/services/deleteuseraccount", method: .post, headers: headers)
+        URL.httpBody = try! JSONSerialization.data(withJSONObject: parameters)
+        URL.httpMethod = "POST"
+        URL.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        Alamofire.request(URL).responseJSON(completionHandler: { response in
+            switch response.result {
+            case .success( _):
+        
+                print("ssuccessfully account deleted")
+                let alert = UIAlertController(title: "Message", message: "Account and items successfully deleted", preferredStyle: .alert)
+                self.present(alert,animated: true,completion: nil)
+            case.failure(let err):
+                print(err)
+                let alert = UIAlertController(title: "Error!", message: "The database connections failed. We have been notified, and we will be working on this soon", preferredStyle: .alert)
+                self.present(alert,animated: true,completion: nil)
+                
+            }
+            
+            
+        })
+
+    }
 }
