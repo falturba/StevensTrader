@@ -39,6 +39,7 @@ class myProductsTableViewController: UITableViewController {
     
     func loadItems()
     {
+        products = []
         let token = KeychainAccess.getToken()
         if token == nil
         {

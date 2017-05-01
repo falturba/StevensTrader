@@ -85,8 +85,9 @@ class LoginViewController: UIViewController {
         }
         
     }
+    
     override func viewDidAppear(_ animated: Bool) {
-        loadLoggedInUser()
+        //loadLoggedInUser()
         super.viewDidAppear(false)
         
     }
@@ -137,7 +138,6 @@ class LoginViewController: UIViewController {
     
     
     func login(_ email:String,_ password:String) {
-        
         let emailText = email + "@stevens.edu"
         let passwrodText = password
         let serverip =  Config.getServerIP()
@@ -178,10 +178,14 @@ class LoginViewController: UIViewController {
                 
                 
                 if self.rememberSwitch.isOn {
-                    KeychainAccess.setUsername(emailText)
+                    KeychainAccess.setUsername(email)
                     KeychainAccess.setPassword(password)
                 }
-                
+                else
+                {
+                    KeychainAccess.resetUsername()
+                    KeychainAccess.resetPassword()
+                }
                 KeychainAccess.setToken(jwt)
                 Config.setUser(name:nameInfo,email:emailText)
                 

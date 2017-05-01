@@ -43,7 +43,7 @@ class BuyTableViewController: UITableViewController, UINavigationBarDelegate {
 
     func reloadData()
     {
-        
+        products = []
         var service:String = Config.getServerIP()
         if searchCategory == "Any"
         {

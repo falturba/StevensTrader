@@ -504,6 +504,14 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                                 KeychainAccess.resetUsername()
                                 
                             }
+                            if(response.response?.statusCode == 406)
+                            {
+                                let alert = UIAlertController(title: "Maximum Items Reached", message: "We apologized, our resources are very limited and we put a threashold of five items per user", preferredStyle:.alert)
+                                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                                self.present(alert, animated: true, completion: nil)
+                               
+                                
+                            }
                         }
                 }
             case .failure(let encodingError):
