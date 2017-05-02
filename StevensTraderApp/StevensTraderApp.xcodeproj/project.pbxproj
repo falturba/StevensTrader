@@ -10,6 +10,7 @@
 		1E994D589148955DF9A3764A /* Pods_StevensTraderAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B3F419BDB055447052CA4A /* Pods_StevensTraderAppTests.framework */; };
 		902EE4A6E080AD11EDB68FDA /* Pods_StevensTraderApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 124A6F5305DC26BB46BB53C4 /* Pods_StevensTraderApp.framework */; };
 		CC002A4C1EB73CB100D883A0 /* MyItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC002A4B1EB73CB100D883A0 /* MyItemViewController.swift */; };
+		CC002A4E1EB859D200D883A0 /* BiddersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC002A4D1EB859D200D883A0 /* BiddersTableViewController.swift */; };
 		CC0FFDED1E9EA0B000019635 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0FFDEC1E9EA0AF00019635 /* UIImageExtension.swift */; };
 		CC0FFDEF1E9EEBCE00019635 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0FFDEE1E9EEBCE00019635 /* ItemViewController.swift */; };
 		CC186AF61EAD2E250005C560 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC186AF51EAD2E250005C560 /* SearchViewController.swift */; };
@@ -63,6 +64,7 @@
 		7186AE9CD43866997F1F976B /* Pods-StevensTraderAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StevensTraderAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StevensTraderAppTests/Pods-StevensTraderAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		86F0507811D0B82D334EB63A /* Pods-StevensTraderApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StevensTraderApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-StevensTraderApp/Pods-StevensTraderApp.release.xcconfig"; sourceTree = "<group>"; };
 		CC002A4B1EB73CB100D883A0 /* MyItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyItemViewController.swift; sourceTree = "<group>"; };
+		CC002A4D1EB859D200D883A0 /* BiddersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiddersTableViewController.swift; sourceTree = "<group>"; };
 		CC0FFDEC1E9EA0AF00019635 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		CC0FFDEE1E9EEBCE00019635 /* ItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		CC186AF51EAD2E250005C560 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				CC8D21AA1EA0529C00EFBA4A /* myProductsTableViewController.swift */,
 				CC0FFDEE1E9EEBCE00019635 /* ItemViewController.swift */,
 				CC002A4B1EB73CB100D883A0 /* MyItemViewController.swift */,
+				CC002A4D1EB859D200D883A0 /* BiddersTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				CC35125C1E90C0910050B97E /* CustomTabBarViewController.swift in Sources */,
 				CC186AF61EAD2E250005C560 /* SearchViewController.swift in Sources */,
 				CCB87FC71E7DD78500EF6514 /* Config.swift in Sources */,
+				CC002A4E1EB859D200D883A0 /* BiddersTableViewController.swift in Sources */,
 				CCE339F61E5E659600E3FFB7 /* SellViewController.swift in Sources */,
 				CCB87FC31E7DB4E700EF6514 /* KeychainService.swift in Sources */,
 				CC641CCA1E4E73E600CD6998 /* AppDelegate.swift in Sources */,

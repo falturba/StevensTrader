@@ -95,6 +95,20 @@ class myProductsTableViewController: UITableViewController,UINavigationBarDelega
                 continue
             }
             
+            if product.auction != nil && product.auction!
+            {
+                for (_,subjson) in jsonProduct["itemData"]["bidders"]
+                {
+//                    print(subjson)
+                    let bidder:Bidder = Bidder(email: subjson["email"].string!, bid: subjson["bid"].number!, date: subjson["time"].string!.components(separatedBy: "T")[0])
+                    
+                    product.bidders.append(bidder)
+                }
+                
+            }
+            
+
+            
             for (_,subjson) in jsonProduct["itemData"]["medias"]
             {
                 let url:String = Config.getServerIP()+"/services/getimage/"+subjson["_id"].string!

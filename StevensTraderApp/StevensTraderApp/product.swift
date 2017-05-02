@@ -22,9 +22,22 @@ class Product: NSObject {
     var createdAt:String?
     var updatedAt:String?
     var auction:Bool?
+    var bidders = [Bidder]()
+}
+struct Bidder
+{
+    var email:String?
+    var bid:NSNumber?
+    var date:String?
+    init(email:String,bid:NSNumber,date:String)
+    {
+        self.email = email
+        self.bid = bid
+        self.date = date
+    }
+    
 }
 
-//["New","Refurbished","Used","Very Good","Good","Acceptable"]
 enum Condition:String
 {
     case new = "New"

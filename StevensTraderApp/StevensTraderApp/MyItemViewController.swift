@@ -122,7 +122,24 @@ class MyItemViewController: UIViewController, UINavigationBarDelegate {
     }
 
     @IBAction func viewBidders(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: "showBidderSegue", sender: self)
+
+        
+        
+        
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier! == "showBidderSegue")
+        {
+            if let itemView = segue.destination as? BiddersTableViewController {
+                
+                itemView.product = product
+            }
+        }
+    }
+
     
     
     @IBAction func deleteItem(_ sender: UIButton) {
