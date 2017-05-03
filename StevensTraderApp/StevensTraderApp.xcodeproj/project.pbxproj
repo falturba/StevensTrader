@@ -206,8 +206,8 @@
 				CCE339F51E5E659600E3FFB7 /* SellViewController.swift */,
 				CC186AF51EAD2E250005C560 /* SearchViewController.swift */,
 				CC4EB2D01E9237D8002AF07B /* BuyTableViewController.swift */,
-				CC8D21AA1EA0529C00EFBA4A /* myProductsTableViewController.swift */,
 				CC0FFDEE1E9EEBCE00019635 /* ItemViewController.swift */,
+				CC8D21AA1EA0529C00EFBA4A /* myProductsTableViewController.swift */,
 				CC002A4B1EB73CB100D883A0 /* MyItemViewController.swift */,
 				CC002A4D1EB859D200D883A0 /* BiddersTableViewController.swift */,
 			);

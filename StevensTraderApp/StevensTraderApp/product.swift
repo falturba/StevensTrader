@@ -23,6 +23,7 @@ class Product: NSObject {
     var updatedAt:String?
     var auction:Bool?
     var bidders = [Bidder]()
+    
 }
 struct Bidder
 {

@@ -10,15 +10,15 @@ router.get('/getproductsforioswithcategory/:min/:max/:category',(req,res)=>{
     $sort: {  updatedAt: -1 } 
   },
   
-   {
+  {
     $match: 
     { $and:
      [ { 
       price: { $gte: parseInt(req.params.min), $lte: parseInt(req.params.max) },
       category:req.params.category 
-        }  
-      ] } 
-    }
+    }  
+    ] } 
+  }
   ,
   { $lookup:
     {
@@ -45,6 +45,12 @@ router.get('/getproductsforioswithcategory/:min/:max/:category',(req,res)=>{
                   description:1,
                   auction:1,
                   category:1,
+                  bidders:
+                  {
+                
+                    bid:1,
+                 
+                  },
                   userData: {
                     name:1,
                     email:1
@@ -71,14 +77,14 @@ router.get('/getproductsforios/:min/:max',(req,res)=>{
     $sort: {  updatedAt: -1 } 
   },
   
-   {
+  {
     $match: 
     { $and:
      [ { 
       price: { $gte: parseInt(req.params.min), $lte: parseInt(req.params.max) } 
-        }  
-      ] } 
-    }
+    }  
+    ] } 
+  }
   ,
   { $lookup:
     {
@@ -105,6 +111,12 @@ router.get('/getproductsforios/:min/:max',(req,res)=>{
                   description:1,
                   auction:1,
                   category:1,
+                  bidders:
+                  {
+          
+                    bid:1,
+     
+                  },
                   userData: {
                     name:1,
                     email:1
@@ -138,24 +150,24 @@ router.get('/getthumbnail/:id/',(req,res)=>{
 
 
     ,function (err, doc) {
-    if (err)
-    {
-      console.log(err);
-      res.status(500).json({status:"Error in the server while searching for the image"});
-    }
-    if(doc[0] == undefined || doc[0].medias == undefined ||  doc[0].medias.thumbnail == undefined)
-    {
-      res.status(204).json({status:"thumbnail does not exist"});
+      if (err)
+      {
+        console.log(err);
+        res.status(500).json({status:"Error in the server while searching for the image"});
+      }
+      if(doc[0] == undefined || doc[0].medias == undefined ||  doc[0].medias.thumbnail == undefined)
+      {
+        res.status(204).json({status:"thumbnail does not exist"});
 
-    }
-    else
-    {
-      
-      res.contentType(doc[0].medias.thumbnail.contentType);
-      res.send(doc[0].medias.thumbnail.data.buffer);
-    }
-    
-  });
+      }
+      else
+      {
+
+        res.contentType(doc[0].medias.thumbnail.contentType);
+        res.send(doc[0].medias.thumbnail.data.buffer);
+      }
+
+    });
 });
 
 
@@ -179,7 +191,7 @@ router.get('/getimage/:id/',(req,res)=>{
       res.contentType(doc.medias[0].img.contentType);
       res.send(doc.medias[0].img.data);
     }
-      
+
     
   });//end of query
 });
@@ -204,7 +216,7 @@ router.get('/getsmallimage/:id/',(req,res)=>{
       res.contentType(doc.medias[0].thumbnail.contentType);
       res.send(doc.medias[0].thumbnail.data);
     }
-      
+
     
   });//end of query
 });

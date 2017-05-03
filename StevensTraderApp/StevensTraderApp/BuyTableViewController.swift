@@ -104,6 +104,22 @@ func refresh(_ refreshControl: UIRefreshControl) {
                     continue
                 }
                 
+                
+                if product.auction != nil && product.auction!
+                {
+                    for (_,subjson) in jsonProduct["bidders"]
+                    {
+                        //                    print(subjson)
+                        let bidder:Bidder = Bidder(email: "", bid: subjson["bid"].number!, date: "")
+                        
+                        product.bidders.append(bidder)
+                    }
+                    
+                }
+                
+                
+                
+                
                 for (_,subjson) in jsonProduct["medias"]
                 {
                     let url:String = Config.getServerIP()+"/services/getimage/"+subjson["_id"].string!

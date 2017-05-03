@@ -11,6 +11,7 @@ import Alamofire
 class ItemViewController: UIViewController {
     
    
+    @IBOutlet weak var numberOfBids: UILabel!
     @IBOutlet weak var bidButton: UIButton!
     @IBOutlet weak var bid: UITextField!
     @IBOutlet weak var desc: UITextView!
@@ -46,6 +47,7 @@ class ItemViewController: UIViewController {
         self.email.text = product.ownerEmail
         self.name.text = product.ownerName
         self.desc.text = product.desc!
+        self.numberOfBids.text = "["+String(product.bidders.count)+"] bids"
         if(product.medias.count > 0)
         {
             loadImages(image1,product.medias[0])
@@ -188,7 +190,8 @@ class ItemViewController: UIViewController {
                         let alert = UIAlertController(title: "Message", message: "Successfully bid placed, we will send you an email if you got outbid", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil))
                         self.present(alert,animated: true,completion: nil)
-                        self.price.text = self.bid.text
+                        self.numberOfBids.text = "["+String(self.product.bidders.count+1)+"] bids"
+                        self.price.text = self.bid.text!+"$"
                         for prod in products
                         {
                             if prod.id == self.product.id!
