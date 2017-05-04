@@ -18,7 +18,7 @@ var myHasher = function(password, tempUserData, insertTempUser, callback) {
 nev.configure({
   tempUserModel: tempAccount,
   persistentUserModel: account,
-  expirationTime: 600, // 10 minutes
+  expirationTime: 6000, // 100 minutes
 tempUserCollection: 'temp_accounts',
   verificationURL: 'https://stevenstrader.herokuapp.com/services/verification/${URL}',
   transportOptions: {
@@ -35,7 +35,7 @@ tempUserCollection: 'temp_accounts',
                 'paste the following link into your browser:</p><p>${URL}</p>',
         text: 'Please verify your account by clicking the following link, or by copying and pasting it into your browser: ${URL}'
     },
-     shouldSendConfirmation: true,
+     shouldSendConfirmation: false,
     confirmMailOptions: {
         from: 'Do Not Reply <stevenstradersystem@gmail.com>',
         subject: 'Successfully verified!',

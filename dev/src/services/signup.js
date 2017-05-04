@@ -3,7 +3,7 @@ var services = express.Router();
 var Account = require('../models/account.js');
 var bodyParser = require("body-parser");
 var email_verfier = require("../libs/email_verifier.js");
-// var stormpath = require('express-stormpath');
+var path = require('path');
 
 services.use(bodyParser.json());
 
@@ -84,7 +84,7 @@ services.get('/verification/:URL', function (req, res) {
           return res.status(404).send('ERROR: sending confirmation email FAILED');
         }
         
-        res.send('../routes/html/confirmed.html')
+        res.sendFile(path.resolve(__dirname+'/../routes/html/confirmed.html'));
       });
     } else {
       return res.status(409).send('Your account already has been verified');
