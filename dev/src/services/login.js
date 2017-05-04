@@ -39,7 +39,7 @@ router.post('/login',function(req,res){
             }
         } else
         {
-            res.status(401).json({ errors: { form: 'user is suspended' } });
+            res.status(403).json({ errors: { form: 'user is suspended' } });
         }
            
         }else{

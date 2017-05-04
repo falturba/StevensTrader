@@ -32,11 +32,18 @@ class ItemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(UIInputViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = true
+        view.addGestureRecognizer(tap)
+
+        
+        
         
         if product.auction != nil
         {
             if product.auction!
             {
+                numberOfBids.isHidden = false
                 bidButton.isHidden = false
                 bid.isHidden = false
             }
@@ -76,7 +83,8 @@ class ItemViewController: UIViewController {
         
         
         
-       
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         
         
@@ -84,6 +92,34 @@ class ItemViewController: UIViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: self.view.window)
+    }
+    /*--------------------- Keyboard handlers functions -----------------------*/
+    func dismissKeyboard()
+    {
+        view.endEditing(true)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+        
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
+    }
+    /*----------------------------------------------------------------------------*/
     
     func handleImageTap(_ sender: UIGestureRecognizer)
     {
@@ -196,7 +232,7 @@ class ItemViewController: UIViewController {
                         {
                             if prod.id == self.product.id!
                             {
-                                prod.price = Int(self.price.text!)! as NSNumber
+                                prod.price = Int(self.price.text!.components(separatedBy: "$")[0])! as NSNumber
                             }
                         }
                     }

@@ -16,6 +16,7 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var auctionSwitch: UISwitch!
     @IBOutlet weak var price: UITextField!
     @IBOutlet weak var itemTitle: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var deleteButton1: UIButton!
@@ -35,7 +36,6 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet  var categoryDropDown: UIPickerView!
     
     @IBOutlet weak var productDesc: UITextView!
-    var activityIndicator = UIActivityIndicatorView()
     
     
     
@@ -45,11 +45,7 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         deleteButton1.isEnabled = false
         deleteButton2.isEnabled = false
         deleteButton3.isEnabled = false
-        activityIndicator.center = self.view.center
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-        activityIndicator.hidesWhenStopped = true
-        view.addSubview(activityIndicator)
-        
+               
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(UIInputViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
@@ -365,8 +361,12 @@ class SellViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                     {
                         if(category.text! != "")
                         {
+                            self.view.isUserInteractionEnabled = false
+                            activityIndicator.startAnimating()
                             sendProductInfo()
                             reset()
+                            activityIndicator.stopAnimating()
+                            self.view.isUserInteractionEnabled = true
                             
                         }else {
                             let alert = UIAlertController(title: "Missing Entry", message: "Please Select Category", preferredStyle: .alert)

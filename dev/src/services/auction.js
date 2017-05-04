@@ -44,7 +44,7 @@ auction.post('/placebid',authenticate,function(req,res){
 							}
 							else
 							{
-								Item.findOne({_id:prodid},{bidders:1,title:1},function(err,data){
+								Item.findOne({_id:prodid},{bidders:1,title:1,userId:1},function(err,data){
 									if(data.bidders[0] != undefined)
 									{
 										if(data.bidders[data.bidders.length-1].email != email)
@@ -60,6 +60,9 @@ auction.post('/placebid',authenticate,function(req,res){
 												else
 												{
 													nodemailer.sendoutbidnotification(data.bidders[data.bidders.length-1],data.title,bid)
+													Account.findOne({_id:data.userId},{email:1},function(err,info){
+													nodemailer.sendbidnotification(info.email,data.title,bid);
+													});
 													res.status(200).json({status:"bid placed successfully"});
 												}
 
@@ -82,6 +85,9 @@ auction.post('/placebid',authenticate,function(req,res){
 											}
 											else
 											{
+												Account.findOne({_id:data.userId},{email:1},function(err,info){
+													nodemailer.sendbidnotification(info.email,data.title,bid);
+													});
 												res.status(200).json({status:"bid placed successfully"});
 											}
 

@@ -17,6 +17,7 @@ class BuyTableViewController: UITableViewController, UINavigationBarDelegate {
     var minPrice:Int?
     var searchCategory:String?
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     override func viewWillAppear(_ animated: Bool) {
         reloadData()
     }
@@ -45,6 +46,8 @@ class BuyTableViewController: UITableViewController, UINavigationBarDelegate {
 
     func reloadData()
     {
+        self.view.isUserInteractionEnabled = false
+        activityIndicator.startAnimating()
         products = []
         var service:String = Config.getServerIP()
         if searchCategory == "Any"
@@ -71,6 +74,8 @@ class BuyTableViewController: UITableViewController, UINavigationBarDelegate {
                 self.parseJson(json)
             }
         }
+        activityIndicator.stopAnimating()
+        self.view.isUserInteractionEnabled = true
     }
 
 func refresh(_ refreshControl: UIRefreshControl) {
@@ -148,7 +153,9 @@ func refresh(_ refreshControl: UIRefreshControl) {
         
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return products.count
+        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)

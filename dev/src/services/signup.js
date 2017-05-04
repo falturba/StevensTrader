@@ -84,9 +84,7 @@ services.get('/verification/:URL', function (req, res) {
           return res.status(404).send('ERROR: sending confirmation email FAILED');
         }
         
-        res.json({
-          msg: 'CONFIRMED!'
-        });
+        res.send('../routes/html/confirmed.html')
       });
     } else {
       return res.status(409).send('Your account already has been verified');

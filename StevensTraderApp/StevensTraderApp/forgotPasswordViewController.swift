@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 class forgotPasswordViewController: UIViewController, UINavigationBarDelegate {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var email: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +52,8 @@ class forgotPasswordViewController: UIViewController, UINavigationBarDelegate {
         if(checkEmail())
         {
            
-            
+            self.view.isUserInteractionEnabled = false
+            activityIndicator.startAnimating()
             let parameters:[String:String] = ["email":email.text!+"@stevens.edu"]
             let url = URL(string:Config.getServerIP() + "/services/forgotpassword")
             var request = URLRequest(url: url!)
@@ -60,16 +62,21 @@ class forgotPasswordViewController: UIViewController, UINavigationBarDelegate {
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             Alamofire.request(request).responseJSON(completionHandler: { response in
                 switch response.result {
-                case .success(let value):
-                    print(value)
+                case .success( _):
+                    let alert = UIAlertController(title: "Message", message: "An email sent to you with a link to confirm", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert,animated: true,completion: nil)
                     
-                case.failure(let err):
-                    print(err)
+                case.failure( _):
+                    let alert = UIAlertController(title: "Mesage", message: "The server is down, please try again later", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert,animated: true,completion: nil)
                     
                 }
             })
             
-        
+        self.view.isUserInteractionEnabled = true
+            activityIndicator.stopAnimating()
         
     } else {
     let alert = UIAlertController(title: "Invalid Email", message: "Please enter letters only, and don't include @stevens.edu", preferredStyle: .alert)

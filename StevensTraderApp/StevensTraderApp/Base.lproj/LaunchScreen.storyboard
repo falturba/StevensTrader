@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,16 +22,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="gw2-vg-Zy9">
-                                <rect key="frame" x="110" y="131" width="155" height="130"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="gw2-vg-Zy9">
+                                <rect key="frame" x="110" y="174" width="155" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="gw2-vg-Zy9" secondAttribute="height" multiplier="31:26" id="Bvp-Il-JbY"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="spatial" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaF-Jl-c0k">
-                                <rect key="frame" x="62" y="28" width="250" height="71"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="spatial" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jaF-Jl-c0k">
+                                <rect key="frame" x="9" y="28" width="358" height="95"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="95" id="6rf-ei-2Ru"/>
+                                </constraints>
                                 <attributedString key="attributedText">
                                     <fragment content="Loading...">
                                         <attributes>
@@ -46,11 +51,17 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.62276923656463623" green="0.067089423537254333" blue="0.19922518730163574" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="jaF-Jl-c0k" firstAttribute="centerX" secondItem="gw2-vg-Zy9" secondAttribute="centerX" id="4BZ-dh-Pey"/>
+                            <constraint firstItem="gw2-vg-Zy9" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Bi3-rC-Nwl"/>
+                            <constraint firstItem="gw2-vg-Zy9" firstAttribute="top" secondItem="jaF-Jl-c0k" secondAttribute="bottom" constant="51" id="Mdz-JA-bUZ"/>
+                            <constraint firstItem="jaF-Jl-c0k" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="8" symbolic="YES" id="cgQ-Hw-CqA"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
     <resources>

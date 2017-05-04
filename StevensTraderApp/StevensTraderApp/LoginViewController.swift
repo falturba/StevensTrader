@@ -12,31 +12,29 @@ import LocalAuthentication
 class LoginViewController: UIViewController {
     
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var segmantControl: UISegmentedControl!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var rememberSwitch: UISwitch!
-    var activityIndicator = UIActivityIndicatorView()
-   
+    
+    @IBOutlet weak var forgotPassword: UIButton!
+    
     typealias JSONStandard = Dictionary<String, AnyObject>
     //local Auth
     var context = LAContext()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        activityIndicator.center = self.view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.hidesWhenStopped = true
-        view.addSubview(activityIndicator)
-        
+        forgotPassword.titleLabel?.minimumScaleFactor = 0.5
+        forgotPassword.titleLabel?.adjustsFontSizeToFitWidth = true
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(UIInputViewController.dismissKeyboard))
         tap.cancelsTouchesInView = true
         view.addGestureRecognizer(tap)
         
         name.isHidden = true
-       
+        
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
@@ -118,19 +116,24 @@ class LoginViewController: UIViewController {
     @IBAction func loginSignupButton(_ sender: Any) {
         if segmantControl.selectedSegmentIndex == 0
         {
-            UIApplication.shared.beginIgnoringInteractionEvents()
+            self.view.isUserInteractionEnabled = false
             activityIndicator.startAnimating()
-            login(email.text!,password.text!)
-            activityIndicator.stopAnimating()
-            UIApplication.shared.endIgnoringInteractionEvents()
+            activityIndicator.isHidden = false
+            
+            self.login(self.email.text!,self.password.text!)
+            self.activityIndicator.stopAnimating()
+            self.view.isUserInteractionEnabled = true
+            
+            
+            
         }
         else
         {
-            UIApplication.shared.beginIgnoringInteractionEvents()
+            self.view.isUserInteractionEnabled = false
             activityIndicator.startAnimating()
             signup()
             activityIndicator.stopAnimating()
-            UIApplication.shared.endIgnoringInteractionEvents()
+            self.view.isUserInteractionEnabled = true
         }
         
         
@@ -162,18 +165,22 @@ class LoginViewController: UIViewController {
                 guard let json = response.value as? [String:String],let jwt = json["token"] , let nameInfo = json["name"] else
                 {
                     var errorMessage = "Something wrong with the server. Please try again later"
-                     if response.response?.statusCode == 401
+                    if response.response?.statusCode == 401
                     {
                         errorMessage = "Wrong username or password"
                         
-                     }else if response.response?.statusCode == 500
-                     {
+                    }else if response.response?.statusCode == 500
+                    {
                         print("error in the database connection")
                     }
-                let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-                return
+                    else if response.response?.statusCode == 403
+                    {
+                        errorMessage = "Your account is suspended"
+                    }
+                    let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    return
                 }
                 
                 
@@ -186,7 +193,7 @@ class LoginViewController: UIViewController {
                 
                 
                 
-            
+                
                 
                 
                 
@@ -196,120 +203,120 @@ class LoginViewController: UIViewController {
         })
     }
     
-        
-        
-        
-        
-        
-        
-        
-        
-        func signup() {
-            if(checkTextField(type:"email"))
+    
+    
+    
+    
+    
+    
+    
+    
+    func signup() {
+        if(checkTextField(type:"email"))
+        {
+            if(checkTextField(type:"name"))
             {
-                if(checkTextField(type:"name"))
-                {
-                    if(checkTextField(type:"password")){
-                        let emailText = email.text!+"@stevens.edu"
-                        let nameText = name.text!
-                        let passwordText = password.text!
-                        let serverip =  Config.getServerIP()
-                        let url = URL(string:serverip+"/services/signup")
-                        var request = URLRequest( url:url!)
-                        request.httpMethod = "POST"
-                        let parameters: [String: String] = [
-                            "type" : "register" as String,
-                            "name" : nameText as String,
-                            "email" : emailText as String,
-                            "password":passwordText as String
-                        ]
-                        request.httpBody = try! JSONSerialization.data(withJSONObject: parameters)
-                        
-                        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                        
-                        Alamofire.request(request).responseJSON(completionHandler:{ response in
-                            switch response.result {
-                            case .failure(let error):
-                                print(error)
-                                let alert = UIAlertController(title: "Error", message: "Error in connecting to ther server. Please try again later", preferredStyle: UIAlertControllerStyle.alert)
-                                alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-                                self.present(alert, animated: true, completion: nil)
-                                if let data = response.data, let responseString = String(data: data, encoding: .utf8) {
-                                    print(responseString)
-                                }
-                            case .success(_):
-                                let result = response.result
-                                var msg = ""
-                                if let dict = result.value as? JSONStandard{
-                                    msg = dict["msg"] as! String
-                                }
-                                
-                                let alert = UIAlertController(title: "message", message:msg, preferredStyle: UIAlertControllerStyle.alert)
-                                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                                self.present(alert, animated: true, completion: nil)
+                if(checkTextField(type:"password")){
+                    let emailText = email.text!+"@stevens.edu"
+                    let nameText = name.text!
+                    let passwordText = password.text!
+                    let serverip =  Config.getServerIP()
+                    let url = URL(string:serverip+"/services/signup")
+                    var request = URLRequest( url:url!)
+                    request.httpMethod = "POST"
+                    let parameters: [String: String] = [
+                        "type" : "register" as String,
+                        "name" : nameText as String,
+                        "email" : emailText as String,
+                        "password":passwordText as String
+                    ]
+                    request.httpBody = try! JSONSerialization.data(withJSONObject: parameters)
+                    
+                    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                    
+                    Alamofire.request(request).responseJSON(completionHandler:{ response in
+                        switch response.result {
+                        case .failure(let error):
+                            print(error)
+                            let alert = UIAlertController(title: "Error", message: "Error in connecting to ther server. Please try again later", preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                            if let data = response.data, let responseString = String(data: data, encoding: .utf8) {
+                                print(responseString)
+                            }
+                        case .success(_):
+                            let result = response.result
+                            var msg = ""
+                            if let dict = result.value as? JSONStandard{
+                                msg = dict["msg"] as! String
                             }
                             
-                        })
-                    }
-                    else {
-                        let alert = UIAlertController(title: "Wrong Password", message: "Password has to be minimum 8 characters, at least 1 Alphabet and 1 Number", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                    
+                            let alert = UIAlertController(title: "message", message:msg, preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                        
+                    })
                 }
                 else {
-                    let alert = UIAlertController(title: "Wrong Name", message: "Name has to be letters only", preferredStyle: UIAlertControllerStyle.alert)
+                    let alert = UIAlertController(title: "Wrong Password", message: "Password has to be minimum 8 characters, at least 1 Alphabet and 1 Number", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }
                 
             }
             else {
-                let alert = UIAlertController(title: "Wrong Email", message: "Email has to be letters only", preferredStyle: UIAlertControllerStyle.alert)
+                let alert = UIAlertController(title: "Wrong Name", message: "Name has to be letters only", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
+            
         }
-        
-        
-        func checkTextField(type:String) -> Bool
+        else {
+            let alert = UIAlertController(title: "Wrong Email", message: "Email has to be letters only", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    
+    func checkTextField(type:String) -> Bool
+    {
+        let regex:NSRegularExpression!
+        let input:String!
+        do
         {
-            let regex:NSRegularExpression!
-            let input:String!
-            do
-            {
-                switch(type){
-                case "email":
-                    regex = try NSRegularExpression(pattern: "^[a-zA-Z]+$")
-                    input = email.text!
-                    break
-                case "name":
-                    regex = try NSRegularExpression(pattern: "^[a-zA-Z\\s]+$")
-                    input = name.text!
-                    break
-                case "password":
-                    regex = try NSRegularExpression(pattern: "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
-                    input = password.text!
-                    break
-                default:
-                    print ("error type")
-                    return false
-                }
-                let matches = regex.matches(in: input, options:[], range:NSRange(location:0,length:input.utf16.count))
-                if (matches.count>0){
-                    return true
-                }
-                else{
-                    return false
-                }
-            }catch{
-                print("wrong regular expression")
+            switch(type){
+            case "email":
+                regex = try NSRegularExpression(pattern: "^[a-zA-Z0-9]+$")
+                input = email.text!
+                break
+            case "name":
+                regex = try NSRegularExpression(pattern: "^[a-zA-Z\\s]+$")
+                input = name.text!
+                break
+            case "password":
+                regex = try NSRegularExpression(pattern: "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
+                input = password.text!
+                break
+            default:
+                print ("error type")
                 return false
             }
+            let matches = regex.matches(in: input, options:[], range:NSRange(location:0,length:input.utf16.count))
+            if (matches.count>0){
+                return true
+            }
+            else{
+                return false
+            }
+        }catch{
+            print("wrong regular expression")
+            return false
         }
+    }
     
-
+    
     
     func clear()
     {
@@ -317,7 +324,7 @@ class LoginViewController: UIViewController {
         email.text = ""
         password.text = ""
     }
-
+    
 }
 
 
