@@ -89,29 +89,27 @@ describe('---- Login test -------', () => {
                 testPostDataPriceLessThan0(res.body.token)
             })
     })
-})
-describe('---- Login test Wrong email -------', () => {
-    it('it should log in success fully.', (done) => {
+    it('it should log in fail, cannot find user.', (done) => {
         chai.request(server)
             .post('/services/login')
             .set('content-type', 'application/json')
             .send({ "email": "epinyoan@stevens1.edu", "password": "12345678a" })
             .end((err, res) => {
+                // console.log("---------- fail login --------")
                 // console.dir(res.body)
                 expect(res.body.errors.form).to.be.eql('Cannot find user.')
                 done()
             })
     })
-})
-describe('---- Login test Wrong Password -------', () => {
-    it('it should log in success fully.', (done) => {
+    it('it should log in fail, Password incorrect.', (done) => {
         chai.request(server)
             .post('/services/login')
             .set('content-type', 'application/json')
-            .send({ "email": "epinyoan@stevens1.edu", "password": "12345678a" })
+            .send({ "email": "epinyoan@stevens.edu", "password": "12345678a1" })
             .end((err, res) => {
+                // console.log("---------- fail login --------")
                 // console.dir(res.body)
-                expect(res.body.errors.form).to.be.eql('Cannot find user.')
+                expect(res.body.errors.form).to.be.eql('Password incorrect.')
                 done()
             })
     })
@@ -120,26 +118,28 @@ describe('---- Login test Wrong Password -------', () => {
 /*
 * Test the /GET products
 */
-describe('/GET product', () => {
-    it('it should GET all the products', (done) => {
-        chai.request(server)
-            .get('/services/getproducts')
-            .end((err, res) => {
-                expect(res).to.have.status(200)
-                expect(res).to.be.json
-                //remove all images that are created by this test case
-                res.body.products.forEach(product => {
-                    product.medias.forEach(media => {
-                        fs.unlink(imageDir + media.imageName, () => { })
-                        fs.unlink(imageDir + media.thumbnailName, () => { })
+function getAllProducts(){
+    describe('/GET products', () => {
+        it('it should GET all the products', (done) => {
+            chai.request(server)
+                .get('/services/getproducts')
+                .end((err, res) => {
+                    expect(res).to.have.status(200)
+                    expect(res).to.be.json
+                    //remove all images that are created by this test case
+                    res.body.products.forEach(product => {
+                        product.medias.forEach(media => {
+                            fs.unlink(imageDir + media.imageName, () => { })
+                            fs.unlink(imageDir + media.thumbnailName, () => { })
+                        })
                     })
+                    // expect(res.body).to.be.a('array')
+                    // expect(res.body.length).to.be.eql(0)
+                    done()
                 })
-                // expect(res.body).to.be.a('array')
-                // expect(res.body.length).to.be.eql(0)
-                done()
-            })
+        })
     })
-})
+}
 
 function testPostData(token) {
     describe('---- Post Item -------', () => {
@@ -169,19 +169,29 @@ function testPostData(token) {
 function testGetItem(id){
     describe('---- get one Item -------', () => {
         /*
-        * Test the /POST products
+        * Test the /get products
         */
         it('it should get a product', (done) => {
             chai.request(server)
                 .get('/services/getproduct/'+id)
                 .end((err, res) => {
-                    console.log('product____')
-                    console.log(res.body)
+                    // console.log('product____')
+                    // console.log(res.body)
                     expect(res.body.product._id).to.be.eql(id)
                     expect(res.body.product.title).to.be.eql('t1')
                     expect(res.body.product.description).to.be.eql('des1')
                     expect(res.body.product.condition).to.be.eql('Very Good')
                     expect(res.body.product.price).to.be.eql(6)
+                    done()
+                    getAllProducts()
+                    //expect(res).to.have.status(200)
+                })
+        })
+        it('it should get wrong id format', (done) => {
+            chai.request(server)
+                .get('/services/getproduct/1')
+                .end((err, res) => {
+                    expect(res.body.status).to.be.eql("Wrong ID format")
                     done()
                     //expect(res).to.have.status(200)
                 })
@@ -193,7 +203,7 @@ function testPostDataNoImage(token) {
         /*
         * Test the /POST products
         */
-        it('it should POST a product', (done) => {
+        it('it should POST a product NoImage', (done) => {
             chai.request(server)
                 .post('/services/postproduct')
                 .set('X-API-Key', 'foobar')
@@ -216,7 +226,7 @@ function testPostDataNotLogin() {
         /*
         * Test the /POST products
         */
-        it('it should POST a product', (done) => {
+        it('it should POST a product Not login', (done) => {
             chai.request(server)
                 .post('/services/postproduct')
                 .set('X-API-Key', 'foobar')
@@ -239,7 +249,7 @@ function testPostDataPriceLessThan0(token) {
         /*
         * Test the /POST products
         */
-        it('it should POST a product', (done) => {
+        it('it should POST a product Price less than 0', (done) => {
             chai.request(server)
                 .post('/services/postproduct')
                 .set('X-API-Key', 'foobar')
