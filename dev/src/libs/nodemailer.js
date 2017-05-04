@@ -8,7 +8,7 @@ let transporter = nodemailer.createTransport({
         pass: 'trader$@stevens'
     }
 });
-let host = "http://stevenstrader.herokuapp.com//services/"
+let host = "http://stevenstrader.herokuapp.com/services/"
 var sendChangePasswordEmail = function(email,url)
 {
 
