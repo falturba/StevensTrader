@@ -29,6 +29,8 @@ changePasswordService.post('/forgotpassword',function(req,res){
 
 });
 changePasswordService.get('/generatepassword/:url',function(req,res){
+	
+
 	Account.findOne({chngpswdlnk:req.params.url},function(err,account){
 		if(err)
 		{
@@ -49,7 +51,13 @@ changePasswordService.get('/generatepassword/:url',function(req,res){
 				if(info)
 				{
 
-					res.json({"message":"succssfully new temp password generated","newpassword":randomPassword});
+					//res.json({"message":"succssfully new temp password generated","newpassword":randomPassword});
+					const HTML_STRING = "<html>"+
+							"<body><h1>Your new password is </h1>'"+randomPassword+"'</body>"+
+						+"</html>"
+						return res.send(HTML_STRING)
+				}else{
+					res.status(403).json({status:"User not found."});
 				}
 
 			})
